@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(update-config)",
+      "WebSearch",
+      "Bash(npm list:*)",
+      "Bash(npx --yes @modelcontextprotocol/inspector list)",
+      "Bash(python3 -m json.tool)",
+      "Bash(npm view:*)",
+      "Bash(python3:*)",
+      "Bash(timeout 5 npx -y @_davideast/stitch-mcp proxy)",
+      "Bash(gtimeout 5 npx -y @_davideast/stitch-mcp proxy)",
+      "Bash(echo \"Exit: $?\")",
+      "Read(//Users/jonathan.munoz/**)",
+      "Read(//Users/jonathan.munoz/.config/**)",
+      "Bash(gcloud auth:*)",
+      "Bash(node:*)",
+      "mcp__stitch__list_projects",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs"
+    ]
+  }
+}
