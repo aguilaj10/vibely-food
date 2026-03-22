@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Update Version Catalog and Add Gradle Wrapper
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: 7ad08936179f002e1dd6c929686006eadac3bc91
@@ -14,7 +14,7 @@ subtasks:
 phase: Phase 1 - Configuration
 assignee: ''
 agent: "claude"
-shell_pid: "81672"
+shell_pid: "84019"
 review_status: ''
 reviewed_by: ''
 history:
@@ -257,3 +257,4 @@ Reviewers should verify:
 - 2026-03-22T21:46:54Z - system - lane=planned - Prompt created.
 - 2026-03-22T21:50:25Z – claude – shell_pid=81672 – lane=doing – Assigned agent via workflow command
 - 2026-03-22T21:54:32Z – claude – shell_pid=81672 – lane=for_review – Ready for review: updated all library versions to latest stable, removed orphaned compose-compiler entry, added gradle wrapper
+- 2026-03-22T21:54:55Z – claude – shell_pid=84019 – lane=doing – Started review via workflow command
