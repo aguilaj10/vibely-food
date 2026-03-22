@@ -1,8 +1,11 @@
 ---
 work_package_id: WP01
 title: Update Version Catalog and Add Gradle Wrapper
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 7ad08936179f002e1dd6c929686006eadac3bc91
+created_at: '2026-03-22T21:50:25.102235+00:00'
 subtasks:
 - T001
 - T002
@@ -11,7 +14,7 @@ subtasks:
 phase: Phase 1 - Configuration
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "81672"
 review_status: ''
 reviewed_by: ''
 history:
