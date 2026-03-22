@@ -24,12 +24,12 @@ version conflict warnings. Running `./gradlew --version` reports Gradle 9.4.1.
 
 ### Included Subtasks
 
-- [ ] T001 Update all version strings in `[versions]` block of `gradle/libs.versions.toml`
+- [x] T001 Update all version strings in `[versions]` block of `gradle/libs.versions.toml`
         and remove the now-redundant `compose-compiler` standalone version entry
-- [ ] T002 Fix the `compose-compiler` plugin entry in `[plugins]` block to reference
+- [x] T002 Fix the `compose-compiler` plugin entry in `[plugins]` block to reference
         `version.ref = "kotlin"` instead of `version.ref = "compose-compiler"`
-- [ ] T003 [P] Create `gradle/wrapper/gradle-wrapper.properties` with Gradle 9.4.1
-- [ ] T004 Verify all library Maven coordinates in `[libraries]` and `[plugins]` blocks
+- [x] T003 [P] Create `gradle/wrapper/gradle-wrapper.properties` with Gradle 9.4.1
+- [x] T004 Verify all library Maven coordinates in `[libraries]` and `[plugins]` blocks
         are still valid for the updated versions
 
 **Requirements Refs**: FR-001, FR-002, FR-003, FR-004, FR-005
