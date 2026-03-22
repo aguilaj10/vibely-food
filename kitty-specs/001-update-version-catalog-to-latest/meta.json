@@ -1,9 +1,0 @@
-{
-  "feature_number": "001",
-  "slug": "001-update-version-catalog-to-latest",
-  "feature_slug": "001-update-version-catalog-to-latest",
-  "friendly_name": "update version catalog to latest",
-  "mission": "software-dev",
-  "target_branch": "main",
-  "created_at": "2026-03-22T21:33:11.200470+00:00"
-}
