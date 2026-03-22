@@ -13,7 +13,7 @@ subtasks:
 - T004
 phase: Phase 1 - Configuration
 assignee: ''
-agent: ''
+agent: "claude"
 shell_pid: "81672"
 review_status: ''
 reviewed_by: ''
@@ -255,3 +255,4 @@ Reviewers should verify:
 ## Activity Log
 
 - 2026-03-22T21:46:54Z - system - lane=planned - Prompt created.
+- 2026-03-22T21:50:25Z – claude – shell_pid=81672 – lane=doing – Assigned agent via workflow command
