@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: buildSrc Convention Plugins
-lane: "doing"
+lane: "for_review"
 dependencies: [WP01]
 base_branch: 002-kmp-project-structure-setup-WP01
 base_commit: 06994075dbf5ca82d9e31cccc788524b8c1a8f4d
@@ -331,3 +331,4 @@ Reviewers should verify:
 
 - 2026-03-23T21:23:31Z – system – lane=planned – Prompt created.
 - 2026-03-23T22:22:43Z – claude – shell_pid=1314 – lane=doing – Assigned agent via workflow command
+- 2026-03-23T22:37:04Z – claude – shell_pid=1314 – lane=for_review – Ready for review: buildSrc with kmp-library/android-app/jvm-server convention plugins, kotlin-jvm catalog entry added, all plugin refs via libs.* accessors
