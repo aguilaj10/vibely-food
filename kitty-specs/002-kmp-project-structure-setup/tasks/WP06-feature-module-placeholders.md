@@ -1,7 +1,7 @@
 ---
 work_package_id: WP06
 title: Feature Module Placeholders
-lane: "doing"
+lane: "for_review"
 dependencies: [WP02]
 base_branch: 002-kmp-project-structure-setup-WP02
 base_commit: 3b2b21ca62ff5649d1378db14e8fa896d735811c
@@ -244,3 +244,4 @@ Reviewers should verify:
 
 - 2026-03-23T21:23:31Z – system – lane=planned – Prompt created.
 - 2026-03-23T22:55:38Z – claude – shell_pid=9537 – lane=doing – Assigned agent via workflow command
+- 2026-03-23T22:56:30Z – claude – shell_pid=9537 – lane=for_review – Ready for review: 8 feature module shells applying kmp-library plugin with commonMain source dirs
