@@ -13,7 +13,7 @@ subtasks:
 - T007
 phase: Phase 0 - Foundation
 assignee: ''
-agent: ''
+agent: "claude"
 shell_pid: "1314"
 review_status: ''
 reviewed_by: ''
@@ -330,3 +330,4 @@ Reviewers should verify:
 ## Activity Log
 
 - 2026-03-23T21:23:31Z – system – lane=planned – Prompt created.
+- 2026-03-23T22:22:43Z – claude – shell_pid=1314 – lane=doing – Assigned agent via workflow command
