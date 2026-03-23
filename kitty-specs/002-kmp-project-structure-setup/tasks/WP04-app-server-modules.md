@@ -1,7 +1,7 @@
 ---
 work_package_id: WP04
 title: App & Server Entry-Point Modules
-lane: "doing"
+lane: "done"
 dependencies: [WP02]
 base_branch: 002-kmp-project-structure-setup-WP02
 base_commit: 3b2b21ca62ff5649d1378db14e8fa896d735811c
@@ -14,8 +14,8 @@ phase: Phase 1 - Module Scaffold
 assignee: ''
 agent: "claude"
 shell_pid: "10459"
-review_status: ''
-reviewed_by: ''
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-23T21:23:31Z'
   lane: planned
@@ -242,3 +242,4 @@ Reviewers should verify:
 - 2026-03-23T22:48:38Z – claude – shell_pid=7993 – lane=doing – Assigned agent via workflow command
 - 2026-03-23T22:52:54Z – claude – shell_pid=7993 – lane=for_review – Ready for review: composeApp (android-app plugin), server (jvm-server plugin), shared (kmp-library plugin) with empty source dirs and .gitkeep files
 - 2026-03-23T22:57:55Z – claude – shell_pid=10459 – lane=doing – Started review via workflow command
+- 2026-03-23T22:58:17Z – claude – shell_pid=10459 – lane=done – Review passed: composeApp (android-app, namespace set), server (jvm-server), shared (kmp-library, namespace set), AndroidManifest.xml present, source dirs with .gitkeep
