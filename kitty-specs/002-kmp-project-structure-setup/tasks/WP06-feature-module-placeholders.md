@@ -1,11 +1,11 @@
 ---
 work_package_id: WP06
 title: Feature Module Placeholders
-lane: "planned"
-dependencies: ["WP02"]
-base_branch: main
-base_commit: ""
-created_at: '2026-03-23T21:23:31Z'
+lane: "doing"
+dependencies: [WP02]
+base_branch: 002-kmp-project-structure-setup-WP02
+base_commit: 3b2b21ca62ff5649d1378db14e8fa896d735811c
+created_at: '2026-03-23T22:55:37.988401+00:00'
 subtasks:
 - T020
 - T021
@@ -18,7 +18,7 @@ subtasks:
 phase: Phase 1 - Module Scaffold
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "9537"
 review_status: ''
 reviewed_by: ''
 history:
