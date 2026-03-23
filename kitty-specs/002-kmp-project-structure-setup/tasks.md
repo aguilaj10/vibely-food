@@ -100,10 +100,10 @@ description: "Work package task list for KMP Project Structure Setup"
 
 ### Included Subtasks
 
-- [ ] T008 Create `detekt.yml` at project root with constitution-aligned ruleset (complexity, KDoc enforcement, coroutines, performance)
-- [ ] T009 Create `.editorconfig` at project root for KtLint (indent=4, max_line_length=120, no-wildcard-imports)
-- [ ] T010 [P] Create `scripts/git-hooks/pre-commit` bash script that runs `./gradlew detekt ktlintCheck --daemon`
-- [ ] T011 [P] Verify `gradlew` and `gradlew.bat` exist; document how to regenerate if missing
+- [x] T008 Create `detekt.yml` at project root with constitution-aligned ruleset (complexity, KDoc enforcement, coroutines, performance)
+- [x] T009 Create `.editorconfig` at project root for KtLint (indent=4, max_line_length=120, no-wildcard-imports)
+- [x] T010 [P] Create `scripts/git-hooks/pre-commit` bash script that runs `./gradlew detekt ktlintCheck --daemon`
+- [x] T011 [P] Verify `gradlew` and `gradlew.bat` exist; document how to regenerate if missing
 
 **Requirements Refs**: FR-004, FR-005, FR-006, FR-009
 
