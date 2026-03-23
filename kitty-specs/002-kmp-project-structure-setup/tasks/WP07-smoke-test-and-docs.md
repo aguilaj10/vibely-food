@@ -1,11 +1,11 @@
 ---
 work_package_id: WP07
 title: Smoke Test & Documentation
-lane: "planned"
-dependencies: ["WP04", "WP05", "WP06"]
-base_branch: main
-base_commit: ""
-created_at: '2026-03-23T21:23:31Z'
+lane: "doing"
+dependencies: [WP04, WP05, WP06]
+base_branch: 002-kmp-project-structure-setup-WP07-merge-base
+base_commit: 4270994e7b73eb38af82f3f1b98ab8bcb75efdcb
+created_at: '2026-03-23T22:59:24.039980+00:00'
 subtasks:
 - T028
 - T029
@@ -14,7 +14,7 @@ subtasks:
 phase: Phase 1 - Validation
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "12202"
 review_status: ''
 reviewed_by: ''
 history:
