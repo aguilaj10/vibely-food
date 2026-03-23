@@ -59,10 +59,10 @@ description: "Work package task list for KMP Project Structure Setup"
 
 ### Included Subtasks
 
-- [ ] T004 Create `buildSrc/settings.gradle.kts` (version catalog reference) and `buildSrc/build.gradle.kts` (apply `kotlin-dsl`)
-- [ ] T005 Create `kmp-library.gradle.kts` — KMP convention plugin (Android target minSdk=26, JVM target, JS browser target)
-- [ ] T006 Create `android-app.gradle.kts` — Android app convention plugin (composeApp entry point, Android + Desktop)
-- [ ] T007 Create `jvm-server.gradle.kts` — JVM-only server convention plugin (jvmToolchain 17, Ktor plugin)
+- [x] T004 Create `buildSrc/settings.gradle.kts` (version catalog reference) and `buildSrc/build.gradle.kts` (apply `kotlin-dsl`)
+- [x] T005 Create `kmp-library.gradle.kts` — KMP convention plugin (Android target minSdk=26, JVM target, JS browser target)
+- [x] T006 Create `android-app.gradle.kts` — Android app convention plugin (composeApp entry point, Android + Desktop)
+- [x] T007 Create `jvm-server.gradle.kts` — JVM-only server convention plugin (jvmToolchain 17, Ktor plugin)
 
 **Requirements Refs**: FR-002, FR-003, FR-008
 
