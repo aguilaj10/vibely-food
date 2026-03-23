@@ -180,11 +180,11 @@ description: "Work package task list for KMP Project Structure Setup"
 
 ### Included Subtasks
 
-- [ ] T015 Create `core/domain/` module — `build.gradle.kts` applying `kmp-library` with explicit comment: "No framework dependencies allowed. Pure Kotlin only."
-- [ ] T016 [P] Create `core/network/` module — `build.gradle.kts` applying `kmp-library`
-- [ ] T017 [P] Create `core/database/` module — `build.gradle.kts` applying `kmp-library`
-- [ ] T018 [P] Create `core/ui/` module — `build.gradle.kts` applying `kmp-library`
-- [ ] T019 [P] Create `core/common/` module — `build.gradle.kts` applying `kmp-library`
+- [x] T015 Create `core/domain/` module — `build.gradle.kts` applying `kmp-library` with explicit comment: "No framework dependencies allowed. Pure Kotlin only."
+- [x] T016 [P] Create `core/network/` module — `build.gradle.kts` applying `kmp-library`
+- [x] T017 [P] Create `core/database/` module — `build.gradle.kts` applying `kmp-library`
+- [x] T018 [P] Create `core/ui/` module — `build.gradle.kts` applying `kmp-library`
+- [x] T019 [P] Create `core/common/` module — `build.gradle.kts` applying `kmp-library`
 
 **Requirements Refs**: FR-001, FR-002, FR-007
 
