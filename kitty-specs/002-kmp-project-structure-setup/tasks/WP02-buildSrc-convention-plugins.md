@@ -1,11 +1,11 @@
 ---
 work_package_id: WP02
 title: buildSrc Convention Plugins
-lane: "planned"
-dependencies: ["WP01"]
-base_branch: main
-base_commit: ""
-created_at: '2026-03-23T21:23:31Z'
+lane: "doing"
+dependencies: [WP01]
+base_branch: 002-kmp-project-structure-setup-WP01
+base_commit: 06994075dbf5ca82d9e31cccc788524b8c1a8f4d
+created_at: '2026-03-23T22:22:43.305474+00:00'
 subtasks:
 - T004
 - T005
@@ -14,7 +14,7 @@ subtasks:
 phase: Phase 0 - Foundation
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "1314"
 review_status: ''
 reviewed_by: ''
 history:
