@@ -1,7 +1,7 @@
 ---
 work_package_id: WP05
 title: Core Layer Modules
-lane: "doing"
+lane: "done"
 dependencies: [WP02]
 base_branch: 002-kmp-project-structure-setup-WP02
 base_commit: 3b2b21ca62ff5649d1378db14e8fa896d735811c
@@ -16,8 +16,8 @@ phase: Phase 1 - Module Scaffold
 assignee: ''
 agent: "claude"
 shell_pid: "10687"
-review_status: ''
-reviewed_by: ''
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-23T21:23:31Z'
   lane: planned
@@ -306,3 +306,4 @@ Reviewers should verify:
 - 2026-03-23T22:53:39Z – claude – shell_pid=8827 – lane=doing – Assigned agent via workflow command
 - 2026-03-23T22:55:17Z – claude – shell_pid=8827 – lane=for_review – Ready for review: 5 core modules applying kmp-library plugin, core/domain has zero-framework-deps comment block, all source dirs with .gitkeep
 - 2026-03-23T22:58:22Z – claude – shell_pid=10687 – lane=doing – Started review via workflow command
+- 2026-03-23T22:58:47Z – claude – shell_pid=10687 – lane=done – Review passed: 5 core modules with kmp-library plugin, domain has zero-framework-deps comment, all namespaces set, source dirs present
