@@ -21,9 +21,9 @@ description: "Work package task list for KMP Project Structure Setup"
 
 ### Included Subtasks
 
-- [ ] T001 Add `agp` version and `android-application` / `android-library` plugin entries to `gradle/libs.versions.toml`
-- [ ] T002 Create `settings.gradle.kts` at project root — enable version catalog, include all 15 module paths
-- [ ] T003 Create root `build.gradle.kts` — apply Detekt + KtLint to all subprojects, register `installGitHooks` task
+- [x] T001 Add `agp` version and `android-application` / `android-library` plugin entries to `gradle/libs.versions.toml`
+- [x] T002 Create `settings.gradle.kts` at project root — enable version catalog, include all 15 module paths
+- [x] T003 Create root `build.gradle.kts` — apply Detekt + KtLint to all subprojects, register `installGitHooks` task
 
 **Requirements Refs**: FR-001, FR-008, FR-009
 
