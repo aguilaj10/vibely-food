@@ -1,0 +1,23 @@
+#!/bin/sh
+# pre-commit hook for Vibely POS
+# Runs Detekt and KtLint on every commit.
+# Install with: ./gradlew installGitHooks
+# Skip (emergency): git commit --no-verify
+
+set -e
+
+echo "Running pre-commit quality checks..."
+
+./gradlew detekt ktlintCheck --daemon --quiet
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+    echo ""
+    echo "Pre-commit checks FAILED. Fix the violations above before committing."
+    echo "   To auto-fix KtLint issues: ./gradlew ktlintFormat"
+    echo "   To skip (emergency only): git commit --no-verify"
+    exit 1
+fi
+
+echo "Pre-commit checks passed."
+exit 0
