@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: Quality Tool Configuration
-lane: "doing"
+lane: "for_review"
 dependencies: [WP01]
 base_branch: 002-kmp-project-structure-setup-WP01
 base_commit: 06994075dbf5ca82d9e31cccc788524b8c1a8f4d
@@ -362,3 +362,4 @@ Reviewers should verify:
 
 - 2026-03-23T21:23:31Z – system – lane=planned – Prompt created.
 - 2026-03-23T22:39:27Z – claude – shell_pid=4839 – lane=doing – Assigned agent via workflow command
+- 2026-03-23T22:48:10Z – claude – shell_pid=4839 – lane=for_review – Ready for review: detekt.yml with complexity/KDoc/coroutines rules, .editorconfig for KtLint, pre-commit hook script
