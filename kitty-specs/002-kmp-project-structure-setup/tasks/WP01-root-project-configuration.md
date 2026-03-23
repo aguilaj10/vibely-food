@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Root Project Configuration
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: fa34a51a0f60f6786b7aaa60fc1bf12210f51079
@@ -13,7 +13,7 @@ subtasks:
 phase: Phase 0 - Foundation
 assignee: ''
 agent: "claude"
-shell_pid: "96849"
+shell_pid: "373"
 review_status: ''
 reviewed_by: ''
 history:
@@ -242,3 +242,4 @@ Reviewers should verify:
 - 2026-03-23T22:16:17Z – claude – shell_pid=96849 – lane=doing – Assigned agent via workflow command
 - 2026-03-23T22:17:34Z – claude – shell_pid=96849 – lane=for_review – Ready for review: updated libs.versions.toml with AGP 8.9.0, created settings.gradle.kts (15 modules), created root build.gradle.kts with Detekt+KtLint+installGitHooks
 - 2026-03-23T22:18:35Z – claude – shell_pid=96849 – lane=for_review – Ready for review: AGP updated to 9.1.0 (latest stable March 2026), libs.versions.toml updated, settings.gradle.kts (15 modules), root build.gradle.kts with Detekt+KtLint+installGitHooks
+- 2026-03-23T22:20:39Z – claude – shell_pid=373 – lane=doing – Started review via workflow command
