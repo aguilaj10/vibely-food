@@ -142,9 +142,9 @@ description: "Work package task list for KMP Project Structure Setup"
 
 ### Included Subtasks
 
-- [ ] T012 [P] Create `composeApp/` module — `build.gradle.kts` applying `android-app` plugin, empty source dirs for androidMain + desktopMain
-- [ ] T013 [P] Create `server/` module — `build.gradle.kts` applying `jvm-server` plugin, empty `src/main/kotlin/` dir
-- [ ] T014 [P] Create `shared/` module — `build.gradle.kts` applying `kmp-library` plugin, empty source dirs for commonMain + androidMain + jvmMain + jsMain
+- [x] T012 [P] Create `composeApp/` module — `build.gradle.kts` applying `android-app` plugin, empty source dirs for androidMain + desktopMain
+- [x] T013 [P] Create `server/` module — `build.gradle.kts` applying `jvm-server` plugin, empty `src/main/kotlin/` dir
+- [x] T014 [P] Create `shared/` module — `build.gradle.kts` applying `kmp-library` plugin, empty source dirs for commonMain + androidMain + jvmMain + jsMain
 
 **Requirements Refs**: FR-001, FR-002
 
