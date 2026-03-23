@@ -13,7 +13,7 @@ subtasks:
 - T031
 phase: Phase 1 - Validation
 assignee: ''
-agent: ''
+agent: "claude"
 shell_pid: "12202"
 review_status: ''
 reviewed_by: ''
@@ -334,3 +334,4 @@ Reviewers should verify all success criteria from `spec.md`:
 ## Activity Log
 
 - 2026-03-23T21:23:31Z – system – lane=planned – Prompt created.
+- 2026-03-23T22:59:24Z – claude – shell_pid=12202 – lane=doing – Assigned agent via workflow command
