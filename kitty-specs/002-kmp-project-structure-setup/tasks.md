@@ -221,14 +221,14 @@ description: "Work package task list for KMP Project Structure Setup"
 
 ### Included Subtasks
 
-- [ ] T020 [P] Create `feature/auth/` module (pattern module — defines the structure for all feature modules)
-- [ ] T021 [P] Create `feature/menu/` module (same pattern as T020)
-- [ ] T022 [P] Create `feature/orders/` module (same pattern as T020)
-- [ ] T023 [P] Create `feature/payments/` module (same pattern as T020)
-- [ ] T024 [P] Create `feature/inventory/` module (same pattern as T020)
-- [ ] T025 [P] Create `feature/customers/` module (same pattern as T020)
-- [ ] T026 [P] Create `feature/reports/` module (same pattern as T020)
-- [ ] T027 [P] Create `feature/settings/` module (same pattern as T020)
+- [x] T020 [P] Create `feature/auth/` module (pattern module — defines the structure for all feature modules)
+- [x] T021 [P] Create `feature/menu/` module (same pattern as T020)
+- [x] T022 [P] Create `feature/orders/` module (same pattern as T020)
+- [x] T023 [P] Create `feature/payments/` module (same pattern as T020)
+- [x] T024 [P] Create `feature/inventory/` module (same pattern as T020)
+- [x] T025 [P] Create `feature/customers/` module (same pattern as T020)
+- [x] T026 [P] Create `feature/reports/` module (same pattern as T020)
+- [x] T027 [P] Create `feature/settings/` module (same pattern as T020)
 
 **Requirements Refs**: FR-001, FR-002
 
