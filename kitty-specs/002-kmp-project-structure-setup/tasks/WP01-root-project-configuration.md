@@ -1,11 +1,11 @@
 ---
 work_package_id: WP01
 title: Root Project Configuration
-lane: "planned"
+lane: "doing"
 dependencies: []
 base_branch: main
-base_commit: ""
-created_at: '2026-03-23T21:23:31Z'
+base_commit: fa34a51a0f60f6786b7aaa60fc1bf12210f51079
+created_at: '2026-03-23T22:16:17.643863+00:00'
 subtasks:
 - T001
 - T002
@@ -13,7 +13,7 @@ subtasks:
 phase: Phase 0 - Foundation
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "96849"
 review_status: ''
 reviewed_by: ''
 history:
