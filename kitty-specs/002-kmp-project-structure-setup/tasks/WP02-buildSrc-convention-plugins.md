@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: buildSrc Convention Plugins
-lane: "doing"
+lane: "done"
 dependencies: [WP01]
 base_branch: 002-kmp-project-structure-setup-WP01
 base_commit: 06994075dbf5ca82d9e31cccc788524b8c1a8f4d
@@ -15,8 +15,8 @@ phase: Phase 0 - Foundation
 assignee: ''
 agent: "claude"
 shell_pid: "4111"
-review_status: ''
-reviewed_by: ''
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-23T21:23:31Z'
   lane: planned
@@ -333,3 +333,4 @@ Reviewers should verify:
 - 2026-03-23T22:22:43Z – claude – shell_pid=1314 – lane=doing – Assigned agent via workflow command
 - 2026-03-23T22:37:04Z – claude – shell_pid=1314 – lane=for_review – Ready for review: buildSrc with kmp-library/android-app/jvm-server convention plugins, kotlin-jvm catalog entry added, all plugin refs via libs.* accessors
 - 2026-03-23T22:37:14Z – claude – shell_pid=4111 – lane=doing – Started review via workflow command
+- 2026-03-23T22:38:57Z – claude – shell_pid=4111 – lane=done – Review passed: buildSrc/settings.gradle.kts with catalog re-declaration, 3 convention plugins correct (kmp-library=3 targets, android-app=2 targets no js, jvm-server=JVM-only), kotlin-jvm catalog entry added for clean version ref, no hardcoded versions
