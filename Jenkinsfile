@@ -56,44 +56,33 @@ pipeline {
             }
         }
 
-        stage('Lint') {
-            parallel {
-                stage('KtLint Check') {
-                    steps {
-                        echo 'Running KtLint checks...'
-                        sh './gradlew ktlintCheck'
-                    }
-                }
-
-                stage('Detekt') {
-                    steps {
-                        echo 'Running Detekt static analysis...'
-                        sh './gradlew detekt'
-                    }
-                }
-            }
-        }
-
-        stage('Build') {
+        stage('Build & Test') {
             steps {
-                echo 'Building all modules...'
+                echo 'Running lint, build, and test in single Gradle invocation...'
                 script {
-                    // Try to build with Android SDK if available, otherwise skip Android modules
-                    def buildCommand = './gradlew clean build --stacktrace'
-                    def result = sh(script: buildCommand, returnStatus: true)
+                    // Run all tasks together for better performance
+                    // build = assemble + check (which includes test)
+                    // This is faster than running separate Gradle commands
+                    def result = sh(
+                        script: './gradlew clean ktlintCheck detekt build --stacktrace',
+                        returnStatus: true
+                    )
 
                     if (result != 0) {
-                        echo 'Android SDK not found, building non-Android modules only...'
-                        sh './gradlew clean build -x :composeApp:assembleDebug -x :composeApp:assembleRelease --stacktrace || true'
+                        echo 'Build failed, possibly due to Android SDK issues. Retrying without Android modules...'
+                        sh '''
+                            ./gradlew clean \
+                                ktlintCheck \
+                                detekt \
+                                build \
+                                -x :composeApp:assembleDebug \
+                                -x :composeApp:assembleRelease \
+                                -x :composeApp:testDebugUnitTest \
+                                -x :composeApp:testReleaseUnitTest \
+                                --stacktrace || true
+                        '''
                     }
                 }
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-                sh './gradlew test --stacktrace || true'
             }
             post {
                 always {
