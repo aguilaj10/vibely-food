@@ -1,7 +1,7 @@
 ---
 work_package_id: WP07
 title: Smoke Test & Documentation
-lane: "doing"
+lane: "done"
 dependencies: [WP04, WP05, WP06]
 base_branch: 002-kmp-project-structure-setup-WP07-merge-base
 base_commit: 4270994e7b73eb38af82f3f1b98ab8bcb75efdcb
@@ -15,8 +15,8 @@ phase: Phase 1 - Validation
 assignee: ''
 agent: "claude"
 shell_pid: "46724"
-review_status: ''
-reviewed_by: ''
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-23T21:23:31Z'
   lane: planned
@@ -339,3 +339,4 @@ Reviewers should verify all success criteria from `spec.md`:
 - 2026-03-24T00:13:10Z – claude – shell_pid=45064 – lane=doing – Started review via workflow command
 - 2026-03-24T00:15:00Z – claude – shell_pid=45064 – lane=for_review – Ready for review: BUILD SUCCESSFUL 477 tasks across 18 modules; installGitHooks worktree-aware
 - 2026-03-24T00:15:05Z – claude – shell_pid=46724 – lane=doing – Started review via workflow command
+- 2026-03-24T00:18:16Z – claude – shell_pid=46724 – lane=done – Review passed: all SC-001–SC-005 verified. BUILD SUCCESSFUL 477 tasks, detekt+ktlint clean, pre-commit hook rejects violations, worktree-aware installGitHooks, README Getting Started complete
