@@ -25,10 +25,10 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~280 lines
 
 ### Included Subtasks
-- [ ] T001 Create `common/Money.kt` — `@JvmInline value class Money(val cents: Long)` with `ZERO` constant and `+`, `−`, `×(Int)` operators
-- [ ] T002 Create `common/Timestamp.kt` — `@JvmInline value class Timestamp(val epochMillis: Long)`
-- [ ] T003 Create `common/Duration.kt` — `@JvmInline value class Duration(val millis: Long)`
-- [ ] T004 [P] Write Kotest tests in `commonTest/kotlin/com/vibely/domain/common/` for Money arithmetic (≥10 combinations per SC-003), Timestamp construction, Duration construction
+- [x] T001 Create `common/Money.kt` — `@JvmInline value class Money(val cents: Long)` with `ZERO` constant and `+`, `−`, `×(Int)` operators
+- [x] T002 Create `common/Timestamp.kt` — `@JvmInline value class Timestamp(val epochMillis: Long)`
+- [x] T003 Create `common/Duration.kt` — `@JvmInline value class Duration(val millis: Long)`
+- [x] T004 [P] Write Kotest tests in `commonTest/kotlin/com/vibely/domain/common/` for Money arithmetic (≥10 combinations per SC-003), Timestamp construction, Duration construction
 
 ### Implementation Notes
 - All three files live in `core/domain/src/commonMain/kotlin/com/vibely/domain/common/`
@@ -59,12 +59,12 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~370 lines
 
 ### Included Subtasks
-- [ ] T005 Create `ordering/Category.kt` — `CategoryId` + `Category`
-- [ ] T006 [P] Create `ordering/Modifier.kt` — `ModifierId` + `Modifier`
-- [ ] T007 [P] Create `ordering/ModifierGroup.kt` — `ModifierGroupId` + `ModifierGroup` (contains `List<Modifier>`)
-- [ ] T008 [P] Create `ordering/MenuItem.kt` — `MenuItemId` + `MenuItem` (references `CategoryId`, `List<ModifierGroup>`)
-- [ ] T009 [P] Create `ordering/Section.kt` — `SectionId` + `Section` (contains `List<TableId>`)
-- [ ] T010 [P] Create `ordering/Table.kt` — `TableId` + `Table` + `TableStatus` enum
+- [x] T005 Create `ordering/Category.kt` — `CategoryId` + `Category`
+- [x] T006 [P] Create `ordering/Modifier.kt` — `ModifierId` + `Modifier`
+- [x] T007 [P] Create `ordering/ModifierGroup.kt` — `ModifierGroupId` + `ModifierGroup` (contains `List<Modifier>`)
+- [x] T008 [P] Create `ordering/MenuItem.kt` — `MenuItemId` + `MenuItem` (references `CategoryId`, `List<ModifierGroup>`)
+- [x] T009 [P] Create `ordering/Section.kt` — `SectionId` + `Section` (contains `List<TableId>`)
+- [x] T010 [P] Create `ordering/Table.kt` — `TableId` + `Table` + `TableStatus` enum
 
 ### Implementation Notes
 - All files in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/`
@@ -96,8 +96,8 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~220 lines
 
 ### Included Subtasks
-- [ ] T011 Create `customer/Customer.kt` — `CustomerId` + `Customer`
-- [ ] T012 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/customer/CustomerTest.kt` — assert nullable fields, loyalty points, all fields accessible
+- [x] T011 Create `customer/Customer.kt` — `CustomerId` + `Customer`
+- [x] T012 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/customer/CustomerTest.kt` — assert nullable fields, loyalty points, all fields accessible
 
 ### Implementation Notes
 - File in `core/domain/src/commonMain/kotlin/com/vibely/domain/customer/`
@@ -127,11 +127,11 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~380 lines
 
 ### Included Subtasks
-- [ ] T013 Create `ordering/OrderStatus.kt` — `OrderStatus` enum (`OPEN | IN_PROGRESS | DELIVERED | CLOSED | VOID`)
-- [ ] T014 Create `ordering/SelectedModifier.kt` — snapshot value object (captures `modifierId`, `name`, `priceAdjustment` at order time)
-- [ ] T015 Create `ordering/OrderItem.kt` — `OrderItem` (references `MenuItemId`, `Money`, `List<SelectedModifier>`)
-- [ ] T016 Create `ordering/Order.kt` — `OrderId` + `Order` (references `TableId`, `CustomerId?`, `List<OrderItem>`, `Timestamp`)
-- [ ] T017 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/ordering/` — full Order construction, two OrderItems with modifiers, OrderStatus enum exhaustiveness
+- [x] T013 Create `ordering/OrderStatus.kt` — `OrderStatus` enum (`OPEN | IN_PROGRESS | DELIVERED | CLOSED | VOID`)
+- [x] T014 Create `ordering/SelectedModifier.kt` — snapshot value object (captures `modifierId`, `name`, `priceAdjustment` at order time)
+- [x] T015 Create `ordering/OrderItem.kt` — `OrderItem` (references `MenuItemId`, `Money`, `List<SelectedModifier>`)
+- [x] T016 Create `ordering/Order.kt` — `OrderId` + `Order` (references `TableId`, `CustomerId?`, `List<OrderItem>`, `Timestamp`)
+- [x] T017 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/ordering/` — full Order construction, two OrderItems with modifiers, OrderStatus enum exhaustiveness
 
 ### Implementation Notes
 - `SelectedModifier` is a snapshot — copies `name: String` and `priceAdjustment: Money` from the modifier at order time; not a live reference
@@ -165,12 +165,12 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~380 lines
 
 ### Included Subtasks
-- [ ] T018 Create `payment/PaymentMethod.kt` — `PaymentMethod` enum (`CASH | CARD | DIGITAL_WALLET | VOUCHER`)
-- [ ] T019 Create `payment/PaymentStatus.kt` — `PaymentStatus` enum (`PENDING | COMPLETED | FAILED | REFUNDED`)
-- [ ] T020 Create `payment/Payment.kt` — `PaymentId` + `Payment` (references `OrderId`, `Money`, `Timestamp`)
-- [ ] T021 Create `payment/ReceiptLineItem.kt` — value object (`name: String`, `quantity: Int`, `unitPrice: Money`, `modifiers: List<SelectedModifier>`)
-- [ ] T022 Create `payment/Receipt.kt` — immutable value object (`orderId`, `tableId`, `customerId?`, `lineItems`, `subtotal`, `taxAmount`, `total`, `payments`, `closedAt`)
-- [ ] T023 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/payment/` — Receipt construction, payment sum assertion, PaymentMethod/PaymentStatus exhaustiveness
+- [x] T018 Create `payment/PaymentMethod.kt` — `PaymentMethod` enum (`CASH | CARD | DIGITAL_WALLET | VOUCHER`)
+- [x] T019 Create `payment/PaymentStatus.kt` — `PaymentStatus` enum (`PENDING | COMPLETED | FAILED | REFUNDED`)
+- [x] T020 Create `payment/Payment.kt` — `PaymentId` + `Payment` (references `OrderId`, `Money`, `Timestamp`)
+- [x] T021 Create `payment/ReceiptLineItem.kt` — value object (`name: String`, `quantity: Int`, `unitPrice: Money`, `modifiers: List<SelectedModifier>`)
+- [x] T022 Create `payment/Receipt.kt` — immutable value object (`orderId`, `tableId`, `customerId?`, `lineItems`, `subtotal`, `taxAmount`, `total`, `payments`, `closedAt`)
+- [x] T023 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/payment/` — Receipt construction, payment sum assertion, PaymentMethod/PaymentStatus exhaustiveness
 
 ### Implementation Notes
 - `Receipt` is a `data class` — all `val`, no mutable state
@@ -203,10 +203,10 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~300 lines
 
 ### Included Subtasks
-- [ ] T024 Create `inventory/UnitOfMeasure.kt` — enum (`KILOGRAM | GRAM | LITRE | MILLILITRE | UNIT | PORTION`)
-- [ ] T025 [P] Create `inventory/IngredientStock.kt` — `IngredientId` + `IngredientStock` (Double quantity, alertThreshold)
-- [ ] T026 [P] Create `inventory/StockAlert.kt` — `StockAlertId` + `StockAlert` (references `IngredientId`, `UnitOfMeasure`, `Timestamp`)
-- [ ] T027 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/inventory/`
+- [x] T024 Create `inventory/UnitOfMeasure.kt` — enum (`KILOGRAM | GRAM | LITRE | MILLILITRE | UNIT | PORTION`)
+- [x] T025 [P] Create `inventory/IngredientStock.kt` — `IngredientId` + `IngredientStock` (Double quantity, alertThreshold)
+- [x] T026 [P] Create `inventory/StockAlert.kt` — `StockAlertId` + `StockAlert` (references `IngredientId`, `UnitOfMeasure`, `Timestamp`)
+- [x] T027 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/inventory/`
 
 ### Implementation Notes
 - `IngredientStock.quantity: Double` — fractional kitchen quantities (1.5 kg); see research.md Decision 5
@@ -236,10 +236,10 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~300 lines
 
 ### Included Subtasks
-- [ ] T028 Create `staff/Role.kt` — enum (`OWNER | MANAGER | CASHIER | SERVER | KITCHEN`)
-- [ ] T029 [P] Create `staff/Employee.kt` — `EmployeeId` + `Employee` (name, pinHash, role)
-- [ ] T030 [P] Create `staff/Shift.kt` — `ShiftId` + `Shift` (employeeId, clockIn, clockOut?, breakDuration)
-- [ ] T031 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/staff/`
+- [x] T028 Create `staff/Role.kt` — enum (`OWNER | MANAGER | CASHIER | SERVER | KITCHEN`)
+- [x] T029 [P] Create `staff/Employee.kt` — `EmployeeId` + `Employee` (name, pinHash, role)
+- [x] T030 [P] Create `staff/Shift.kt` — `ShiftId` + `Shift` (employeeId, clockIn, clockOut?, breakDuration)
+- [x] T031 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/staff/`
 
 ### Implementation Notes
 - `Employee.pinHash: String` — stores a hash string, NOT the raw PIN (algorithm is a service-layer concern)

@@ -1,9 +1,12 @@
 ---
 work_package_id: WP06
 title: Inventory Bounded Context
-lane: planned
+lane: "done"
 dependencies:
 - WP01
+base_branch: 003-core-domain-models-WP01
+base_commit: 7c5a57dca0f4840ab52667f4afbc0d6562373dab
+created_at: '2026-03-24T02:22:23.058362+00:00'
 subtasks:
 - T024
 - T025
@@ -11,10 +14,10 @@ subtasks:
 - T027
 phase: Phase 5 - Inventory (parallel with WP02, WP03, WP07)
 assignee: ''
-agent: ''
-shell_pid: ''
-review_status: ''
-reviewed_by: ''
+agent: "claude"
+shell_pid: "89213"
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-24T00:40:45Z'
   lane: planned
@@ -259,3 +262,7 @@ class InventoryTest : StringSpec({
 ## Activity Log
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
+- 2026-03-24T02:22:23Z – claude-wp06 – shell_pid=83169 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T02:35:25Z – claude-wp06 – shell_pid=83169 – lane=for_review – Ready for review: UnitOfMeasure enum, IngredientStock, StockAlert, 5 jvmTest cases pass
+- 2026-03-24T02:38:19Z – claude – shell_pid=89213 – lane=doing – Started review via workflow command
+- 2026-03-24T02:45:09Z – claude – shell_pid=89213 – lane=done – Review passed: UnitOfMeasure enum, IngredientStock with Double quantities, StockAlert with Timestamp, 5 jvmTest cases including exhaustive when, build clean

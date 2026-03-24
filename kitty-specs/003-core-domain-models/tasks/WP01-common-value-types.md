@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Common Value Types
-lane: "doing"
+lane: "done"
 dependencies: []
 base_branch: main
 base_commit: 65a2a0bd9549049fbf775380e44a373a6b734c6f
@@ -14,9 +14,9 @@ subtasks:
 phase: Phase 1 - Foundation
 assignee: ''
 agent: "claude"
-shell_pid: "61888"
-review_status: ''
-reviewed_by: ''
+shell_pid: "78762"
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-24T00:40:45Z'
   lane: planned
@@ -286,3 +286,7 @@ class DurationTest : StringSpec({
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
 - 2026-03-24T00:52:06Z – claude – shell_pid=61888 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T01:13:17Z – claude – shell_pid=61888 – lane=for_review – Ready for review: Money/Timestamp/Duration value classes + 15 Kotest tests. Build + ktlint + detekt all pass on JVM and JS targets.
+- 2026-03-24T01:53:17Z – claude – shell_pid=61888 – lane=for_review – Ready for review: Money/Timestamp/Duration value classes with jvmTest tests passing. useJUnit() added to build.gradle.kts for jvmTest discovery.
+- 2026-03-24T01:55:12Z – claude – shell_pid=78762 – lane=doing – Started review via workflow command
+- 2026-03-24T02:10:40Z – claude – shell_pid=78762 – lane=done – Review passed: Money/Timestamp/Duration value classes correct, 11 Money tests (SC-003 satisfied), build + detekt clean. Approved deviations: import kotlin.jvm.JvmInline required for KMP commonMain; tests in jvmTest per team decision.

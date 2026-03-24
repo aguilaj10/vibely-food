@@ -1,11 +1,14 @@
 ---
 work_package_id: WP04
 title: Ordering — Order Entities
-lane: planned
+lane: "done"
 dependencies:
 - WP01
 - WP02
 - WP03
+base_branch: 003-core-domain-models-WP04-merge-base
+base_commit: 84862d647a5efe01a955991441ce43d2b9eb7424
+created_at: '2026-03-24T02:46:05.076401+00:00'
 subtasks:
 - T013
 - T014
@@ -14,10 +17,10 @@ subtasks:
 - T017
 phase: Phase 2 - Ordering Bounded Context (Part 2)
 assignee: ''
-agent: ''
-shell_pid: ''
-review_status: ''
-reviewed_by: ''
+agent: "claude"
+shell_pid: "93507"
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-24T00:40:45Z'
   lane: planned
@@ -336,3 +339,6 @@ class OrderTest : StringSpec({
 ## Activity Log
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
+- 2026-03-24T02:46:07Z – claude – shell_pid=93507 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T02:48:16Z – claude – shell_pid=93507 – lane=for_review – Ready for review: OrderStatus, SelectedModifier, OrderItem, Order with OrderId, 5 jvmTest cases, build clean
+- 2026-03-24T02:48:38Z – claude – shell_pid=93507 – lane=done – Review passed: Order, OrderItem, SelectedModifier, OrderStatus — snapshot pattern correct, CustomerId? from customer context, JvmInline with import, 5 jvmTest cases, build and ktlint clean

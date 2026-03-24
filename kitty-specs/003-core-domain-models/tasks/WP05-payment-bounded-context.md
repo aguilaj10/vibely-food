@@ -1,11 +1,14 @@
 ---
 work_package_id: WP05
 title: Payment Bounded Context
-lane: planned
+lane: "done"
 dependencies:
 - WP04
 - WP03
 - WP01
+base_branch: 003-core-domain-models-WP05-merge-base
+base_commit: e41d774a2f06e28d1c2de107608223c8ef6bc386
+created_at: '2026-03-24T02:48:51.085611+00:00'
 subtasks:
 - T018
 - T019
@@ -15,10 +18,10 @@ subtasks:
 - T023
 phase: Phase 3 - Payment
 assignee: ''
-agent: ''
-shell_pid: ''
-review_status: ''
-reviewed_by: ''
+agent: "claude"
+shell_pid: "95460"
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-24T00:40:45Z'
   lane: planned
@@ -364,3 +367,6 @@ class PaymentTest : StringSpec({
 ## Activity Log
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
+- 2026-03-24T02:48:53Z – claude – shell_pid=95460 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T02:50:18Z – claude – shell_pid=95460 – lane=for_review – Ready for review: PaymentMethod, PaymentStatus, Payment with PaymentId, ReceiptLineItem, Receipt — 5 jvmTest cases, build clean
+- 2026-03-24T02:50:34Z – claude – shell_pid=95460 – lane=done – Review passed: PaymentMethod/Status enums, PaymentId JvmInline, Payment, ReceiptLineItem (no ID), Receipt (all val, snapshot total), cross-context imports correct, 5 jvmTest cases, build and ktlint clean
