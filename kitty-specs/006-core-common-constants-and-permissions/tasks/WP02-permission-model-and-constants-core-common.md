@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Permission Model and Constants in core:common
-lane: "doing"
+lane: "done"
 dependencies: []
 base_branch: main
 base_commit: 2b58f7202055decbbcd818a70b09af4bd6752aad
@@ -16,8 +16,8 @@ phase: Phase 1 - Permission Model and Constants
 assignee: ''
 agent: "claude-reviewer"
 shell_pid: "35288"
-review_status: ''
-reviewed_by: ''
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-24T15:10:01Z'
   lane: planned
@@ -413,3 +413,4 @@ object SyncConstants {
 - 2026-03-24T15:16:08Z – claude-2 – shell_pid=30475 – lane=doing – Assigned agent via workflow command
 - 2026-03-24T15:27:30Z – claude-2 – shell_pid=30475 – lane=for_review – Ready for review: Permission (11 values), RolePermissions (6 roles mapped), DatabaseConstants, ApiConstants, SyncConstants — build and detekt green
 - 2026-03-24T15:27:46Z – claude-reviewer – shell_pid=35288 – lane=doing – Started review via workflow command
+- 2026-03-24T15:28:30Z – claude-reviewer – shell_pid=35288 – lane=done – Review passed: Permission (11 values), RolePermissions (all 6 roles, correct permission counts), DatabaseConstants/ApiConstants/SyncConstants with TODO() placeholders and KDoc — build and detekt green, SC-002/SC-003/SC-004 satisfied
