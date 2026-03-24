@@ -30,6 +30,7 @@ build/
 # Local configuration
 local.properties
 *.local.properties
+.env
 
 # IDE
 .idea/
@@ -40,6 +41,7 @@ local.properties
 # OS
 .DS_Store
 Thumbs.db
+jenkins-cli.jar
 
 # Android
 *.apk
