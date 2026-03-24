@@ -236,10 +236,10 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~300 lines
 
 ### Included Subtasks
-- [ ] T028 Create `staff/Role.kt` — enum (`OWNER | MANAGER | CASHIER | SERVER | KITCHEN`)
-- [ ] T029 [P] Create `staff/Employee.kt` — `EmployeeId` + `Employee` (name, pinHash, role)
-- [ ] T030 [P] Create `staff/Shift.kt` — `ShiftId` + `Shift` (employeeId, clockIn, clockOut?, breakDuration)
-- [ ] T031 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/staff/`
+- [x] T028 Create `staff/Role.kt` — enum (`OWNER | MANAGER | CASHIER | SERVER | KITCHEN`)
+- [x] T029 [P] Create `staff/Employee.kt` — `EmployeeId` + `Employee` (name, pinHash, role)
+- [x] T030 [P] Create `staff/Shift.kt` — `ShiftId` + `Shift` (employeeId, clockIn, clockOut?, breakDuration)
+- [x] T031 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/staff/`
 
 ### Implementation Notes
 - `Employee.pinHash: String` — stores a hash string, NOT the raw PIN (algorithm is a service-layer concern)
