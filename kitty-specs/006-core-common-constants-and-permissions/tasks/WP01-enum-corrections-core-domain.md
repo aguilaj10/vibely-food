@@ -16,7 +16,7 @@ subtasks:
 - T007
 phase: Phase 1 - Enum Corrections
 assignee: ''
-agent: ''
+agent: "claude-1"
 shell_pid: "30214"
 review_status: ''
 reviewed_by: ''
@@ -308,3 +308,4 @@ enum class PaymentMethod {
 ## Activity Log
 
 - 2026-03-24T15:10:01Z – system – lane=planned – Prompt generated via /spec-kitty.tasks
+- 2026-03-24T15:16:01Z – claude-1 – shell_pid=30214 – lane=doing – Assigned agent via workflow command
