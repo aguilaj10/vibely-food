@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: Customer Bounded Context
-lane: "doing"
+lane: "for_review"
 dependencies:
 - WP01
 base_branch: 003-core-domain-models-WP01
@@ -185,3 +185,4 @@ class CustomerTest : StringSpec({
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
 - 2026-03-24T02:22:24Z – claude-wp03 – shell_pid=83169 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T02:30:30Z – claude-wp03 – shell_pid=83169 – lane=for_review – Ready for review: Customer entity, CustomerId value class, 4 jvmTest cases pass
