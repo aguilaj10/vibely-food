@@ -1,11 +1,14 @@
 ---
 work_package_id: WP05
 title: Payment Bounded Context
-lane: planned
+lane: "doing"
 dependencies:
 - WP04
 - WP03
 - WP01
+base_branch: 003-core-domain-models-WP05-merge-base
+base_commit: e41d774a2f06e28d1c2de107608223c8ef6bc386
+created_at: '2026-03-24T02:48:51.085611+00:00'
 subtasks:
 - T018
 - T019
@@ -16,7 +19,7 @@ subtasks:
 phase: Phase 3 - Payment
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "95460"
 review_status: ''
 reviewed_by: ''
 history:
