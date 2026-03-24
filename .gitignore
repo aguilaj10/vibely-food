@@ -48,3 +48,5 @@ jenkins-cli.jar
 *.aab
 *.ap_
 *.dex
+/ANDROID_SDK_SETUP.md
+/docs/GRADLE_TASKS_EXPLAINED.md
