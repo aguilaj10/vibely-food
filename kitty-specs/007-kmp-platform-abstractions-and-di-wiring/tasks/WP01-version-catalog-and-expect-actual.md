@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Version Catalog + expect/actual in core:common
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: cfd0285a2c00faf5fb2c8e41971d0e5a47e238e7
@@ -15,8 +15,8 @@ subtasks:
 - T006
 phase: Phase 1 - Platform Abstractions
 assignee: ''
-agent: "claude-sonnet-4-6"
-shell_pid: "9181"
+agent: "claude"
+shell_pid: "17885"
 review_status: ''
 reviewed_by: ''
 history:
@@ -643,3 +643,4 @@ Detekt check:
 - 2026-03-24T22:28:04Z – system – lane=planned – Prompt created.
 - 2026-03-24T22:35:52Z – claude-sonnet-4-6 – shell_pid=9181 – lane=doing – Assigned agent via workflow command
 - 2026-03-24T22:50:57Z – claude-sonnet-4-6 – shell_pid=9181 – lane=for_review – All 6 subtasks complete. 17 files changed: version catalog updated, 3 expect classes + 10 actual implementations + 2 jvmTest classes. 9/9 tests passing. ktlint clean. Pre-commit hooks passed.
+- 2026-03-24T22:52:51Z – claude – shell_pid=17885 – lane=doing – Started review via workflow command
