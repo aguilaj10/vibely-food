@@ -1,34 +1,37 @@
 ---
-work_package_id: "WP02"
-title: "All Other Context Repositories"
-phase: "Phase 1 - All Other Contexts"
-lane: "planned"
+work_package_id: WP02
+title: All Other Context Repositories
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 15d6622ebdadda755d2ceb2ff7fe74b5e026541c
+created_at: '2026-03-24T14:28:49.921537+00:00'
 subtasks:
-  - "T006"
-  - "T007"
-  - "T008"
-  - "T009"
-  - "T010"
-assignee: ""
-agent: ""
-shell_pid: ""
-review_status: ""
-reviewed_by: ""
+- T006
+- T007
+- T008
+- T009
+- T010
+phase: Phase 1 - All Other Contexts
+assignee: ''
+agent: ''
+shell_pid: "13000"
+review_status: ''
+reviewed_by: ''
 history:
-  - timestamp: "2026-03-24T14:22:26Z"
-    lane: "planned"
-    agent: "system"
-    shell_pid: ""
-    action: "Prompt generated via /spec-kitty.tasks"
+- timestamp: '2026-03-24T14:22:26Z'
+  lane: planned
+  agent: system
+  shell_pid: ''
+  action: Prompt generated via /spec-kitty.tasks
 requirement_refs:
-  - "FR-007"
-  - "FR-008"
-  - "FR-009"
-  - "FR-010"
-  - "FR-011"
-  - "FR-012"
-  - "FR-013"
+- FR-007
+- FR-008
+- FR-009
+- FR-010
+- FR-011
+- FR-012
+- FR-013
 ---
 
 # Work Package Prompt: WP02 – All Other Context Repositories
