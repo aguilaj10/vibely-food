@@ -1,7 +1,7 @@
 ---
 work_package_id: WP05
 title: Payment Bounded Context
-lane: "doing"
+lane: "for_review"
 dependencies:
 - WP04
 - WP03
@@ -368,3 +368,4 @@ class PaymentTest : StringSpec({
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
 - 2026-03-24T02:48:53Z – claude – shell_pid=95460 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T02:50:18Z – claude – shell_pid=95460 – lane=for_review – Ready for review: PaymentMethod, PaymentStatus, Payment with PaymentId, ReceiptLineItem, Receipt — 5 jvmTest cases, build clean
