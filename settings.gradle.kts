@@ -25,6 +25,8 @@ dependencyResolutionManagement {
     // No explicit versionCatalogs declaration needed here.
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 rootProject.name = "vibely-food"
 
 // Entry-point modules
