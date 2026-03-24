@@ -1,35 +1,38 @@
 ---
-work_package_id: "WP01"
-title: "Ordering Context Repositories"
-phase: "Phase 1 - Ordering Context"
-lane: "planned"
+work_package_id: WP01
+title: Ordering Context Repositories
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: b5bb43f081f0923ed62e4c86282464845f98b90b
+created_at: '2026-03-24T14:28:43.893055+00:00'
 subtasks:
-  - "T001"
-  - "T002"
-  - "T003"
-  - "T004"
-  - "T005"
-assignee: ""
-agent: ""
-shell_pid: ""
-review_status: ""
-reviewed_by: ""
+- T001
+- T002
+- T003
+- T004
+- T005
+phase: Phase 1 - Ordering Context
+assignee: ''
+agent: ''
+shell_pid: "12844"
+review_status: ''
+reviewed_by: ''
 history:
-  - timestamp: "2026-03-24T14:22:26Z"
-    lane: "planned"
-    agent: "system"
-    shell_pid: ""
-    action: "Prompt generated via /spec-kitty.tasks"
+- timestamp: '2026-03-24T14:22:26Z'
+  lane: planned
+  agent: system
+  shell_pid: ''
+  action: Prompt generated via /spec-kitty.tasks
 requirement_refs:
-  - "FR-001"
-  - "FR-002"
-  - "FR-003"
-  - "FR-004"
-  - "FR-005"
-  - "FR-006"
-  - "FR-012"
-  - "FR-013"
+- FR-001
+- FR-002
+- FR-003
+- FR-004
+- FR-005
+- FR-006
+- FR-012
+- FR-013
 ---
 
 # Work Package Prompt: WP01 – Ordering Context Repositories
