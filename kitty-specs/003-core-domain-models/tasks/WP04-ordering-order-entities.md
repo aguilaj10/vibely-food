@@ -1,11 +1,14 @@
 ---
 work_package_id: WP04
 title: Ordering — Order Entities
-lane: planned
+lane: "doing"
 dependencies:
 - WP01
 - WP02
 - WP03
+base_branch: 003-core-domain-models-WP04-merge-base
+base_commit: 84862d647a5efe01a955991441ce43d2b9eb7424
+created_at: '2026-03-24T02:46:05.076401+00:00'
 subtasks:
 - T013
 - T014
@@ -15,7 +18,7 @@ subtasks:
 phase: Phase 2 - Ordering Bounded Context (Part 2)
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "93507"
 review_status: ''
 reviewed_by: ''
 history:
