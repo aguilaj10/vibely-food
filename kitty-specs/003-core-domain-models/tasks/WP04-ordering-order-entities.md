@@ -17,7 +17,7 @@ subtasks:
 - T017
 phase: Phase 2 - Ordering Bounded Context (Part 2)
 assignee: ''
-agent: ''
+agent: "claude"
 shell_pid: "93507"
 review_status: ''
 reviewed_by: ''
@@ -339,3 +339,4 @@ class OrderTest : StringSpec({
 ## Activity Log
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
+- 2026-03-24T02:46:07Z – claude – shell_pid=93507 – lane=doing – Assigned agent via workflow command
