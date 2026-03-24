@@ -8,6 +8,13 @@ set -e
 
 echo "Running pre-commit quality checks..."
 
+# gradlew lives in the project root. In worktrees or on branches before the Gradle
+# wrapper has been committed, it may not exist yet — skip gracefully in that case.
+if [ ! -f "./gradlew" ]; then
+    echo "Pre-commit checks skipped (gradlew not found — Gradle wrapper not yet on this branch)."
+    exit 0
+fi
+
 ./gradlew detekt ktlintCheck --daemon --quiet
 EXIT_CODE=$?
 
