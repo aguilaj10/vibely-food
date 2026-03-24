@@ -1,8 +1,11 @@
 ---
 work_package_id: WP01
 title: Version Catalog + expect/actual in core:common
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: cfd0285a2c00faf5fb2c8e41971d0e5a47e238e7
+created_at: '2026-03-24T22:35:51.553274+00:00'
 subtasks:
 - T001
 - T002
@@ -13,7 +16,7 @@ subtasks:
 phase: Phase 1 - Platform Abstractions
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "9181"
 review_status: ''
 reviewed_by: ''
 history:
