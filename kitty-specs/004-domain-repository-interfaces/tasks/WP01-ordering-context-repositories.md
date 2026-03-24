@@ -14,7 +14,7 @@ subtasks:
 - T005
 phase: Phase 1 - Ordering Context
 assignee: ''
-agent: ''
+agent: "claude-1"
 shell_pid: "12844"
 review_status: ''
 reviewed_by: ''
@@ -478,3 +478,4 @@ interface OrderRepository {
 ## Activity Log
 
 - 2026-03-24T14:22:26Z – system – lane=planned – Prompt generated via /spec-kitty.tasks
+- 2026-03-24T14:28:44Z – claude-1 – shell_pid=12844 – lane=doing – Assigned agent via workflow command
