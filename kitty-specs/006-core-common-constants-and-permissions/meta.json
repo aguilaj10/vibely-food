@@ -1,0 +1,9 @@
+{
+  "feature_number": "006",
+  "slug": "006-core-common-constants-and-permissions",
+  "feature_slug": "006-core-common-constants-and-permissions",
+  "friendly_name": "core common constants and permissions",
+  "mission": "software-dev",
+  "target_branch": "main",
+  "created_at": "2026-03-24T14:57:21.089745+00:00"
+}
