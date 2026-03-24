@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Permission Model and Constants in core:common
-lane: "doing"
+lane: "for_review"
 dependencies: []
 base_branch: main
 base_commit: 2b58f7202055decbbcd818a70b09af4bd6752aad
@@ -411,3 +411,4 @@ object SyncConstants {
 
 - 2026-03-24T15:10:01Z – system – lane=planned – Prompt generated via /spec-kitty.tasks
 - 2026-03-24T15:16:08Z – claude-2 – shell_pid=30475 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T15:27:30Z – claude-2 – shell_pid=30475 – lane=for_review – Ready for review: Permission (11 values), RolePermissions (6 roles mapped), DatabaseConstants, ApiConstants, SyncConstants — build and detekt green
