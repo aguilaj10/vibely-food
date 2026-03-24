@@ -23,7 +23,7 @@ Both work packages are fully independent and can be executed in parallel. WP01 t
 - [x] T004 Update `PaymentMethod.kt` — rename VOUCHER → BANK_TRANSFER
 - [x] T005 [P] Fix `StaffTest.kt` — update Role references
 - [x] T006 [P] Fix `OrderTest.kt` — update OrderStatus references
-- [ ] T007 [P] Fix `PaymentTest.kt` — update PaymentMethod references
+- [x] T007 [P] Fix `PaymentTest.kt` — update PaymentMethod references
 
 ### Implementation Notes
 - Update the four enum files in `core/domain/src/commonMain/kotlin/com/vibely/domain/`
