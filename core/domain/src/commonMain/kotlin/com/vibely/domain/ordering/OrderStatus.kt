@@ -1,9 +1,15 @@
 package com.vibely.domain.ordering
 
+/**
+ * Represents the lifecycle state of an order.
+ *
+ * Values match the database [order_status] type exactly.
+ */
 enum class OrderStatus {
-    OPEN,
-    IN_PROGRESS,
-    DELIVERED,
-    CLOSED,
-    VOID,
+    DRAFT,
+    PENDING,
+    PREPARING,
+    READY,
+    COMPLETED,
+    CANCELLED,
 }

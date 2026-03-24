@@ -42,7 +42,7 @@ class OrderTest {
                 tableId = TableId("table-5"),
                 customerId = CustomerId("cust-001"),
                 items = listOf(item1, item2),
-                status = OrderStatus.OPEN,
+                status = OrderStatus.DRAFT,
                 createdAt = now,
                 updatedAt = now,
                 voidReason = null,
@@ -50,7 +50,7 @@ class OrderTest {
 
         order.id.value shouldBe "order-001"
         order.items.size shouldBe 2
-        order.status shouldBe OrderStatus.OPEN
+        order.status shouldBe OrderStatus.DRAFT
         order.voidReason.shouldBeNull()
         order.items[0].selectedModifiers[0].priceAdjustment shouldBe Money(150)
     }
@@ -63,7 +63,7 @@ class OrderTest {
                 tableId = TableId("table-1"),
                 customerId = null,
                 items = emptyList(),
-                status = OrderStatus.OPEN,
+                status = OrderStatus.DRAFT,
                 createdAt = now,
                 updatedAt = now,
                 voidReason = null,
@@ -73,19 +73,19 @@ class OrderTest {
     }
 
     @Test
-    fun `Order with VOID status can carry voidReason`() {
+    fun `Order with CANCELLED status can carry voidReason`() {
         val order =
             Order(
                 id = OrderId("order-void"),
                 tableId = TableId("table-2"),
                 customerId = null,
                 items = emptyList(),
-                status = OrderStatus.VOID,
+                status = OrderStatus.CANCELLED,
                 createdAt = now,
                 updatedAt = now,
                 voidReason = "Customer left",
             )
-        order.status shouldBe OrderStatus.VOID
+        order.status shouldBe OrderStatus.CANCELLED
         order.voidReason shouldBe "Customer left"
     }
 
@@ -94,11 +94,12 @@ class OrderTest {
         OrderStatus.entries.forEach { status ->
             val label =
                 when (status) {
-                    OrderStatus.OPEN -> "open"
-                    OrderStatus.IN_PROGRESS -> "in progress"
-                    OrderStatus.DELIVERED -> "delivered"
-                    OrderStatus.CLOSED -> "closed"
-                    OrderStatus.VOID -> "void"
+                    OrderStatus.DRAFT -> "draft"
+                    OrderStatus.PENDING -> "pending"
+                    OrderStatus.PREPARING -> "preparing"
+                    OrderStatus.READY -> "ready"
+                    OrderStatus.COMPLETED -> "completed"
+                    OrderStatus.CANCELLED -> "cancelled"
                 }
             label.isNotEmpty() shouldBe true
         }

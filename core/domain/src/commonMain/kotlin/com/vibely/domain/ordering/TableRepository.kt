@@ -28,7 +28,7 @@ interface TableRepository {
      * Useful for showing free tables during order placement or reserved tables
      * in the floor plan view.
      *
-     * @param status The [TableStatus] to filter by (FREE, OCCUPIED, or RESERVED).
+     * @param status The [TableStatus] to filter by (AVAILABLE, OCCUPIED, RESERVED, or CLEANING).
      * @return A list of [Table] records with the given status.
      *         Returns an empty list if no tables have that status.
      */
