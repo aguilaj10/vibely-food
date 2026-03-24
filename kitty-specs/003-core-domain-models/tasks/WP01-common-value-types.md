@@ -13,7 +13,7 @@ subtasks:
 - T004
 phase: Phase 1 - Foundation
 assignee: ''
-agent: ''
+agent: "claude"
 shell_pid: "61888"
 review_status: ''
 reviewed_by: ''
@@ -285,3 +285,4 @@ class DurationTest : StringSpec({
 ## Activity Log
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
+- 2026-03-24T00:52:06Z – claude – shell_pid=61888 – lane=doing – Assigned agent via workflow command
