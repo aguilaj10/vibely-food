@@ -1,11 +1,11 @@
 ---
 work_package_id: WP02
 title: Permission Model and Constants in core:common
-lane: "planned"
+lane: "doing"
 dependencies: []
 base_branch: main
-base_commit: ''
-created_at: '2026-03-24T15:10:01Z'
+base_commit: 2b58f7202055decbbcd818a70b09af4bd6752aad
+created_at: '2026-03-24T15:16:07.663314+00:00'
 subtasks:
 - T008
 - T009
@@ -15,7 +15,7 @@ subtasks:
 phase: Phase 1 - Permission Model and Constants
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "30475"
 review_status: ''
 reviewed_by: ''
 history:
