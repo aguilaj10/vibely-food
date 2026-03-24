@@ -20,7 +20,7 @@ Both work packages are fully independent and can be executed in parallel. WP01 t
 - [x] T001 Update `Role.kt` — rename SERVER → WAITER, add VIEWER
 - [x] T002 Update `OrderStatus.kt` — replace all values to match DB schema
 - [x] T003 Update `TableStatus.kt` — rename FREE → AVAILABLE, add CLEANING
-- [ ] T004 Update `PaymentMethod.kt` — rename VOUCHER → BANK_TRANSFER
+- [x] T004 Update `PaymentMethod.kt` — rename VOUCHER → BANK_TRANSFER
 - [ ] T005 [P] Fix `StaffTest.kt` — update Role references
 - [ ] T006 [P] Fix `OrderTest.kt` — update OrderStatus references
 - [ ] T007 [P] Fix `PaymentTest.kt` — update PaymentMethod references
