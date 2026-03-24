@@ -1,108 +1,205 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: Core Common — Constants and Permissions
 
+**Branch**: `006-core-common-constants-and-permissions` | **Date**: 2026-03-24 | **Spec**: [spec.md](spec.md)
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+---
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Two parallel work packages delivering pure-Kotlin value types and constants with zero dependencies:
+
+1. **WP01** — Correct four existing enumerations in `core:domain` to match the database schema, and update all test references to renamed values.
+2. **WP02** — Populate `core:common` with a new `Permission` type, a role-to-permission mapping, and three placeholder constant objects (`DatabaseConstants`, `ApiConstants`, `SyncConstants`).
+
+The database schema (`docs/database-schema.sql`) is the authoritative source for all enum values. No research, no API contracts, no data model documents needed.
+
+---
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+**Language/Version**: Kotlin 2.3.20 (KMP — Android, JVM, JS targets)
+**Primary Dependencies**: None — both `core:domain` and `core:common` have zero external dependencies by constitution
+**Storage**: N/A — pure value types only
+**Testing**: Kotest assertions in `jvmTest` — existing tests updated, no new tests required beyond build/Detekt gates
+**Target Platform**: KMP `commonMain` (shared across Android, JVM, JS)
+**Project Type**: KMP library modules
+**Performance Goals**: N/A — pure value types, zero overhead
+**Constraints**: Zero non-Kotlin imports; KDoc on every public symbol (Detekt-enforced)
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Affected Modules**:
+- `core:domain` — existing enums updated (`Role`, `OrderStatus`, `TableStatus`, `PaymentMethod`)
+- `core:common` — new types added (`Permission`, `RolePermissions`, `DatabaseConstants`, `ApiConstants`, `SyncConstants`); module already scaffolded and registered in `settings.gradle.kts`
+
+---
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+| Rule | Status | Notes |
+|------|--------|-------|
+| `core:domain` must have zero framework dependencies | ✅ PASS | Enum corrections are pure Kotlin |
+| `core:common` must have zero framework dependencies | ✅ PASS | Permission model and constants are pure Kotlin |
+| KDoc on all public classes, functions, properties | ✅ REQUIRED | All new types and updated enums must have class-level KDoc |
+| Use typed IDs | ✅ N/A | No new IDs introduced |
+| No `expect/actual` in shared code | ✅ N/A | No platform branching needed |
+| Type-safe Gradle version catalog accessors | ✅ N/A | No build file changes needed |
 
-[Gates determined based on constitution file]
+**Gate result**: PASS — no violations.
+
+---
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+kitty-specs/006-core-common-constants-and-permissions/
+├── plan.md       # This file
+└── spec.md       # Feature specification
 ```
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+No `research.md` — all decisions resolved from the DB schema and existing domain.
+No `data-model.md` — no new entities.
+No `contracts/` — no API changes.
 
+### Source Code
+
+**New files (WP02)**:
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+core/common/src/commonMain/kotlin/com/vibely/common/
+├── Permission.kt          # Permission enum (11 values)
+├── RolePermissions.kt     # Role → Set<Permission> mapping + hasPermission()
+├── DatabaseConstants.kt   # Placeholder DB connection constants
+├── ApiConstants.kt        # Placeholder API constants
+└── SyncConstants.kt       # Placeholder sync constants
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Modified files (WP01)**:
+```
+core/domain/src/commonMain/kotlin/com/vibely/domain/
+├── staff/Role.kt           # SERVER → WAITER, add VIEWER
+├── ordering/OrderStatus.kt # Replace all values to match DB schema
+├── ordering/TableStatus.kt # FREE → AVAILABLE, add CLEANING
+└── payment/PaymentMethod.kt# VOUCHER → SPLIT
 
-## Complexity Tracking
+core/domain/src/jvmTest/kotlin/com/vibely/domain/
+├── staff/StaffTest.kt      # Update Role references
+├── ordering/OrderTest.kt   # Update OrderStatus references
+└── payment/PaymentTest.kt  # Update PaymentMethod references
+```
 
-*Fill ONLY if Constitution Check has violations that must be justified*
+No changes to any `build.gradle.kts` file, no new source sets.
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+---
+
+## Enum Corrections Detail (WP01)
+
+### `Role` — `com.vibely.domain.staff`
+| Before | After | Change |
+|--------|-------|--------|
+| OWNER | OWNER | — |
+| MANAGER | MANAGER | — |
+| CASHIER | CASHIER | — |
+| SERVER | WAITER | renamed |
+| KITCHEN | KITCHEN | — |
+| *(missing)* | VIEWER | added |
+
+### `OrderStatus` — `com.vibely.domain.ordering`
+| Before | After | Change |
+|--------|-------|--------|
+| OPEN | DRAFT | replaced |
+| IN_PROGRESS | PENDING | replaced |
+| *(missing)* | PREPARING | added |
+| DELIVERED | READY | replaced |
+| CLOSED | COMPLETED | replaced |
+| VOID | CANCELLED | replaced |
+
+### `TableStatus` — `com.vibely.domain.ordering`
+| Before | After | Change |
+|--------|-------|--------|
+| FREE | AVAILABLE | renamed |
+| OCCUPIED | OCCUPIED | — |
+| RESERVED | RESERVED | — |
+| *(missing)* | CLEANING | added |
+
+### `PaymentMethod` — `com.vibely.domain.payment`
+| Before | After | Change |
+|--------|-------|--------|
+| CASH | CASH | — |
+| CARD | CARD | — |
+| DIGITAL_WALLET | DIGITAL_WALLET | — |
+| VOUCHER | SPLIT | replaced |
+
+---
+
+## New Types Detail (WP02)
+
+### `Permission` — `com.vibely.common`
+```kotlin
+enum class Permission {
+    MANAGE_STORE, MANAGE_USERS, MANAGE_MENU, MANAGE_INVENTORY,
+    CREATE_ORDER, UPDATE_ORDER_STATUS, PROCESS_PAYMENT,
+    VIEW_ORDERS, VIEW_MENU, VIEW_TABLES, VIEW_REPORTS
+}
+```
+
+### `RolePermissions` — `com.vibely.common`
+Object that holds a `Map<Role, Set<Permission>>` and exposes:
+- `fun permissionsFor(role: Role): Set<Permission>`
+- Extension: `fun Role.hasPermission(permission: Permission): Boolean`
+
+Mapping per FR-003:
+```
+OWNER   → all 11 permissions
+MANAGER → all except MANAGE_USERS (10 permissions)
+CASHIER → CREATE_ORDER, UPDATE_ORDER_STATUS, PROCESS_PAYMENT, VIEW_ORDERS, VIEW_MENU, VIEW_TABLES
+WAITER  → CREATE_ORDER, VIEW_ORDERS, VIEW_MENU, VIEW_TABLES
+KITCHEN → VIEW_ORDERS, UPDATE_ORDER_STATUS
+VIEWER  → VIEW_ORDERS, VIEW_MENU, VIEW_TABLES, VIEW_REPORTS
+```
+
+### Placeholder Constants Strategy
+Use Kotlin's `TODO("description")` for values not yet known. This compiles cleanly but throws `NotImplementedError` if accidentally used at runtime, providing a strong safety signal. Each constant carries a description of what it represents and where its value will come from.
+
+**`DatabaseConstants`**: MAX_POOL_SIZE, MIN_IDLE, CONNECTION_TIMEOUT_MS, IDLE_TIMEOUT_MS, MAX_LIFETIME_MS, PREPARED_STATEMENT_CACHE_SIZE
+
+**`ApiConstants`**: BASE_URL, API_VERSION (`"v1"` — this one is known), TIMEOUT_MS, MAX_RETRIES, RETRY_BACKOFF_MS
+
+**`SyncConstants`**: SYNC_INTERVAL_MS, MAX_PENDING_EVENTS, EVENT_BATCH_SIZE
+
+---
+
+## Implementation Phases
+
+All work is independent; WP01 and WP02 can run in parallel.
+
+### WP01 — Enum Corrections in `core:domain`
+1. Update `Role.kt`, `OrderStatus.kt`, `TableStatus.kt`, `PaymentMethod.kt`
+2. Fix all test files referencing old enum values
+3. `./gradlew :core:domain:build` must pass with zero errors/warnings
+4. `./gradlew :core:domain:detekt` must pass (KDoc on all updated enums)
+
+### WP02 — Permission Model and Constants in `core:common`
+1. Create `Permission.kt`, `RolePermissions.kt`
+2. Create `DatabaseConstants.kt`, `ApiConstants.kt`, `SyncConstants.kt`
+3. `./gradlew :core:common:build` must pass with zero errors/warnings
+4. `./gradlew :core:common:detekt` must pass
+
+---
+
+## Testing Strategy
+
+No new tests required. WP01 must update existing tests to use the new enum values and ensure they continue to pass. WP02 types have no runtime behaviour — build + Detekt is the full gate.
+
+---
+
+## Definition of Done
+
+- [ ] All four enums exactly match the DB schema types
+- [ ] `Permission` enum with 11 values exists in `core:common`
+- [ ] `RolePermissions` provides `permissionsFor(role)` and `hasPermission` extension
+- [ ] All three constant objects exist with `TODO()` placeholders and descriptions
+- [ ] `./gradlew :core:domain:build` passes — zero errors, zero warnings
+- [ ] `./gradlew :core:common:build` passes — zero errors, zero warnings
+- [ ] `./gradlew :core:domain:detekt` passes
+- [ ] `./gradlew :core:common:detekt` passes
+- [ ] All existing `core:domain` tests pass after enum corrections
