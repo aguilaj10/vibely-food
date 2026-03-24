@@ -165,12 +165,12 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~380 lines
 
 ### Included Subtasks
-- [ ] T018 Create `payment/PaymentMethod.kt` — `PaymentMethod` enum (`CASH | CARD | DIGITAL_WALLET | VOUCHER`)
-- [ ] T019 Create `payment/PaymentStatus.kt` — `PaymentStatus` enum (`PENDING | COMPLETED | FAILED | REFUNDED`)
-- [ ] T020 Create `payment/Payment.kt` — `PaymentId` + `Payment` (references `OrderId`, `Money`, `Timestamp`)
-- [ ] T021 Create `payment/ReceiptLineItem.kt` — value object (`name: String`, `quantity: Int`, `unitPrice: Money`, `modifiers: List<SelectedModifier>`)
-- [ ] T022 Create `payment/Receipt.kt` — immutable value object (`orderId`, `tableId`, `customerId?`, `lineItems`, `subtotal`, `taxAmount`, `total`, `payments`, `closedAt`)
-- [ ] T023 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/payment/` — Receipt construction, payment sum assertion, PaymentMethod/PaymentStatus exhaustiveness
+- [x] T018 Create `payment/PaymentMethod.kt` — `PaymentMethod` enum (`CASH | CARD | DIGITAL_WALLET | VOUCHER`)
+- [x] T019 Create `payment/PaymentStatus.kt` — `PaymentStatus` enum (`PENDING | COMPLETED | FAILED | REFUNDED`)
+- [x] T020 Create `payment/Payment.kt` — `PaymentId` + `Payment` (references `OrderId`, `Money`, `Timestamp`)
+- [x] T021 Create `payment/ReceiptLineItem.kt` — value object (`name: String`, `quantity: Int`, `unitPrice: Money`, `modifiers: List<SelectedModifier>`)
+- [x] T022 Create `payment/Receipt.kt` — immutable value object (`orderId`, `tableId`, `customerId?`, `lineItems`, `subtotal`, `taxAmount`, `total`, `payments`, `closedAt`)
+- [x] T023 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/payment/` — Receipt construction, payment sum assertion, PaymentMethod/PaymentStatus exhaustiveness
 
 ### Implementation Notes
 - `Receipt` is a `data class` — all `val`, no mutable state
