@@ -211,22 +211,18 @@ pipeline {
 
         success {
             echo 'Build succeeded! ✅'
-            script {
-                // Send success notification (configure as needed)
-                // emailext subject: "Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                //          body: "Build was successful!",
-                //          to: "your-email@example.com"
-            }
+            // Uncomment to send success notification:
+            // emailext subject: "Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            //          body: "Build was successful!",
+            //          to: "your-email@example.com"
         }
 
         failure {
             echo 'Build failed! ❌'
-            script {
-                // Send failure notification (configure as needed)
-                // emailext subject: "Build Failure: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                //          body: "Build failed. Check console output: ${env.BUILD_URL}",
-                //          to: "your-email@example.com"
-            }
+            // Uncomment to send failure notification:
+            // emailext subject: "Build Failure: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            //          body: "Build failed. Check console output: ${env.BUILD_URL}",
+            //          to: "your-email@example.com"
         }
 
         unstable {
