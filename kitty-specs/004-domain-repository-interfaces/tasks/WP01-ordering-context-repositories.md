@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Ordering Context Repositories
-lane: "doing"
+lane: "for_review"
 dependencies: []
 base_branch: main
 base_commit: b5bb43f081f0923ed62e4c86282464845f98b90b
@@ -479,3 +479,4 @@ interface OrderRepository {
 
 - 2026-03-24T14:22:26Z – system – lane=planned – Prompt generated via /spec-kitty.tasks
 - 2026-03-24T14:28:44Z – claude-1 – shell_pid=12844 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T14:31:51Z – claude-1 – shell_pid=12844 – lane=for_review – Ready for review: 5 ordering interfaces with full KDoc
