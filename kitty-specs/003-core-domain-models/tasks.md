@@ -203,10 +203,10 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~300 lines
 
 ### Included Subtasks
-- [ ] T024 Create `inventory/UnitOfMeasure.kt` — enum (`KILOGRAM | GRAM | LITRE | MILLILITRE | UNIT | PORTION`)
-- [ ] T025 [P] Create `inventory/IngredientStock.kt` — `IngredientId` + `IngredientStock` (Double quantity, alertThreshold)
-- [ ] T026 [P] Create `inventory/StockAlert.kt` — `StockAlertId` + `StockAlert` (references `IngredientId`, `UnitOfMeasure`, `Timestamp`)
-- [ ] T027 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/inventory/`
+- [x] T024 Create `inventory/UnitOfMeasure.kt` — enum (`KILOGRAM | GRAM | LITRE | MILLILITRE | UNIT | PORTION`)
+- [x] T025 [P] Create `inventory/IngredientStock.kt` — `IngredientId` + `IngredientStock` (Double quantity, alertThreshold)
+- [x] T026 [P] Create `inventory/StockAlert.kt` — `StockAlertId` + `StockAlert` (references `IngredientId`, `UnitOfMeasure`, `Timestamp`)
+- [x] T027 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/inventory/`
 
 ### Implementation Notes
 - `IngredientStock.quantity: Double` — fractional kitchen quantities (1.5 kg); see research.md Decision 5
