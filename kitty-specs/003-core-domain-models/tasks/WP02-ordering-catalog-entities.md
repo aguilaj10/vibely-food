@@ -1,9 +1,12 @@
 ---
 work_package_id: WP02
 title: Ordering — Catalog Entities
-lane: planned
+lane: "doing"
 dependencies:
 - WP01
+base_branch: 003-core-domain-models-WP01
+base_commit: 7c5a57dca0f4840ab52667f4afbc0d6562373dab
+created_at: '2026-03-24T02:12:56.661079+00:00'
 subtasks:
 - T005
 - T006
@@ -14,7 +17,7 @@ subtasks:
 phase: Phase 2 - Ordering Bounded Context (Part 1)
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "82665"
 review_status: ''
 reviewed_by: ''
 history:
