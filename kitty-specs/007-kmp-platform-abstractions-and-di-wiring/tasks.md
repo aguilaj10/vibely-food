@@ -17,12 +17,12 @@
 **Requirements Refs**: FR-001, FR-002, FR-003, FR-007
 
 ### Included Subtasks
-- [ ] T001 Update `gradle/libs.versions.toml` — remove all SQLDelight entries, add DataStore/Room/security-crypto/KSP versions, libraries, and plugins
-- [ ] T002 Update `core/common/build.gradle.kts` — add `security-crypto` to `androidMain` dependencies
-- [ ] T003 [P] Implement `PlatformCapabilities` — `expect class` in `commonMain` + 3 `actual` implementations (Android/JVM/JS)
-- [ ] T004 [P] Implement `PlatformLogger` — `expect class` in `commonMain` + 3 `actual` implementations (Android/JVM/JS)
-- [ ] T005 [P] Implement `SecureStorage` — `expect class` in `commonMain` + 3 `actual` implementations (Android/JVM/JS)
-- [ ] T006 Add `SecureStorageTest` and `PlatformCapabilitiesTest` in `core:common:jvmTest`
+- [x] T001 Update `gradle/libs.versions.toml` — remove all SQLDelight entries, add DataStore/Room/security-crypto/KSP versions, libraries, and plugins
+- [x] T002 Update `core/common/build.gradle.kts` — add `security-crypto` to `androidMain` dependencies
+- [x] T003 [P] Implement `PlatformCapabilities` — `expect class` in `commonMain` + 3 `actual` implementations (Android/JVM/JS)
+- [x] T004 [P] Implement `PlatformLogger` — `expect class` in `commonMain` + 3 `actual` implementations (Android/JVM/JS)
+- [x] T005 [P] Implement `SecureStorage` — `expect class` in `commonMain` + 3 `actual` implementations (Android/JVM/JS)
+- [x] T006 Add `SecureStorageTest` and `PlatformCapabilitiesTest` in `core:common:jvmTest`
 
 ### Implementation Notes
 - T001 must be committed before T002–T005 (adds the library/plugin aliases referenced in Gradle scripts).
