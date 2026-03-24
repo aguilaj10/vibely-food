@@ -127,7 +127,9 @@ No changes to any `build.gradle.kts` file, no new source sets.
 | CASH | CASH | — |
 | CARD | CARD | — |
 | DIGITAL_WALLET | DIGITAL_WALLET | — |
-| VOUCHER | SPLIT | replaced |
+| VOUCHER | BANK_TRANSFER | replaced |
+
+Note: `SPLIT` is not a payment instrument — split bills are modelled as two `Payment` records (one per instrument). This enables per-instrument reporting.
 
 ---
 

@@ -37,7 +37,7 @@ The domain layer defines several enumerations that have drifted from the databas
 - **Enum corrections**: Correct the following enumerations introduced in feature 003 to match the database schema:
   - `OrderStatus`: align to `DRAFT`, `PENDING`, `PREPARING`, `READY`, `COMPLETED`, `CANCELLED`
   - `TableStatus`: align to `AVAILABLE`, `OCCUPIED`, `RESERVED`, `CLEANING`
-  - `PaymentMethod`: align to `CASH`, `CARD`, `DIGITAL_WALLET`, `SPLIT`
+  - `PaymentMethod`: align to `CASH`, `CARD`, `DIGITAL_WALLET`, `BANK_TRANSFER`
 - **Placeholder constants**: Create named constant groups for database configuration, API configuration, and sync configuration using placeholder values. Each placeholder must be documented with a description of what the value represents and where it will come from.
 
 ### Out of Scope
@@ -87,7 +87,7 @@ Given a role and a permission, the system can answer whether that role holds tha
 `TableStatus` must contain exactly: `AVAILABLE`, `OCCUPIED`, `RESERVED`, `CLEANING`. The previous values (`FREE`, `OCCUPIED`, `RESERVED`) are replaced or renamed (`FREE` → `AVAILABLE`, add `CLEANING`).
 
 ### FR-007 — PaymentMethod Aligned to Schema
-`PaymentMethod` must contain exactly: `CASH`, `CARD`, `DIGITAL_WALLET`, `SPLIT`. The previous `VOUCHER` value is replaced by `SPLIT`.
+`PaymentMethod` must contain exactly: `CASH`, `CARD`, `DIGITAL_WALLET`, `BANK_TRANSFER`. The previous `VOUCHER` value is replaced by `BANK_TRANSFER`. Split payments are modelled as multiple `Payment` records per order (one per instrument used), not as a single `SPLIT` record; this allows accurate per-instrument reporting.
 
 ### FR-008 — Database Connection Constants (Placeholder)
 A named constant group documents the database connection configuration: maximum pool size, minimum idle connections, connection timeout, idle timeout, maximum connection lifetime, prepared statement cache size. All values are placeholders documented with descriptions; actual values come from environment configuration at runtime.
@@ -115,7 +115,7 @@ A kitchen screen queries orders with status `PREPARING`. The corrected `OrderSta
 The table layout screen filters tables by `TableStatus.AVAILABLE`. The renamed value (formerly `FREE`) maps to the database `AVAILABLE` value without a custom mapping layer.
 
 ### Scenario 5 — Split payment recorded
-A cashier splits a bill between cash and card. The payment is recorded with `PaymentMethod.SPLIT`, which maps directly to the database `SPLIT` value.
+A cashier splits a bill between cash and card. Two `Payment` records are created — one with `PaymentMethod.CASH` and one with `PaymentMethod.CARD`. Each maps directly to its corresponding database value, enabling accurate per-instrument revenue reporting.
 
 ---
 
@@ -142,6 +142,7 @@ A cashier splits a bill between cash and card. The payment is recorded with `Pay
 - SC-004: The three constant groups exist with placeholder values and every placeholder is documented with a description of what it represents.
 - SC-005: The project compiles with zero errors and zero warnings after the enum corrections are applied.
 - SC-006: All existing tests that reference the renamed enum values (`FREE`, `SERVER`, `OPEN`, `IN_PROGRESS`, `DELIVERED`, `CLOSED`, `VOID`, `VOUCHER`) are updated and continue to pass.
+- SC-007: `PaymentMethod.SPLIT` does not exist; split payments are represented as multiple `Payment` records, each with a specific instrument value.
 
 ---
 
