@@ -56,13 +56,6 @@ pipeline {
             }
         }
 
-        stage('Install Git Hooks') {
-            steps {
-                echo 'Installing Git hooks...'
-                sh './gradlew installGitHooks'
-            }
-        }
-
         stage('Lint') {
             parallel {
                 stage('KtLint Check') {
@@ -106,17 +99,6 @@ pipeline {
                 always {
                     // Publish test results
                     junit '**/build/test-results/test/*.xml'
-
-                    // Publish test coverage (if available)
-                    script {
-                        if (fileExists('build/reports/jacoco')) {
-                            jacoco(
-                                execPattern: '**/build/jacoco/*.exec',
-                                classPattern: '**/build/classes',
-                                sourcePattern: '**/src/main/java,**/src/main/kotlin'
-                            )
-                        }
-                    }
                 }
             }
         }
