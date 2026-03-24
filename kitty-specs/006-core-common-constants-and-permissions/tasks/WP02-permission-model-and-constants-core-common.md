@@ -14,7 +14,7 @@ subtasks:
 - T012
 phase: Phase 1 - Permission Model and Constants
 assignee: ''
-agent: ''
+agent: "claude-2"
 shell_pid: "30475"
 review_status: ''
 reviewed_by: ''
@@ -410,3 +410,4 @@ object SyncConstants {
 ## Activity Log
 
 - 2026-03-24T15:10:01Z – system – lane=planned – Prompt generated via /spec-kitty.tasks
+- 2026-03-24T15:16:08Z – claude-2 – shell_pid=30475 – lane=doing – Assigned agent via workflow command
