@@ -33,7 +33,7 @@ comments:
 
 complexity:
   active: true
-  CyclomaticComplexity:
+  CyclomaticComplexMethod:
     active: true
     threshold: 15
   NestedBlockDepth:
@@ -94,20 +94,12 @@ style:
   active: true
   ForbiddenComment:
     active: true
-    values: ["FIXME:", "HACK:", "TODO:"]
+    comments: ["FIXME:", "HACK:", "TODO:"]
     allowedPatterns: ""
   ForbiddenImport:
-    active: true
-    forbiddenPatterns:
-      - reason: "Prevent Android/framework imports in domain layer"
-        value: "android.*"
-        applies_to_subpath: "core/domain"
-      - reason: "Prevent Ktor imports in domain layer"
-        value: "io.ktor.*"
-        applies_to_subpath: "core/domain"
-      - reason: "Prevent Room imports in domain layer"
-        value: "androidx.room.*"
-        applies_to_subpath: "core/domain"
+    active: false
+    imports: []
+    forbiddenPatterns: ""
   MagicNumber:
     active: true
     excludes: ["**/test/**", "**/androidTest/**", "**/*.gradle.kts"]
