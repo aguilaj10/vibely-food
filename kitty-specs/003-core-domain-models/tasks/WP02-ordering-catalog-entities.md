@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Ordering — Catalog Entities
-lane: "doing"
+lane: "done"
 dependencies:
 - WP01
 base_branch: 003-core-domain-models-WP01
@@ -18,8 +18,8 @@ phase: Phase 2 - Ordering Bounded Context (Part 1)
 assignee: ''
 agent: "claude"
 shell_pid: "89213"
-review_status: ''
-reviewed_by: ''
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-24T00:40:45Z'
   lane: planned
@@ -271,3 +271,4 @@ data class Table(
 - 2026-03-24T02:12:58Z – claude-wp02 – shell_pid=82665 – lane=doing – Assigned agent via workflow command
 - 2026-03-24T02:35:16Z – claude-wp02 – shell_pid=82665 – lane=for_review – Ready for review: 6 ordering catalog entities, build clean, no tests (deferred to WP04)
 - 2026-03-24T02:38:19Z – claude – shell_pid=89213 – lane=doing – Started review via workflow command
+- 2026-03-24T02:44:55Z – claude – shell_pid=89213 – lane=done – Review passed: 6 ordering catalog models (Category, Modifier, ModifierGroup, MenuItem, Section, Table) — type-safe imports, zero framework deps, JvmInline value class IDs, build clean
