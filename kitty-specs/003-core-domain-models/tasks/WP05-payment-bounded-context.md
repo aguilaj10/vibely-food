@@ -18,7 +18,7 @@ subtasks:
 - T023
 phase: Phase 3 - Payment
 assignee: ''
-agent: ''
+agent: "claude"
 shell_pid: "95460"
 review_status: ''
 reviewed_by: ''
@@ -367,3 +367,4 @@ class PaymentTest : StringSpec({
 ## Activity Log
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
+- 2026-03-24T02:48:53Z – claude – shell_pid=95460 – lane=doing – Assigned agent via workflow command
