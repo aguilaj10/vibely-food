@@ -17,8 +17,34 @@ echo -e "${BLUE}  Jenkins Setup for Vibely Food${NC}"
 echo -e "${BLUE}========================================${NC}"
 echo ""
 
+# Check Docker permissions first
+echo -e "${YELLOW}Checking Docker permissions...${NC}"
+if ! docker ps &> /dev/null; then
+    echo -e "${RED}✗ Cannot access Docker${NC}"
+    echo -e ""
+    echo -e "${YELLOW}Your user is in the docker group, but the session needs to be refreshed.${NC}"
+    echo -e ""
+    echo -e "Quick fix (choose one):"
+    echo -e ""
+    echo -e "1. Run this command to refresh group membership:"
+    echo -e "   ${BLUE}newgrp docker${NC}"
+    echo -e "   Then run this script again"
+    echo -e ""
+    echo -e "2. Or run in one command:"
+    echo -e "   ${BLUE}newgrp docker << 'SCRIPT'"
+    echo -e "   cd $(pwd)"
+    echo -e "   ./scripts/setup-jenkins.sh"
+    echo -e "   SCRIPT${NC}"
+    echo -e ""
+    echo -e "3. Or log out and log back in (most reliable)"
+    echo -e ""
+    echo -e "See ${BLUE}FIX_DOCKER_PERMISSION.md${NC} for more details."
+    exit 1
+fi
+echo -e "${GREEN}✓ Docker access confirmed${NC}"
+
 # Check if Jenkins is running
-echo -e "${YELLOW}Checking Jenkins status...${NC}"
+echo -e "\n${YELLOW}Checking Jenkins status...${NC}"
 if docker ps | grep -q jenkins; then
     echo -e "${GREEN}✓ Jenkins container is running${NC}"
     JENKINS_CONTAINER=$(docker ps --filter "name=jenkins" --format "{{.Names}}" | head -1)
