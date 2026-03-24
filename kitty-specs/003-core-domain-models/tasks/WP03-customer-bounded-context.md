@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: Customer Bounded Context
-lane: "doing"
+lane: "done"
 dependencies:
 - WP01
 base_branch: 003-core-domain-models-WP01
@@ -14,8 +14,8 @@ phase: Phase 4 - Customer (parallel with WP02, WP06, WP07)
 assignee: ''
 agent: "claude"
 shell_pid: "89213"
-review_status: ''
-reviewed_by: ''
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-24T00:40:45Z'
   lane: planned
@@ -187,3 +187,4 @@ class CustomerTest : StringSpec({
 - 2026-03-24T02:22:24Z – claude-wp03 – shell_pid=83169 – lane=doing – Assigned agent via workflow command
 - 2026-03-24T02:30:30Z – claude-wp03 – shell_pid=83169 – lane=for_review – Ready for review: Customer entity, CustomerId value class, 4 jvmTest cases pass
 - 2026-03-24T02:38:19Z – claude – shell_pid=89213 – lane=doing – Started review via workflow command
+- 2026-03-24T02:45:02Z – claude – shell_pid=89213 – lane=done – Review passed: Customer model with nullable phone/email, loyaltyPoints: Int, CustomerId JvmInline, 4 jvmTest cases, build clean
