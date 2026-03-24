@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Ordering — Catalog Entities
-lane: "doing"
+lane: "for_review"
 dependencies:
 - WP01
 base_branch: 003-core-domain-models-WP01
@@ -269,3 +269,4 @@ data class Table(
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
 - 2026-03-24T02:12:58Z – claude-wp02 – shell_pid=82665 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T02:35:16Z – claude-wp02 – shell_pid=82665 – lane=for_review – Ready for review: 6 ordering catalog entities, build clean, no tests (deferred to WP04)
