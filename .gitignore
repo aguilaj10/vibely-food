@@ -50,3 +50,5 @@ jenkins-cli.jar
 *.dex
 /ANDROID_SDK_SETUP.md
 /docs/GRADLE_TASKS_EXPLAINED.md
+/docs/database-schema.sql.backup
+/SCHEMA_ALIGNMENT_REPORT.md

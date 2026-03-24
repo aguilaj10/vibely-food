@@ -61,6 +61,8 @@ CREATE INDEX idx_stores_organization ON stores(organization_id);
 
 -- Enable RLS
 ALTER TABLE stores ENABLE ROW LEVEL SECURITY;
+ALTER TABLE stores FORCE ROW LEVEL SECURITY;
+ALTER TABLE stores FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY stores_isolation ON stores
     USING (organization_id::text = current_setting('app.current_organization_id', true));
@@ -86,6 +88,8 @@ CREATE INDEX idx_users_organization_store ON users(organization_id, store_id);
 CREATE INDEX idx_users_email ON users(email);
 
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE users FORCE ROW LEVEL SECURITY;
+ALTER TABLE users FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY users_isolation ON users
     USING (
@@ -117,6 +121,8 @@ CREATE INDEX idx_categories_org_store ON categories(organization_id, store_id);
 CREATE INDEX idx_categories_parent ON categories(parent_id);
 
 ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
+ALTER TABLE categories FORCE ROW LEVEL SECURITY;
+ALTER TABLE categories FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY categories_isolation ON categories
     USING (
@@ -150,6 +156,8 @@ CREATE INDEX idx_products_category ON products(category_id);
 CREATE INDEX idx_products_sku ON products(sku);
 
 ALTER TABLE products ENABLE ROW LEVEL SECURITY;
+ALTER TABLE products FORCE ROW LEVEL SECURITY;
+ALTER TABLE products FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY products_isolation ON products
     USING (
@@ -189,6 +197,8 @@ CREATE INDEX idx_orders_user ON orders(user_id);
 CREATE INDEX idx_orders_customer ON orders(customer_id);
 
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
+ALTER TABLE orders FORCE ROW LEVEL SECURITY;
+ALTER TABLE orders FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY orders_isolation ON orders
     USING (
@@ -229,6 +239,8 @@ CREATE INDEX idx_order_items_product ON order_items(product_id);
 CREATE INDEX idx_order_items_org_store ON order_items(organization_id, store_id);
 
 ALTER TABLE order_items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE order_items FORCE ROW LEVEL SECURITY;
+ALTER TABLE order_items FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY order_items_isolation ON order_items
     USING (
@@ -256,6 +268,8 @@ CREATE INDEX idx_order_events_order ON order_events(order_id, sequence_number);
 CREATE INDEX idx_order_events_org_store ON order_events(organization_id, store_id, occurred_at DESC);
 
 ALTER TABLE order_events ENABLE ROW LEVEL SECURITY;
+ALTER TABLE order_events FORCE ROW LEVEL SECURITY;
+ALTER TABLE order_events FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY order_events_isolation ON order_events
     USING (
@@ -296,6 +310,8 @@ CREATE INDEX idx_payments_org_store ON payments(organization_id, store_id, creat
 CREATE INDEX idx_payments_status ON payments(status);
 
 ALTER TABLE payments ENABLE ROW LEVEL SECURITY;
+ALTER TABLE payments FORCE ROW LEVEL SECURITY;
+ALTER TABLE payments FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY payments_isolation ON payments
     USING (
@@ -335,6 +351,8 @@ CREATE INDEX idx_inventory_product ON inventory_items(product_id);
 CREATE INDEX idx_inventory_low_stock ON inventory_items(current_quantity) WHERE current_quantity <= reorder_point;
 
 ALTER TABLE inventory_items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE inventory_items FORCE ROW LEVEL SECURITY;
+ALTER TABLE inventory_items FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY inventory_items_isolation ON inventory_items
     USING (
@@ -362,6 +380,8 @@ CREATE INDEX idx_inventory_movements_item ON inventory_movements(inventory_item_
 CREATE INDEX idx_inventory_movements_org_store ON inventory_movements(organization_id, store_id, created_at DESC);
 
 ALTER TABLE inventory_movements ENABLE ROW LEVEL SECURITY;
+ALTER TABLE inventory_movements FORCE ROW LEVEL SECURITY;
+ALTER TABLE inventory_movements FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY inventory_movements_isolation ON inventory_movements
     USING (
@@ -405,6 +425,8 @@ CREATE INDEX idx_customers_email ON customers(email);
 CREATE INDEX idx_customers_phone ON customers(phone);
 
 ALTER TABLE customers ENABLE ROW LEVEL SECURITY;
+ALTER TABLE customers FORCE ROW LEVEL SECURITY;
+ALTER TABLE customers FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY customers_isolation ON customers
     USING (
@@ -440,6 +462,8 @@ CREATE TABLE suppliers (
 CREATE INDEX idx_suppliers_org_store ON suppliers(organization_id, store_id);
 
 ALTER TABLE suppliers ENABLE ROW LEVEL SECURITY;
+ALTER TABLE suppliers FORCE ROW LEVEL SECURITY;
+ALTER TABLE suppliers FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY suppliers_isolation ON suppliers
     USING (
@@ -470,6 +494,8 @@ CREATE INDEX idx_tables_org_store ON restaurant_tables(organization_id, store_id
 CREATE INDEX idx_tables_status ON restaurant_tables(status);
 
 ALTER TABLE restaurant_tables ENABLE ROW LEVEL SECURITY;
+ALTER TABLE restaurant_tables FORCE ROW LEVEL SECURITY;
+ALTER TABLE restaurant_tables FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY restaurant_tables_isolation ON restaurant_tables
     USING (
@@ -503,6 +529,8 @@ CREATE INDEX idx_shifts_user ON shifts(user_id, started_at DESC);
 CREATE INDEX idx_shifts_started ON shifts(started_at DESC);
 
 ALTER TABLE shifts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE shifts FORCE ROW LEVEL SECURITY;
+ALTER TABLE shifts FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY shifts_isolation ON shifts
     USING (
@@ -529,6 +557,8 @@ CREATE TABLE store_settings (
 CREATE INDEX idx_store_settings_org_store ON store_settings(organization_id, store_id);
 
 ALTER TABLE store_settings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE store_settings FORCE ROW LEVEL SECURITY;
+ALTER TABLE store_settings FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY store_settings_isolation ON store_settings
     USING (
@@ -552,6 +582,8 @@ CREATE TABLE tax_rates (
 CREATE INDEX idx_tax_rates_org_store ON tax_rates(organization_id, store_id);
 
 ALTER TABLE tax_rates ENABLE ROW LEVEL SECURITY;
+ALTER TABLE tax_rates FORCE ROW LEVEL SECURITY;
+ALTER TABLE tax_rates FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY tax_rates_isolation ON tax_rates
     USING (
@@ -585,6 +617,8 @@ CREATE INDEX idx_outbox_entity ON sync_outbox(entity_type, entity_id);
 CREATE INDEX idx_outbox_org_store ON sync_outbox(organization_id, store_id);
 
 ALTER TABLE sync_outbox ENABLE ROW LEVEL SECURITY;
+ALTER TABLE sync_outbox FORCE ROW LEVEL SECURITY;
+ALTER TABLE sync_outbox FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY sync_outbox_isolation ON sync_outbox
     USING (
@@ -614,6 +648,8 @@ CREATE INDEX idx_audit_log_entity ON audit_log(entity_type, entity_id, occurred_
 CREATE INDEX idx_audit_log_org_store ON audit_log(organization_id, store_id, occurred_at DESC);
 
 ALTER TABLE audit_log ENABLE ROW LEVEL SECURITY;
+ALTER TABLE audit_log FORCE ROW LEVEL SECURITY;
+ALTER TABLE audit_log FORCE ROW LEVEL SECURITY;
 
 CREATE POLICY audit_log_isolation ON audit_log
     USING (
