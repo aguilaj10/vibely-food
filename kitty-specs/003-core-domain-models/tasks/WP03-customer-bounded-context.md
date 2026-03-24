@@ -1,16 +1,19 @@
 ---
 work_package_id: WP03
 title: Customer Bounded Context
-lane: planned
+lane: "doing"
 dependencies:
 - WP01
+base_branch: 003-core-domain-models-WP01
+base_commit: 7c5a57dca0f4840ab52667f4afbc0d6562373dab
+created_at: '2026-03-24T02:22:23.060169+00:00'
 subtasks:
 - T011
 - T012
 phase: Phase 4 - Customer (parallel with WP02, WP06, WP07)
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "83169"
 review_status: ''
 reviewed_by: ''
 history:
