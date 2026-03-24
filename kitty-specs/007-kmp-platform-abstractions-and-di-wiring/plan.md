@@ -1,108 +1,393 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: KMP Platform Abstractions and DI Wiring
 
+**Branch**: `007-kmp-platform-abstractions-and-di-wiring` | **Date**: 2026-03-24 | **Spec**: [spec.md](spec.md)
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+---
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Three sequential work packages that wire the platform abstraction layer for Vibely POS across Android, JVM, and Web/JS:
+
+1. **WP01** — Update version catalog (remove SQLDelight, add DataStore/Room/security-crypto) and implement `expect/actual` declarations in `core:common`.
+2. **WP02** — Implement Koin `expect fun platformModule()` actuals and `commonModule()` in `shared`, including temporary `DatabaseFactory`/`DatabaseConfig` stubs for the JVM target.
+3. **WP03** — Wire Koin initialisation at all three platform entry points and scaffold the `app-web` Kotlin/JS browser module.
+
+WP02 depends on WP01 (needs compiled `expect` declarations). WP03 depends on WP02 (needs `commonModule()` + `platformModule()`).
+
+---
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+**Language/Version**: Kotlin Multiplatform 2.3.20 — Android, JVM, JS (IR/browser) targets
+**Primary Dependencies**: Koin 4.2.0, DataStore KMP 1.1.3, Room KMP 2.7.0, security-crypto 1.1.0-alpha06
+**Storage**: DataStore KMP (Android preferences), Room KMP (Android event queue), in-memory (JVM), localStorage (Web/JS)
+**Testing**: Kotest assertions, jvmTest source set — one test per `SecureStorage` implementation, one per `PlatformCapabilities` actual
+**Target Platform**: Android (minSdk 26), JVM (server), Kotlin/JS browser
+**Project Type**: Kotlin Multiplatform library modules + platform entry point modules
+**Performance Goals**: No overhead — pure wiring; all abstractions are thin delegates with zero business logic
+**Constraints**: Zero platform imports in `commonMain`; `core:domain` must remain framework-free (this feature does not touch it); KDoc on every public symbol (Detekt-enforced)
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+---
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+| Rule | Status | Notes |
+|------|--------|-------|
+| `core:domain` must have zero framework dependencies | ✅ PASS | This feature does not touch `core:domain` |
+| Use `expect/actual` for platform-specific code — never branch on platform in shared code | ✅ REQUIRED | Core deliverable of this feature |
+| No framework imports in `core:domain` | ✅ PASS | N/A — `core:domain` untouched |
+| KDoc on all public classes, functions, properties | ✅ REQUIRED | All new `expect` declarations and `actual` implementations need KDoc |
+| Clean Architecture layer boundaries | ✅ PASS | Platform abstractions in `core:common`, DI wiring in `shared`, entry points in app modules |
+| No hardcoded credentials or env values | ✅ REQUIRED | JVM `DatabaseConfig` reads from `System.getenv()` only; `.env` is the source of truth |
+| SQLDelight removed from constitution and catalog | ✅ ADDRESSED | Constitution updated to v1.2.0; `libs.versions.toml` update is WP01-T001 |
 
-[Gates determined based on constitution file]
+**Gate result**: PASS — no violations.
+
+---
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+kitty-specs/007-kmp-platform-abstractions-and-di-wiring/
+├── plan.md         # This file
+├── spec.md         # Feature specification
+└── tasks/          # Work package files (generated by /spec-kitty.tasks)
 ```
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+No `research.md` — all decisions resolved from spec + planning Q&A.
+No `data-model.md` — pure infrastructure wiring, no new entities.
+No `contracts/` — no API endpoints introduced.
+
+### Source Code
 
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+gradle/
+└── libs.versions.toml             # WP01: remove SQLDelight, add DataStore/Room/security-crypto
 
-tests/
-├── contract/
-├── integration/
-└── unit/
+core/common/
+└── src/
+    ├── commonMain/kotlin/com/vibely/common/platform/
+    │   ├── PlatformCapabilities.kt    # WP01: expect class
+    │   ├── PlatformLogger.kt          # WP01: expect class
+    │   └── SecureStorage.kt           # WP01: expect class
+    ├── androidMain/kotlin/com/vibely/common/platform/
+    │   ├── PlatformCapabilities.kt    # WP01: actual — Android values
+    │   ├── PlatformLogger.kt          # WP01: actual — android.util.Log
+    │   └── SecureStorage.kt           # WP01: actual — EncryptedSharedPreferences
+    ├── jvmMain/kotlin/com/vibely/common/platform/
+    │   ├── PlatformCapabilities.kt    # WP01: actual — JVM values
+    │   ├── PlatformLogger.kt          # WP01: actual — println/SLF4J
+    │   └── SecureStorage.kt           # WP01: actual — ConcurrentHashMap
+    └── jsMain/kotlin/com/vibely/common/platform/
+        ├── PlatformCapabilities.kt    # WP01: actual — Web/JS values
+        ├── PlatformLogger.kt          # WP01: actual — console
+        └── SecureStorage.kt           # WP01: actual — localStorage
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+shared/
+└── src/
+    ├── commonMain/kotlin/com/vibely/shared/di/
+    │   ├── CommonModule.kt            # WP02: commonModule()
+    │   └── PlatformModule.kt          # WP02: expect fun platformModule()
+    ├── androidMain/kotlin/com/vibely/shared/di/
+    │   └── PlatformModule.kt          # WP02: actual — Android bindings
+    ├── jvmMain/kotlin/com/vibely/shared/di/
+    │   ├── PlatformModule.kt          # WP02: actual — JVM bindings
+    │   └── DatabaseStubs.kt           # WP02: TEMP stubs — TODO remove when Phase 1.1 done
+    └── jsMain/kotlin/com/vibely/shared/di/
+        └── PlatformModule.kt          # WP02: actual — Web/JS bindings
 
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
+composeApp/
+└── src/androidMain/kotlin/com/vibely/
+    └── VibelyApp.kt                   # WP03: Application subclass — startKoin
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
+server/
+└── src/main/kotlin/com/vibely/server/
+    └── Main.kt                        # WP03: main() — startKoin + Ktor
 
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+app-web/                               # WP03: new module scaffold
+├── build.gradle.kts
+└── src/jsMain/kotlin/com/vibely/web/
+    └── Main.kt                        # WP03: JS entry point — startKoin
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+---
 
-## Complexity Tracking
+## Work Packages
 
-*Fill ONLY if Constitution Check has violations that must be justified*
+### WP01 — Version Catalog + expect/actual in `core:common`
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+**Scope**: Update `libs.versions.toml`, add `core:common` dependencies, implement all 3 `expect` declarations and 9 `actual` implementations.
+
+**Sequential dependency**: None — can start immediately.
+
+#### T001 — Update `libs.versions.toml`
+Remove all SQLDelight entries. Add:
+```toml
+[versions]
+datastore = "1.1.3"
+room = "2.7.0"
+security-crypto = "1.1.0-alpha06"
+ksp = "2.3.20-2.0.1"   # required by Room KMP annotation processor
+
+[libraries]
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+security-crypto = { module = "androidx.security:security-crypto", version.ref = "security-crypto" }
+
+[plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }
+```
+
+#### T002 — Update `core/common/build.gradle.kts`
+Add `security-crypto` to `androidMain` dependencies. No changes to other source sets.
+
+#### T003 — `PlatformCapabilities.kt` (expect + 3 actuals)
+
+**commonMain** (`expect class`):
+```kotlin
+/**
+ * Describes the runtime capabilities available on the current platform.
+ * Shared code uses these flags to gate platform-specific behaviour.
+ */
+expect class PlatformCapabilities() {
+    /** True if the platform can persist data to local storage. */
+    val supportsLocalCache: Boolean
+    /** True if the platform supports background work after the UI is hidden. */
+    val supportsBackgroundSync: Boolean
+    /** True if the platform can display push or local notifications. */
+    val supportsNotifications: Boolean
+}
+```
+
+**androidMain** (`actual`): `true / true / true`
+**jvmMain** (`actual`): `false / true / false`
+**jsMain** (`actual`): `true / false / false`
+
+#### T004 — `PlatformLogger.kt` (expect + 3 actuals)
+
+**commonMain** (`expect class`):
+```kotlin
+/**
+ * Platform-aware structured logger.
+ * Shared code calls this instead of importing platform logging APIs directly.
+ */
+expect class PlatformLogger() {
+    fun debug(tag: String, message: String)
+    fun info(tag: String, message: String)
+    fun warn(tag: String, message: String)
+    fun error(tag: String, message: String, throwable: Throwable? = null)
+}
+```
+
+**androidMain**: delegates to `android.util.Log`
+**jvmMain**: delegates to `System.out.println` with level prefix
+**jsMain**: delegates to `console.log / console.warn / console.error`
+
+#### T005 — `SecureStorage.kt` (expect + 3 actuals)
+
+**commonMain** (`expect class`):
+```kotlin
+/**
+ * Platform-aware key-value storage for sensitive values (tokens, session keys).
+ * Shared code depends only on this contract.
+ */
+expect class SecureStorage() {
+    /** Saves [value] under [key], replacing any existing entry. */
+    fun save(key: String, value: String)
+    /** Returns the value stored under [key], or null if absent. */
+    fun get(key: String): String?
+    /** Removes the entry for [key]. No-op if absent. */
+    fun delete(key: String)
+    /** Removes all stored entries. */
+    fun clear()
+}
+```
+
+**androidMain**: `AndroidSecureStorage` — `EncryptedSharedPreferences` backed by Android Keystore
+**jvmMain**: `JvmSecureStorage` — `ConcurrentHashMap<String, String>` (in-memory, non-persistent)
+**jsMain**: `WebSecureStorage` — `window.localStorage`
+
+#### T006 — jvmTest: `SecureStorageTest` + `PlatformCapabilitiesTest`
+Two test classes in `core:common:jvmTest`:
+- `SecureStorageTest`: save → get → delete → clear round-trips
+- `PlatformCapabilitiesTest`: assert JVM actual values match spec (false/true/false)
+
+---
+
+### WP02 — Koin DI modules in `shared`
+
+**Sequential dependency**: WP01 must be merged first (needs compiled `expect` classes).
+
+#### T007 — Update `shared/build.gradle.kts`
+Add Koin, DataStore, Room, and `core:common` to the appropriate source sets:
+- `commonMain`: `koin-core`, `projects.core.common`
+- `androidMain`: `datastore-preferences`, `room-runtime`
+
+#### T008 — `DatabaseStubs.kt` in `shared:jvmMain`
+Temporary stubs so the JVM `platformModule` compiles before Phase 1.1:
+```kotlin
+// TODO: Remove this file when Phase 1.1 (core:database) is implemented.
+// These stubs exist solely to allow the JVM platformModule to compile.
+
+data class DatabaseConfig(
+    val url: String,
+    val username: String,
+    val password: String,
+)
+
+class DatabaseFactory(val config: DatabaseConfig) {
+    // Intentionally empty — full implementation in Phase 1.1.
+}
+```
+
+#### T009 — `PlatformModule.kt` (expect fun + 3 actuals)
+
+**commonMain**:
+```kotlin
+/** Returns the Koin [Module] for platform-specific dependency bindings. */
+expect fun platformModule(): Module
+```
+
+**androidMain** `actual`:
+- `DataStore<Preferences>` → `androidContext().dataStore`
+- `VibelyLocalDatabase` → `Room.databaseBuilder(...).build()`
+- `PendingEventDao` → from `VibelyLocalDatabase`
+- `UserPreferencesRepository` → `UserPreferencesRepository(get())`
+- `SecureStorage` → `SecureStorage()` (Android actual)
+- `PlatformLogger` → `PlatformLogger()` (Android actual)
+
+**jvmMain** `actual`:
+- `DatabaseConfig` → reads `DATABASE_URL`, `DB_USER`, `DB_PASSWORD` from `System.getenv()`; dev fallbacks allowed
+- `DatabaseFactory` → `DatabaseFactory(get())`
+- `SecureStorage` → `SecureStorage()` (JVM actual)
+- `PlatformLogger` → `PlatformLogger()` (JVM actual)
+
+**jsMain** `actual`:
+- `SecureStorage` → `SecureStorage()` (JS actual)
+- `PlatformLogger` → `PlatformLogger()` (JS actual)
+- `PlatformCapabilities` → `PlatformCapabilities()` (JS actual)
+
+#### T010 — `CommonModule.kt` in `shared:commonMain`
+```kotlin
+/**
+ * Koin module containing platform-agnostic infrastructure bindings.
+ * Repository and use-case bindings are added here incrementally as each
+ * feature is implemented — do NOT add them in advance.
+ */
+fun commonModule(): Module = module {
+    single { UserPreferencesRepository(get()) }
+    single<SecureStorage> { SecureStorage() }
+    single<PlatformLogger> { PlatformLogger() }
+}
+```
+
+---
+
+### WP03 — Entry points and `app-web` scaffold
+
+**Sequential dependency**: WP02 must be merged first.
+
+#### T011 — `VibelyApp.kt` in `composeApp:androidMain`
+```kotlin
+/**
+ * Application entry point.
+ * Initialises Koin with [commonModule] and [platformModule] before any
+ * Activity or Service is created.
+ */
+class VibelyApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        startKoin {
+            androidContext(this@VibelyApp)
+            modules(commonModule(), platformModule())
+        }
+    }
+}
+```
+Register `android:name=".VibelyApp"` in `composeApp/src/androidMain/AndroidManifest.xml`.
+
+#### T012 — `Main.kt` in `server:main`
+```kotlin
+/**
+ * JVM server entry point.
+ * Koin is started before the Ktor engine so all injection is available
+ * to route handlers and repositories.
+ */
+fun main() {
+    startKoin {
+        modules(commonModule(), platformModule())
+    }
+    embeddedServer(Netty, port = 8080) {
+        // Ktor configuration follows in Phase 1.2
+    }.start(wait = true)
+}
+```
+Add `koin-core` and Ktor Netty dependencies to `server/build.gradle.kts`.
+
+#### T013 — Scaffold `app-web` module
+New `app-web/build.gradle.kts`:
+```kotlin
+plugins {
+    alias(libs.plugins.kotlin.multiplatform)
+}
+
+kotlin {
+    js(IR) {
+        browser {
+            binaries.executable()
+        }
+    }
+    sourceSets {
+        jsMain.dependencies {
+            implementation(libs.koin.core)
+            implementation(projects.shared)
+        }
+    }
+}
+```
+
+`app-web/src/jsMain/kotlin/com/vibely/web/Main.kt`:
+```kotlin
+/**
+ * Web/JS application entry point.
+ * Initialises Koin before the UI is rendered.
+ */
+fun main() {
+    startKoin {
+        modules(commonModule(), platformModule())
+    }
+    // Compose for Web / UI initialisation follows in Phase 1.3
+}
+```
+
+Register `app-web` in `settings.gradle.kts`.
+
+---
+
+## Enum Corrections Detail (N/A)
+
+No enum changes — pure wiring feature.
+
+---
+
+## Dependency Graph
+
+```
+WP01 (catalog + expect/actual)
+  └─► WP02 (Koin DI modules)
+        └─► WP03 (entry points + app-web)
+```
+
+WP01 and WP02 are the critical path. WP03 is the thinnest package (mostly boilerplate wiring).
+
+---
+
+## Notes
+
+- `DatabaseFactory`/`DatabaseConfig` stubs in `shared:jvmMain` are intentionally temporary. They will be deleted and replaced by real implementations when `core:database` is implemented in Phase 1.1. The TODO comment in `DatabaseStubs.kt` is mandatory.
+- `UserPreferencesRepository` and `VibelyLocalDatabase` / `PendingEventDao` will be created as part of WP01/WP02. Their definitions follow the DataStore and Room patterns documented in `IMPLEMENTATION_PLAN.md § 0.1.3`.
+- The `app-web` module is intentionally minimal — it holds only the Koin entry point. Compose for Web setup happens in Phase 1.3 (Design System).
