@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        // Use the default Java version available in the container
-        JAVA_HOME = tool name: 'Default', type: 'jdk'
-        PATH = "${env.PATH}"
+        // Use JDK17 mounted from host machine
+        JAVA_HOME = '/opt/jdk17'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
 
         // Gradle options
         GRADLE_OPTS = '-Dorg.gradle.daemon=false -Dorg.gradle.caching=true'
