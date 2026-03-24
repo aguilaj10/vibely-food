@@ -1,7 +1,7 @@
 ---
 work_package_id: WP07
 title: Smoke Test & Documentation
-lane: "for_review"
+lane: "doing"
 dependencies: [WP04, WP05, WP06]
 base_branch: 002-kmp-project-structure-setup-WP07-merge-base
 base_commit: 4270994e7b73eb38af82f3f1b98ab8bcb75efdcb
@@ -14,7 +14,7 @@ subtasks:
 phase: Phase 1 - Validation
 assignee: ''
 agent: "claude"
-shell_pid: "45064"
+shell_pid: "46724"
 review_status: ''
 reviewed_by: ''
 history:
@@ -338,3 +338,4 @@ Reviewers should verify all success criteria from `spec.md`:
 - 2026-03-24T00:08:22Z – claude – shell_pid=12202 – lane=for_review – Ready for review: BUILD SUCCESSFUL 477 tasks; installGitHooks worktree-aware; all convention plugin AGP 9.x fixes applied
 - 2026-03-24T00:13:10Z – claude – shell_pid=45064 – lane=doing – Started review via workflow command
 - 2026-03-24T00:15:00Z – claude – shell_pid=45064 – lane=for_review – Ready for review: BUILD SUCCESSFUL 477 tasks across 18 modules; installGitHooks worktree-aware
+- 2026-03-24T00:15:05Z – claude – shell_pid=46724 – lane=doing – Started review via workflow command
