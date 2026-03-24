@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Enum Corrections in core:domain
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: bad7276d4456b3157e3dc17e1ebc211024d6bac0
@@ -16,8 +16,8 @@ subtasks:
 - T007
 phase: Phase 1 - Enum Corrections
 assignee: ''
-agent: "claude-1"
-shell_pid: "30214"
+agent: "claude"
+shell_pid: "40058"
 review_status: ''
 reviewed_by: ''
 history:
@@ -310,3 +310,4 @@ enum class PaymentMethod {
 - 2026-03-24T15:10:01Z – system – lane=planned – Prompt generated via /spec-kitty.tasks
 - 2026-03-24T15:16:01Z – claude-1 – shell_pid=30214 – lane=doing – Assigned agent via workflow command
 - 2026-03-24T15:33:08Z – claude-1 – shell_pid=30214 – lane=for_review – Ready for review: corrected Role/OrderStatus/TableStatus/PaymentMethod enums with exhaustive jvmTest coverage; build + detekt + ktlint green
+- 2026-03-24T15:33:17Z – claude – shell_pid=40058 – lane=doing – Started review via workflow command
