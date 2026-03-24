@@ -52,10 +52,10 @@
 **Requirements Refs**: FR-004, FR-005
 
 ### Included Subtasks
-- [ ] T007 Update `shared/build.gradle.kts` — add `koin-core`, DataStore, Room, and `core:common` dependencies to the correct source sets
-- [ ] T008 Create `DatabaseStubs.kt` in `shared:jvmMain` — `DatabaseConfig` data class and empty `DatabaseFactory` class with mandatory TODO header
-- [ ] T009 Implement `PlatformModule.kt` — `expect fun platformModule()` in `commonMain` + Android / JVM / JS `actual` implementations
-- [ ] T010 Implement `CommonModule.kt` — minimal `commonModule()` in `shared:commonMain`
+- [x] T007 Update `shared/build.gradle.kts` — add `koin-core`, DataStore, Room, and `core:common` dependencies to the correct source sets
+- [x] T008 Create `DatabaseStubs.kt` in `shared:jvmMain` — `DatabaseConfig` data class and empty `DatabaseFactory` class with mandatory TODO header
+- [x] T009 Implement `PlatformModule.kt` — `expect fun platformModule()` in `commonMain` + Android / JVM / JS `actual` implementations
+- [x] T010 Implement `CommonModule.kt` — minimal `commonModule()` in `shared:commonMain`
 
 ### Implementation Notes
 - T007 must land before any other task in this WP (Koin and Room not on classpath yet).
