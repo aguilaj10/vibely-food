@@ -60,11 +60,11 @@ description: "Work package task list for feature 004 — Domain Repository Inter
 **Estimated prompt size**: ~380 lines
 
 ### Included Subtasks
-- [ ] T006 [P] Create `CustomerRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/customer/CustomerRepository.kt`
-- [ ] T007 [P] Create `IngredientStockRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/inventory/IngredientStockRepository.kt`
-- [ ] T008 [P] Create `EmployeeRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/staff/EmployeeRepository.kt`
-- [ ] T009 [P] Create `ShiftRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/staff/ShiftRepository.kt`
-- [ ] T010 [P] Create `PaymentRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/payment/PaymentRepository.kt`
+- [x] T006 [P] Create `CustomerRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/customer/CustomerRepository.kt`
+- [x] T007 [P] Create `IngredientStockRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/inventory/IngredientStockRepository.kt`
+- [x] T008 [P] Create `EmployeeRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/staff/EmployeeRepository.kt`
+- [x] T009 [P] Create `ShiftRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/staff/ShiftRepository.kt`
+- [x] T010 [P] Create `PaymentRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/payment/PaymentRepository.kt`
 
 ### Implementation Notes
 - Each file goes in the package of its aggregate root — no new packages.
