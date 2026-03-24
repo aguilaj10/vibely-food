@@ -7,10 +7,16 @@ value class TableId(
     val value: String,
 )
 
+/**
+ * Represents the occupancy state of a restaurant table.
+ *
+ * Values match the database [table_status] type exactly.
+ */
 enum class TableStatus {
-    FREE,
+    AVAILABLE,
     OCCUPIED,
     RESERVED,
+    CLEANING,
 }
 
 data class Table(

@@ -60,8 +60,9 @@ class StaffTest {
                     Role.OWNER -> "owner"
                     Role.MANAGER -> "manager"
                     Role.CASHIER -> "cashier"
-                    Role.SERVER -> "server"
+                    Role.WAITER -> "waiter"
                     Role.KITCHEN -> "kitchen"
+                    Role.VIEWER -> "viewer"
                 }
             label.isNotEmpty() shouldBe true
         }

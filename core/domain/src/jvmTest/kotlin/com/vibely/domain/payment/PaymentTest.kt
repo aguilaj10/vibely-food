@@ -82,7 +82,7 @@ class PaymentTest {
                     PaymentMethod.CASH -> "cash"
                     PaymentMethod.CARD -> "card"
                     PaymentMethod.DIGITAL_WALLET -> "digital wallet"
-                    PaymentMethod.VOUCHER -> "voucher"
+                    PaymentMethod.BANK_TRANSFER -> "bank transfer"
                 }
             label.isNotEmpty() shouldBe true
         }
@@ -103,13 +103,13 @@ class PaymentTest {
     }
 
     @Test
-    fun `Payment amount can be zero for comped order`() {
+    fun `Payment amount can be zero for bank transfer order`() {
         val comped =
             Payment(
                 id = PaymentId("pay-comp"),
                 orderId = OrderId("order-comp"),
                 amount = Money.ZERO,
-                method = PaymentMethod.VOUCHER,
+                method = PaymentMethod.BANK_TRANSFER,
                 status = PaymentStatus.COMPLETED,
                 timestamp = now,
             )
