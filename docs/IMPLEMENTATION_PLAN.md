@@ -360,15 +360,14 @@ interface OrderRepository {
 // shared/src/commonMain/kotlin/di/CommonModule.kt
 
 fun commonModule() = module {
-    // Domain layer (pure Kotlin)
-    single<OrderRepository> { get<OrderRepositoryImpl>() }
-    factory { CreateOrderUseCase(get(), get()) }
-    factory { GetOrdersUseCase(get()) }
-    
-    // Platform-specific (provided by platformModule)
-    // - SqlDriver
-    // - SecureStorage
-    // - PlatformLogger
+    // Platform-agnostic infrastructure (wired here)
+    single<UserPreferencesRepository> { UserPreferencesRepository(get()) }
+    single<SecureStorage> { get() }       // actual provided by platformModule
+    single<PlatformLogger> { get() }      // actual provided by platformModule
+
+    // NOTE: Repository and use case bindings are added here incrementally as
+    // each feature is implemented. Do NOT wire use cases in advance of their
+    // implementation. See Phase 0.2 gap tracking for the pending use cases.
 }
 
 // Platform-specific module
