@@ -87,9 +87,9 @@
 **Requirements Refs**: FR-006
 
 ### Included Subtasks
-- [ ] T011 Create `VibelyApp.kt` in `composeApp:androidMain` — `Application` subclass calling `startKoin`; register `android:name` in `AndroidManifest.xml`
-- [ ] T012 Update `server/Main.kt` — call `startKoin` before Ktor engine; add `koin-core` and Ktor Netty to `server/build.gradle.kts`
-- [ ] T013 Scaffold `app-web` module — `build.gradle.kts`, JS entry point `Main.kt`, register in `settings.gradle.kts`
+- [x] T011 Create `VibelyApp.kt` in `composeApp:androidMain` — `Application` subclass calling `startKoin`; register `android:name` in `AndroidManifest.xml`
+- [x] T012 Update `server/Main.kt` — call `startKoin` before Ktor engine; add `koin-core` and Ktor Netty to `server/build.gradle.kts`
+- [x] T013 Scaffold `app-web` module — `build.gradle.kts`, JS entry point `Main.kt`, register in `settings.gradle.kts`
 
 ### Implementation Notes
 - T011, T012, T013 touch three independent modules — safe to implement concurrently.
