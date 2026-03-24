@@ -9,4 +9,10 @@ kotlin {
     android {
         namespace = "com.vibely.core.domain"
     }
+
+    sourceSets {
+        commonTest.dependencies {
+            implementation(libs.kotest.assertions.core)
+        }
+    }
 }
