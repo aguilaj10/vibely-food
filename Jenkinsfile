@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        // Java version for Gradle builds
-        JAVA_HOME = tool name: 'JDK17', type: 'jdk'
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+        // Use the default Java version available in the container
+        JAVA_HOME = tool name: 'Default', type: 'jdk'
+        PATH = "${env.PATH}"
 
         // Gradle options
         GRADLE_OPTS = '-Dorg.gradle.daemon=false -Dorg.gradle.caching=true'
 
-        // Android SDK (if available on Jenkins agent)
+        // Android SDK (mounted from host machine)
         ANDROID_HOME = '/opt/android-sdk'
     }
 
