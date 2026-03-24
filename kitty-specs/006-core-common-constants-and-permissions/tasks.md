@@ -17,7 +17,7 @@ Both work packages are fully independent and can be executed in parallel. WP01 t
 - FR-001, FR-005, FR-006, FR-007, SC-001, SC-005, SC-006
 
 ### Included Subtasks
-- [ ] T001 Update `Role.kt` — rename SERVER → WAITER, add VIEWER
+- [x] T001 Update `Role.kt` — rename SERVER → WAITER, add VIEWER
 - [ ] T002 Update `OrderStatus.kt` — replace all values to match DB schema
 - [ ] T003 Update `TableStatus.kt` — rename FREE → AVAILABLE, add CLEANING
 - [ ] T004 Update `PaymentMethod.kt` — rename VOUCHER → BANK_TRANSFER
