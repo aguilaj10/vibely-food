@@ -1,11 +1,11 @@
 ---
 work_package_id: WP01
 title: Enum Corrections in core:domain
-lane: "planned"
+lane: "doing"
 dependencies: []
 base_branch: main
-base_commit: ''
-created_at: '2026-03-24T15:10:01Z'
+base_commit: bad7276d4456b3157e3dc17e1ebc211024d6bac0
+created_at: '2026-03-24T15:16:00.298036+00:00'
 subtasks:
 - T001
 - T002
@@ -17,7 +17,7 @@ subtasks:
 phase: Phase 1 - Enum Corrections
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "30214"
 review_status: ''
 reviewed_by: ''
 history:
