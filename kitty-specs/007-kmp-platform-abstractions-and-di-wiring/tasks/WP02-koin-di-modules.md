@@ -1,8 +1,11 @@
 ---
 work_package_id: WP02
 title: Koin DI Modules in shared
-lane: planned
+lane: "doing"
 dependencies: [WP01]
+base_branch: 007-kmp-platform-abstractions-and-di-wiring-WP01
+base_commit: 60d6c8b76287b3c8e3ffb6521ec8955b5d4fa79a
+created_at: '2026-03-24T23:11:38.818269+00:00'
 subtasks:
 - T007
 - T008
@@ -11,7 +14,7 @@ subtasks:
 phase: Phase 1 - Platform Abstractions
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "26433"
 review_status: ''
 reviewed_by: ''
 history:
