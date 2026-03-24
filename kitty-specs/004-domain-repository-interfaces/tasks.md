@@ -24,11 +24,11 @@ description: "Work package task list for feature 004 — Domain Repository Inter
 **Estimated prompt size**: ~380 lines
 
 ### Included Subtasks
-- [ ] T001 [P] Create `CategoryRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/CategoryRepository.kt`
-- [ ] T002 [P] Create `MenuItemRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/MenuItemRepository.kt`
-- [ ] T003 [P] Create `SectionRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/SectionRepository.kt`
-- [ ] T004 [P] Create `TableRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/TableRepository.kt`
-- [ ] T005 [P] Create `OrderRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/OrderRepository.kt`
+- [x] T001 [P] Create `CategoryRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/CategoryRepository.kt`
+- [x] T002 [P] Create `MenuItemRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/MenuItemRepository.kt`
+- [x] T003 [P] Create `SectionRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/SectionRepository.kt`
+- [x] T004 [P] Create `TableRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/TableRepository.kt`
+- [x] T005 [P] Create `OrderRepository` in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/OrderRepository.kt`
 
 ### Implementation Notes
 - All files go in the existing `com.vibely.domain.ordering` package — same package as the aggregate roots.
