@@ -59,12 +59,12 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~370 lines
 
 ### Included Subtasks
-- [ ] T005 Create `ordering/Category.kt` — `CategoryId` + `Category`
-- [ ] T006 [P] Create `ordering/Modifier.kt` — `ModifierId` + `Modifier`
-- [ ] T007 [P] Create `ordering/ModifierGroup.kt` — `ModifierGroupId` + `ModifierGroup` (contains `List<Modifier>`)
-- [ ] T008 [P] Create `ordering/MenuItem.kt` — `MenuItemId` + `MenuItem` (references `CategoryId`, `List<ModifierGroup>`)
-- [ ] T009 [P] Create `ordering/Section.kt` — `SectionId` + `Section` (contains `List<TableId>`)
-- [ ] T010 [P] Create `ordering/Table.kt` — `TableId` + `Table` + `TableStatus` enum
+- [x] T005 Create `ordering/Category.kt` — `CategoryId` + `Category`
+- [x] T006 [P] Create `ordering/Modifier.kt` — `ModifierId` + `Modifier`
+- [x] T007 [P] Create `ordering/ModifierGroup.kt` — `ModifierGroupId` + `ModifierGroup` (contains `List<Modifier>`)
+- [x] T008 [P] Create `ordering/MenuItem.kt` — `MenuItemId` + `MenuItem` (references `CategoryId`, `List<ModifierGroup>`)
+- [x] T009 [P] Create `ordering/Section.kt` — `SectionId` + `Section` (contains `List<TableId>`)
+- [x] T010 [P] Create `ordering/Table.kt` — `TableId` + `Table` + `TableStatus` enum
 
 ### Implementation Notes
 - All files in `core/domain/src/commonMain/kotlin/com/vibely/domain/ordering/`
