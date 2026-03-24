@@ -1,8 +1,11 @@
 ---
 work_package_id: WP01
 title: Common Value Types
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 65a2a0bd9549049fbf775380e44a373a6b734c6f
+created_at: '2026-03-24T00:52:05.369493+00:00'
 subtasks:
 - T001
 - T002
@@ -11,7 +14,7 @@ subtasks:
 phase: Phase 1 - Foundation
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "61888"
 review_status: ''
 reviewed_by: ''
 history:
