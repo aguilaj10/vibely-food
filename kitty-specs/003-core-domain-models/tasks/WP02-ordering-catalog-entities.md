@@ -16,7 +16,7 @@ subtasks:
 - T010
 phase: Phase 2 - Ordering Bounded Context (Part 1)
 assignee: ''
-agent: ''
+agent: "claude-wp02"
 shell_pid: "82665"
 review_status: ''
 reviewed_by: ''
@@ -268,3 +268,4 @@ data class Table(
 ## Activity Log
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
+- 2026-03-24T02:12:58Z – claude-wp02 – shell_pid=82665 – lane=doing – Assigned agent via workflow command
