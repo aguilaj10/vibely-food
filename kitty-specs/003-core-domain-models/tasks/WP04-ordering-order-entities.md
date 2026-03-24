@@ -1,7 +1,7 @@
 ---
 work_package_id: WP04
 title: Ordering — Order Entities
-lane: "doing"
+lane: "for_review"
 dependencies:
 - WP01
 - WP02
@@ -340,3 +340,4 @@ class OrderTest : StringSpec({
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
 - 2026-03-24T02:46:07Z – claude – shell_pid=93507 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T02:48:16Z – claude – shell_pid=93507 – lane=for_review – Ready for review: OrderStatus, SelectedModifier, OrderItem, Order with OrderId, 5 jvmTest cases, build clean
