@@ -11,8 +11,16 @@ kotlin {
     }
 
     sourceSets {
-        commonTest.dependencies {
+        jvmTest.dependencies {
             implementation(libs.kotest.assertions.core)
         }
     }
+}
+
+// The kmp-library convention plugin adds kotlin("test") to commonTest only.
+// jvmTest inherits kotlin-test-junit from commonTest, but Gradle still needs to be told
+// which test framework to use so tests are discovered. JUnit 4 (useJUnit) matches the
+// kotlin-test-junit artifact that kotlin("test") resolves to on JVM.
+tasks.withType<Test>().configureEach {
+    useJUnit()
 }
