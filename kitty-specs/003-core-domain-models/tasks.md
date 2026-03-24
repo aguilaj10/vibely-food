@@ -96,8 +96,8 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~220 lines
 
 ### Included Subtasks
-- [ ] T011 Create `customer/Customer.kt` — `CustomerId` + `Customer`
-- [ ] T012 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/customer/CustomerTest.kt` — assert nullable fields, loyalty points, all fields accessible
+- [x] T011 Create `customer/Customer.kt` — `CustomerId` + `Customer`
+- [x] T012 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/customer/CustomerTest.kt` — assert nullable fields, loyalty points, all fields accessible
 
 ### Implementation Notes
 - File in `core/domain/src/commonMain/kotlin/com/vibely/domain/customer/`
