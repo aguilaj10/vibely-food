@@ -13,7 +13,7 @@ kotlin {
     android {
         // compileSdk and minSdk defaults; each module sets its own namespace:
         //   kotlin { android { namespace = "com.vibely.<name>" } }
-        compileSdk = 35
+        compileSdk = 36
         minSdk = 26
     }
 

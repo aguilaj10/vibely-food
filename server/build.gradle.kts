@@ -3,6 +3,12 @@ plugins {
 }
 
 application {
-    // Placeholder main class — will be replaced when the server entry point is implemented.
     mainClass.set("com.vibely.server.MainKt")
+}
+
+dependencies {
+    implementation(libs.koin.core)
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.netty)
+    implementation(projects.shared)
 }
