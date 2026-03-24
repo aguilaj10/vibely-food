@@ -1,7 +1,7 @@
 ---
 work_package_id: WP06
 title: Inventory Bounded Context
-lane: "doing"
+lane: "for_review"
 dependencies:
 - WP01
 base_branch: 003-core-domain-models-WP01
@@ -263,3 +263,4 @@ class InventoryTest : StringSpec({
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
 - 2026-03-24T02:22:23Z – claude-wp06 – shell_pid=83169 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T02:35:25Z – claude-wp06 – shell_pid=83169 – lane=for_review – Ready for review: UnitOfMeasure enum, IngredientStock, StockAlert, 5 jvmTest cases pass
