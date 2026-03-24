@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Common Value Types
-lane: "doing"
+lane: "for_review"
 dependencies: []
 base_branch: main
 base_commit: 65a2a0bd9549049fbf775380e44a373a6b734c6f
@@ -286,3 +286,4 @@ class DurationTest : StringSpec({
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
 - 2026-03-24T00:52:06Z – claude – shell_pid=61888 – lane=doing – Assigned agent via workflow command
+- 2026-03-24T01:13:17Z – claude – shell_pid=61888 – lane=for_review – Ready for review: Money/Timestamp/Duration value classes + 15 Kotest tests. Build + ktlint + detekt all pass on JVM and JS targets.
