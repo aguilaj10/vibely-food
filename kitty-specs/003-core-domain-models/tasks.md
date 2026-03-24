@@ -127,11 +127,11 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~380 lines
 
 ### Included Subtasks
-- [ ] T013 Create `ordering/OrderStatus.kt` — `OrderStatus` enum (`OPEN | IN_PROGRESS | DELIVERED | CLOSED | VOID`)
-- [ ] T014 Create `ordering/SelectedModifier.kt` — snapshot value object (captures `modifierId`, `name`, `priceAdjustment` at order time)
-- [ ] T015 Create `ordering/OrderItem.kt` — `OrderItem` (references `MenuItemId`, `Money`, `List<SelectedModifier>`)
-- [ ] T016 Create `ordering/Order.kt` — `OrderId` + `Order` (references `TableId`, `CustomerId?`, `List<OrderItem>`, `Timestamp`)
-- [ ] T017 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/ordering/` — full Order construction, two OrderItems with modifiers, OrderStatus enum exhaustiveness
+- [x] T013 Create `ordering/OrderStatus.kt` — `OrderStatus` enum (`OPEN | IN_PROGRESS | DELIVERED | CLOSED | VOID`)
+- [x] T014 Create `ordering/SelectedModifier.kt` — snapshot value object (captures `modifierId`, `name`, `priceAdjustment` at order time)
+- [x] T015 Create `ordering/OrderItem.kt` — `OrderItem` (references `MenuItemId`, `Money`, `List<SelectedModifier>`)
+- [x] T016 Create `ordering/Order.kt` — `OrderId` + `Order` (references `TableId`, `CustomerId?`, `List<OrderItem>`, `Timestamp`)
+- [x] T017 Write Kotest tests in `commonTest/kotlin/com/vibely/domain/ordering/` — full Order construction, two OrderItems with modifiers, OrderStatus enum exhaustiveness
 
 ### Implementation Notes
 - `SelectedModifier` is a snapshot — copies `name: String` and `priceAdjustment: Money` from the modifier at order time; not a live reference
