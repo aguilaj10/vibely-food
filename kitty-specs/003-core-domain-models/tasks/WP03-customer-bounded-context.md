@@ -12,7 +12,7 @@ subtasks:
 - T012
 phase: Phase 4 - Customer (parallel with WP02, WP06, WP07)
 assignee: ''
-agent: ''
+agent: "claude-wp03"
 shell_pid: "83169"
 review_status: ''
 reviewed_by: ''
@@ -184,3 +184,4 @@ class CustomerTest : StringSpec({
 ## Activity Log
 
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
+- 2026-03-24T02:22:24Z – claude-wp03 – shell_pid=83169 – lane=doing – Assigned agent via workflow command
