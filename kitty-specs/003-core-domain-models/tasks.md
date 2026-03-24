@@ -25,10 +25,10 @@ WP01 (common) ──► WP02 (ordering catalog) ──┐
 **Estimated size**: ~280 lines
 
 ### Included Subtasks
-- [ ] T001 Create `common/Money.kt` — `@JvmInline value class Money(val cents: Long)` with `ZERO` constant and `+`, `−`, `×(Int)` operators
-- [ ] T002 Create `common/Timestamp.kt` — `@JvmInline value class Timestamp(val epochMillis: Long)`
-- [ ] T003 Create `common/Duration.kt` — `@JvmInline value class Duration(val millis: Long)`
-- [ ] T004 [P] Write Kotest tests in `commonTest/kotlin/com/vibely/domain/common/` for Money arithmetic (≥10 combinations per SC-003), Timestamp construction, Duration construction
+- [x] T001 Create `common/Money.kt` — `@JvmInline value class Money(val cents: Long)` with `ZERO` constant and `+`, `−`, `×(Int)` operators
+- [x] T002 Create `common/Timestamp.kt` — `@JvmInline value class Timestamp(val epochMillis: Long)`
+- [x] T003 Create `common/Duration.kt` — `@JvmInline value class Duration(val millis: Long)`
+- [x] T004 [P] Write Kotest tests in `commonTest/kotlin/com/vibely/domain/common/` for Money arithmetic (≥10 combinations per SC-003), Timestamp construction, Duration construction
 
 ### Implementation Notes
 - All three files live in `core/domain/src/commonMain/kotlin/com/vibely/domain/common/`
