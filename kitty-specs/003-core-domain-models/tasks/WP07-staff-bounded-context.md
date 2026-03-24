@@ -1,7 +1,7 @@
 ---
 work_package_id: WP07
 title: Staff Bounded Context
-lane: "for_review"
+lane: "doing"
 dependencies:
 - WP01
 base_branch: 003-core-domain-models-WP01
@@ -14,8 +14,8 @@ subtasks:
 - T031
 phase: Phase 6 - Staff (parallel with WP02, WP03, WP06)
 assignee: ''
-agent: "claude-wp07"
-shell_pid: "83169"
+agent: "claude"
+shell_pid: "89213"
 review_status: ''
 reviewed_by: ''
 history:
@@ -264,3 +264,4 @@ class StaffTest : StringSpec({
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
 - 2026-03-24T02:22:23Z – claude-wp07 – shell_pid=83169 – lane=doing – Assigned agent via workflow command
 - 2026-03-24T02:35:27Z – claude-wp07 – shell_pid=83169 – lane=for_review – Ready for review: Role enum, Employee with pinHash, Shift with nullable clockOut, 5 jvmTest cases pass
+- 2026-03-24T02:38:19Z – claude – shell_pid=89213 – lane=doing – Started review via workflow command
