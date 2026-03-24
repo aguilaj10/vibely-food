@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: Entry Points and app-web Scaffold
-lane: "doing"
+lane: "done"
 dependencies: [WP02]
 base_branch: 007-kmp-platform-abstractions-and-di-wiring-WP02
 base_commit: 8345accf6e6bf6ab5fe52a54093cfd5beb79fe57
@@ -14,8 +14,8 @@ phase: Phase 1 - Platform Abstractions
 assignee: ''
 agent: "claude"
 shell_pid: "43640"
-review_status: ''
-reviewed_by: ''
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-24T22:28:04Z'
   lane: planned
@@ -294,3 +294,4 @@ requirement_refs:
 - 2026-03-24T23:32:00Z – claude – shell_pid=35955 – lane=doing – Assigned agent via workflow command
 - 2026-03-24T23:46:31Z – claude – shell_pid=35955 – lane=for_review – Ready for review: VibelyApp.kt (T011), server/Main.kt (T012), app-web scaffold (T013). Added kmp-js-app convention plugin for type-safe alias() in app-web. Bumped compileSdk/targetSdk to 36 in android-app convention (shared's datastore dep requires it). Yarn lock updated. :composeApp:assembleDebug :server:build :app-web:build all pass. Detekt clean.
 - 2026-03-24T23:48:10Z – claude – shell_pid=43640 – lane=doing – Started review via workflow command
+- 2026-03-24T23:48:50Z – claude – shell_pid=43640 – lane=done – Review passed: All 3 subtasks complete. VibelyApp wires ApplicationContextHolder+Koin correctly (T011); server/Main.kt starts Koin before embeddedServer (T012); app-web scaffolded with kmp-js-app convention plugin and type-safe alias (T013). compileSdk/targetSdk bumped to 36 in android-app convention (required by datastore transitive dep). All builds pass, detekt clean, type-safe Gradle accessors throughout.
