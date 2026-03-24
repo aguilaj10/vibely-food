@@ -96,6 +96,7 @@ ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 # since alias() is not available in precompiled script plugin blocks.
 android-app = { id = "android-app" }
 kmp-library = { id = "kmp-library" }
+kmp-js-app = { id = "kmp-js-app" }
 jvm-server = { id = "jvm-server" }
 
 [bundles]

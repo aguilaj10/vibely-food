@@ -32,6 +32,7 @@ rootProject.name = "vibely-food"
 // Entry-point modules
 include(":composeApp")
 include(":server")
+include(":app-web")
 include(":shared")
 
 // Core layer
