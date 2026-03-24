@@ -53,11 +53,11 @@ Both work packages are fully independent and can be executed in parallel. WP01 t
 - FR-002, FR-003, FR-004, FR-008, FR-009, FR-010, SC-002, SC-003, SC-004
 
 ### Included Subtasks
-- [ ] T008 [P] Create `Permission.kt` — 11-value enum in `com.vibely.common`
-- [ ] T009 Create `RolePermissions.kt` — mapping object with `permissionsFor()` and `hasPermission` extension
-- [ ] T010 [P] Create `DatabaseConstants.kt` — placeholder constants with `TODO()` bodies
-- [ ] T011 [P] Create `ApiConstants.kt` — placeholder constants with `TODO()` bodies
-- [ ] T012 [P] Create `SyncConstants.kt` — placeholder constants with `TODO()` bodies
+- [x] T008 [P] Create `Permission.kt` — 11-value enum in `com.vibely.common`
+- [x] T009 Create `RolePermissions.kt` — mapping object with `permissionsFor()` and `hasPermission` extension
+- [x] T010 [P] Create `DatabaseConstants.kt` — placeholder constants with `TODO()` bodies
+- [x] T011 [P] Create `ApiConstants.kt` — placeholder constants with `TODO()` bodies
+- [x] T012 [P] Create `SyncConstants.kt` — placeholder constants with `TODO()` bodies
 
 ### Implementation Notes
 - All five files go in `core/common/src/commonMain/kotlin/com/vibely/common/`
