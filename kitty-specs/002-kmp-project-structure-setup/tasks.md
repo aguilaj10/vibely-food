@@ -268,7 +268,7 @@ description: "Work package task list for KMP Project Structure Setup"
 - [x] T028 Update `.gitignore` — add Gradle artifact directories (`build/`, `.gradle/`, `local.properties`) and confirm existing entries are preserved
 - [x] T029 Update `README.md` — add "Getting Started" section with setup commands (`./gradlew installGitHooks`, `./gradlew build`)
 - [x] T030 Run `./gradlew build` smoke test — verify all 15 modules compile; document any empty-source-set warnings and how to suppress them
-- [ ] T031 Run `./gradlew installGitHooks` — verify `.git/hooks/pre-commit` exists and is executable; test by staging a trivial lint violation
+- [x] T031 Run `./gradlew installGitHooks` — verify `.git/hooks/pre-commit` exists and is executable; test by staging a trivial lint violation
 
 **Requirements Refs**: FR-001, FR-002, FR-003, FR-004, FR-005, FR-006, FR-007, FR-008, FR-009
 
