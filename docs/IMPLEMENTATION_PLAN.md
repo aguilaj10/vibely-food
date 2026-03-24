@@ -8,7 +8,7 @@ Multi-tenant SaaS POS system built with Kotlin Multiplatform, targeting JVM, And
 - Kotlin Multiplatform 2.1.0+
 - Compose Multiplatform (UI)
 - Ktor (Backend)
-- Exposed (JVM) + SQLDelight (Mobile) for Database
+- Exposed (JVM/Server) + DataStore KMP + Room KMP (Mobile) for Database
 - Koin (Dependency Injection)
 - PostgreSQL with RLS + PgBouncer
 - Flyway (Migrations)
@@ -70,7 +70,8 @@ compose-compiler = "1.5.15"
 koin = "4.0.0"
 ktor = "3.0.1"
 exposed = "0.56.0"
-sqldelight = "2.0.2"
+datastore = "1.1.3"
+room = "2.7.0"
 hikari = "6.0.0"
 flyway = "10.20.1"
 postgresql = "42.7.4"
@@ -129,12 +130,10 @@ postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" 
 flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
 flyway-database-postgresql = { module = "org.flywaydb:flyway-database-postgresql", version.ref = "flyway" }
 
-# Database - Mobile (SQLDelight)
-sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }
-sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
-sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
-sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
-sqldelight-sqlite-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+# Local storage - Mobile (DataStore KMP + Room KMP)
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 # Testing
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
@@ -147,7 +146,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
+room = { id = "androidx.room", version.ref = "room" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
@@ -245,85 +244,87 @@ expect class SecureStorage {
 
 ---
 
-### 0.1.3 Database Layer Decision: SQLDelight vs Exposed
+### 0.1.3 Database Layer Decision: DataStore KMP + Room KMP (Mobile) / Exposed (JVM)
 
-**Critical Decision:** Use different database libraries per platform.
+**Decision:** Mobile stores only local preferences and config — all business data is served by the backend.
 
-**SQLDelight (Mobile: Android/iOS)**
+| Layer | Library | Purpose |
+|-------|---------|---------|
+| Mobile — preferences/config | DataStore KMP (`androidx.datastore`) | Key-value typed preferences, user settings |
+| Mobile — structured local cache | Room KMP (`androidx.room`) | Offline event queue, structured local cache if needed |
+| JVM Server | Exposed + HikariCP | PostgreSQL, full business data, RLS |
 
-**Why:**
-- Type-safe SQL at compile time
-- Generates Kotlin code from SQL
-- Excellent performance on mobile
-- Small binary size
-- Works offline-first
+**Why not SQLDelight:**
+- Mobile only stores preferences and config — no need for raw SQL generation
+- Room KMP is now officially supported, identical API to Android Room
+- Team is Android-native: zero relearning cost, same annotations and DAOs
+- SQLDelight's `.sq` file model offers no advantage for our use case
 
-**Setup:**
+**DataStore KMP Setup (preferences/config):**
 ```kotlin
-// shared/build.gradle.kts
-plugins {
-    alias(libs.plugins.sqldelight)
+// shared/src/commonMain/kotlin/preferences/UserPreferences.kt
+
+val Context.dataStore by preferencesDataStore(name = "user_prefs")
+
+object PreferenceKeys {
+    val AUTH_TOKEN = stringPreferencesKey("auth_token")
+    val SELECTED_STORE_ID = stringPreferencesKey("selected_store_id")
+    val THEME_MODE = stringPreferencesKey("theme_mode")
+    val LAST_SYNC_AT = longPreferencesKey("last_sync_at")
 }
 
-sqldelight {
-    databases {
-        create("AppDatabase") {
-            packageName.set("com.vibely.pos.db")
-            srcDirs("src/commonMain/sqldelight")
-        }
+class UserPreferencesRepository(private val dataStore: DataStore<Preferences>) {
+    val authToken: Flow<String?> = dataStore.data.map { it[PreferenceKeys.AUTH_TOKEN] }
+    val selectedStoreId: Flow<String?> = dataStore.data.map { it[PreferenceKeys.SELECTED_STORE_ID] }
+
+    suspend fun saveAuthToken(token: String) {
+        dataStore.edit { it[PreferenceKeys.AUTH_TOKEN] = token }
+    }
+
+    suspend fun clearAll() {
+        dataStore.edit { it.clear() }
     }
 }
 ```
 
-**SQL Files:**
-```sql
--- shared/src/commonMain/sqldelight/com/vibely/pos/db/Order.sq
-
-CREATE TABLE orders (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    store_id INTEGER NOT NULL,
-    total_cents INTEGER NOT NULL,
-    status TEXT NOT NULL,
-    created_at INTEGER NOT NULL
-);
-
-CREATE INDEX orders_store_id ON orders(store_id);
-
-getOrdersByStore:
-SELECT * FROM orders WHERE store_id = ?;
-
-insertOrder:
-INSERT INTO orders(store_id, total_cents, status, created_at)
-VALUES (?, ?, ?, ?);
-```
-
-**Repository Implementation:**
+**Room KMP Setup (offline event queue):**
 ```kotlin
-class OrderRepositoryMobile(
-    private val database: AppDatabase
-) : OrderRepository {
-    override suspend fun getOrders(storeId: StoreId): Result<List<Order>> =
-        withContext(Dispatchers.IO) {
-            runCatching {
-                database.orderQueries
-                    .getOrdersByStore(storeId.value)
-                    .executeAsList()
-                    .map { it.toDomain() }
-            }
-        }
+// shared/src/commonMain/kotlin/db/PendingEventEntity.kt
+
+@Entity(tableName = "pending_events")
+data class PendingEventEntity(
+    @PrimaryKey val id: String,
+    val orderId: String,
+    val eventType: String,
+    val eventData: String,   // JSON string
+    val occurredAt: Long,
+    val syncStatus: String = "PENDING",  // PENDING | SYNCED | FAILED
+    val syncAttempts: Int = 0,
+    val lastSyncAttempt: Long? = null,
+)
+
+@Dao
+interface PendingEventDao {
+    @Query("SELECT * FROM pending_events WHERE sync_status = 'PENDING' ORDER BY occurred_at ASC LIMIT :limit")
+    suspend fun getPendingEvents(limit: Int): List<PendingEventEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(event: PendingEventEntity)
+
+    @Query("UPDATE pending_events SET sync_status = 'SYNCED', last_sync_attempt = :ts WHERE id = :id")
+    suspend fun markSynced(id: String, ts: Long)
+
+    @Query("UPDATE pending_events SET sync_status = 'FAILED', sync_attempts = sync_attempts + 1, last_sync_attempt = :ts WHERE id = :id")
+    suspend fun markFailed(id: String, ts: Long)
+}
+
+@Database(entities = [PendingEventEntity::class], version = 1)
+abstract class VibelyLocalDatabase : RoomDatabase() {
+    abstract fun pendingEventDao(): PendingEventDao
 }
 ```
 
-**Exposed (JVM Server)**
-
-**Why:**
-- Kotlin DSL for SQL
-- Better for complex queries
-- Excellent PostgreSQL support
-- Transaction management
-- Works with HikariCP
-
-**Repository Implementation:**
+**Exposed (JVM Server):**
 ```kotlin
 class OrderRepositoryJvm(
     private val database: DatabaseFactory
@@ -339,9 +340,8 @@ class OrderRepositoryJvm(
 }
 ```
 
-**Shared Interface:**
+**Shared Interface (core:domain — unchanged):**
 ```kotlin
-// core/domain - shared by both
 interface OrderRepository {
     suspend fun getOrders(storeId: StoreId): Result<List<Order>>
     suspend fun createOrder(order: Order): Result<OrderId>
@@ -380,24 +380,32 @@ expect fun platformModule(): Module
 // shared/src/androidMain/kotlin/di/PlatformModule.kt
 
 actual fun platformModule() = module {
-    single<SqlDriver> {
-        DatabaseDriverFactory(androidContext()).createDriver()
+    single<DataStore<Preferences>> {
+        androidContext().dataStore
     }
-    
-    single<AppDatabase> {
-        AppDatabase(driver = get())
+
+    single<VibelyLocalDatabase> {
+        Room.databaseBuilder(
+            androidContext(),
+            VibelyLocalDatabase::class.java,
+            "vibely_local.db"
+        ).build()
     }
-    
+
+    single<UserPreferencesRepository> {
+        UserPreferencesRepository(dataStore = get())
+    }
+
+    single<PendingEventDao> {
+        get<VibelyLocalDatabase>().pendingEventDao()
+    }
+
     single<SecureStorage> {
         AndroidSecureStorage(androidContext())
     }
-    
+
     single<PlatformLogger> {
         AndroidLogger()
-    }
-    
-    single<OrderRepositoryImpl> {
-        OrderRepositoryMobile(database = get())
     }
 }
 ```
@@ -1607,44 +1615,15 @@ FOR EACH STATEMENT
 EXECUTE FUNCTION refresh_current_orders();
 ```
 
-**Client-Side Event Store (SQLDelight):**
-```sql
--- shared/src/commonMain/sqldelight/com/vibely/pos/OrderEvents.sq
-CREATE TABLE order_events_local (
-    id TEXT PRIMARY KEY NOT NULL,
-    order_id TEXT NOT NULL,
-    event_type TEXT NOT NULL,
-    event_data TEXT NOT NULL, -- JSON string
-    occurred_at INTEGER NOT NULL, -- Unix timestamp
-    sequence_number INTEGER NOT NULL,
-    sync_status TEXT NOT NULL DEFAULT 'PENDING', -- PENDING, SYNCED, FAILED
-    sync_attempts INTEGER NOT NULL DEFAULT 0,
-    last_sync_attempt INTEGER
-);
-
-CREATE INDEX idx_order_events_order_id ON order_events_local(order_id);
-CREATE INDEX idx_order_events_sync_status ON order_events_local(sync_status);
-
--- Queries
-insertEvent:
-INSERT INTO order_events_local(id, order_id, event_type, event_data, occurred_at, sequence_number)
-VALUES (?, ?, ?, ?, ?, ?);
-
-getEventsByOrderId:
-SELECT * FROM order_events_local
-WHERE order_id = ?
-ORDER BY sequence_number ASC;
-
-getPendingSyncEvents:
-SELECT * FROM order_events_local
-WHERE sync_status = 'PENDING'
-ORDER BY occurred_at ASC
-LIMIT ?;
-
-markEventSynced:
-UPDATE order_events_local
-SET sync_status = 'SYNCED', last_sync_attempt = ?
-WHERE id = ?;
+**Client-Side Event Store (Room KMP):**
+```kotlin
+// shared/src/commonMain/kotlin/db/PendingEventEntity.kt
+// See Section 0.1.3 for full entity + DAO definition.
+// PendingEventDao exposes:
+//   getPendingEvents(limit)  — fetch unsynced events in order
+//   insert(event)            — enqueue a new event
+//   markSynced(id, ts)       — mark as SYNCED after server ack
+//   markFailed(id, ts)       — increment attempts, mark FAILED
 
 markEventFailed:
 UPDATE order_events_local
@@ -2950,34 +2929,36 @@ Use single database with RLS and composite partitioning.
 
 ---
 
-#### ADR-002: SQLDelight for Mobile, Exposed for JVM
+#### ADR-002: DataStore KMP + Room KMP (Mobile) / Exposed (JVM)
 
-**Status:** Accepted
+**Status:** Accepted (revised — SQLDelight dropped)
 
 **Context:**
-Need to choose ORM/database library for Kotlin Multiplatform project targeting Android, JVM, and Web.
+Mobile clients do not store business data locally — all business data is served by the Ktor backend.
+Mobile only needs: user preferences, auth token, selected store, and an offline event queue for sync resilience.
 
 **Decision:**
-- **Mobile (Android):** SQLDelight for local SQLite
+- **Mobile — preferences/config:** DataStore KMP (`androidx.datastore:datastore-preferences`)
+- **Mobile — offline event queue:** Room KMP (`androidx.room`)
 - **JVM (Server):** Exposed for PostgreSQL
-- **Web:** IndexedDB with custom wrapper
+- **Web:** IndexedDB with custom wrapper (unchanged)
 
 **Rationale:**
-- SQLDelight generates type-safe Kotlin from SQL, perfect for mobile
-- Exposed provides excellent PostgreSQL support with DSL
-- No single library handles all platforms well
-- Platform-specific implementations hidden behind repository interfaces
+- Mobile storage needs are simple — DataStore handles key-value preferences with zero SQL
+- Room KMP is now officially KMP-supported with identical API to Android Room
+- Team is Android-native: no relearning cost for Room annotations and DAOs
+- SQLDelight's `.sq` file model adds complexity with no benefit for our use case
+- Exposed remains the right choice for PostgreSQL on the server
 
 **Consequences:**
-- Two different database APIs to maintain
-- Mappers needed between SQLDelight entities and domain models
-- Cannot share database code across platforms
-- Must test each platform's repository implementation separately
+- DataStore and Room each have a narrow, well-defined responsibility
+- Mappers needed between Room entities and domain models (same as before)
+- Cannot share database code across platforms (same as before)
 
 **Alternatives Considered:**
-- Room: Android-only, doesn't support KMP
-- SQLDelight everywhere: Poor PostgreSQL support
-- Exposed everywhere: Doesn't support mobile
+- SQLDelight: Dropped — SQL-generation overhead not justified for preferences + event queue
+- Room everywhere: Doesn't support JVM/PostgreSQL
+- Exposed everywhere: Doesn't support mobile SQLite
 
 ---
 
@@ -3198,7 +3179,7 @@ systemctl restart postgresql
 2. ✅ PgBouncer session pooling requirement
 3. ✅ Complete libs.versions.toml structure
 4. ✅ Expect/actual pattern for platform-specific code
-5. ✅ SQLDelight vs Exposed decision (ADR-002)
+5. ✅ DataStore KMP + Room KMP (Mobile) vs Exposed (JVM) decision (ADR-002)
 6. ✅ Complete RLS policies for all tables
 7. ✅ Partition scripts with date ranges
 8. ✅ Turbine for Flow testing
