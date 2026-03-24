@@ -1,7 +1,7 @@
 ---
 work_package_id: WP04
 title: Ordering — Order Entities
-lane: "for_review"
+lane: "done"
 dependencies:
 - WP01
 - WP02
@@ -19,8 +19,8 @@ phase: Phase 2 - Ordering Bounded Context (Part 2)
 assignee: ''
 agent: "claude"
 shell_pid: "93507"
-review_status: ''
-reviewed_by: ''
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-24T00:40:45Z'
   lane: planned
@@ -341,3 +341,4 @@ class OrderTest : StringSpec({
 - 2026-03-24T00:40:45Z – system – lane=planned – Prompt created.
 - 2026-03-24T02:46:07Z – claude – shell_pid=93507 – lane=doing – Assigned agent via workflow command
 - 2026-03-24T02:48:16Z – claude – shell_pid=93507 – lane=for_review – Ready for review: OrderStatus, SelectedModifier, OrderItem, Order with OrderId, 5 jvmTest cases, build clean
+- 2026-03-24T02:48:38Z – claude – shell_pid=93507 – lane=done – Review passed: Order, OrderItem, SelectedModifier, OrderStatus — snapshot pattern correct, CustomerId? from customer context, JvmInline with import, 5 jvmTest cases, build and ktlint clean
