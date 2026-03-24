@@ -87,8 +87,12 @@ sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
-android-application = { id = "com.android.application", version.ref = "agp" }
-android-library = { id = "com.android.library", version.ref = "agp" }
+# Convention plugins from buildSrc (no version — resolved from the buildSrc classpath).
+# Note: AGP and Kotlin plugin IDs are applied inside the convention plugins with raw id()
+# since alias() is not available in precompiled script plugin blocks.
+android-app = { id = "android-app" }
+kmp-library = { id = "kmp-library" }
+jvm-server = { id = "jvm-server" }
 
 [bundles]
 ktor-server = ["ktor-server-core", "ktor-server-netty", "ktor-server-content-negotiation", "ktor-serialization-kotlinx-json", "ktor-server-auth", "ktor-server-auth-jwt"]

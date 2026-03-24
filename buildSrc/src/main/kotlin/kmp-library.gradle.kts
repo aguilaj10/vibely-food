@@ -1,16 +1,20 @@
+// KMP library convention: applies kotlin.multiplatform (for jvm/js/sourceSets DSL)
+// alongside com.android.kotlin.multiplatform.library (AGP 9.x unified KMP plugin
+// that provides android {} and is compatible with kotlin.multiplatform).
+// The old combination of kotlin.multiplatform + com.android.library is no longer
+// supported since AGP 9.0; this pairing is the correct migration path.
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
-    id("com.android.library")
+    id("com.android.kotlin.multiplatform.library")
     id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 kotlin {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
+    android {
+        // compileSdk and minSdk defaults; each module sets its own namespace:
+        //   kotlin { android { namespace = "com.vibely.<name>" } }
+        compileSdk = 35
+        minSdk = 26
     }
 
     jvm()
@@ -28,17 +32,4 @@ kotlin {
             implementation(kotlin("test"))
         }
     }
-}
-
-android {
-    compileSdk = 35
-    defaultConfig {
-        minSdk = 26
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    // Each module must set its own namespace:
-    //   android { namespace = "com.vibely.<module>" }
 }

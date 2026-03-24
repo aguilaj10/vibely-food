@@ -7,16 +7,22 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    // No repositoriesMode restriction: the Kotlin/JS toolchain adds its own distribution
+    // repositories (Node.js, Yarn) programmatically; setting FAIL_ON_PROJECT_REPOS or
+    // PREFER_SETTINGS blocks those downloads. The declared repositories below are used
+    // for all regular dependency resolution.
     repositories {
-        google()
+        google {
+            mavenContent {
+                includeGroupAndSubgroups("androidx")
+                includeGroupAndSubgroups("com.android")
+                includeGroupAndSubgroups("com.google")
+            }
+        }
         mavenCentral()
     }
-    versionCatalogs {
-        create("libs") {
-            from(files("gradle/libs.versions.toml"))
-        }
-    }
+    // gradle/libs.versions.toml is auto-discovered by Gradle 9.x as the "libs" catalog.
+    // No explicit versionCatalogs declaration needed here.
 }
 
 rootProject.name = "vibely-food"

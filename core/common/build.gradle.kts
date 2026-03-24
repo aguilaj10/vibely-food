@@ -1,7 +1,9 @@
 plugins {
-    alias(libs.plugins.kmpLibrary)
+    alias(libs.plugins.kmp.library)
 }
 
-android {
-    namespace = "com.vibely.core.common"
+kotlin {
+    android {
+        namespace = "com.vibely.core.common"
+    }
 }

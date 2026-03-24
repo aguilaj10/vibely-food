@@ -2,9 +2,11 @@
 // Only pure Kotlin is allowed. No Android, Ktor, Compose, or any framework imports.
 // This is enforced by Detekt ForbiddenImport rules in detekt.yml.
 plugins {
-    alias(libs.plugins.kmpLibrary)
+    alias(libs.plugins.kmp.library)
 }
 
-android {
-    namespace = "com.vibely.core.domain"
+kotlin {
+    android {
+        namespace = "com.vibely.core.domain"
+    }
 }

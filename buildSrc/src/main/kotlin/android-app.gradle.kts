@@ -1,34 +1,13 @@
+// AGP 9.x: 'com.android.application' + 'kotlin.multiplatform' is not supported.
+// composeApp uses 'kotlin.android' for the Android target. The Desktop target
+// will be wired to the 'shared' KMP module in a future feature iteration.
+// AGP 9.x: 'org.jetbrains.kotlin.android' is no longer needed — Kotlin support
+// is built into 'com.android.application' since AGP 9.0.
 plugins {
-    id("org.jetbrains.kotlin.multiplatform")
     id("com.android.application")
     id("org.jetbrains.compose")
     id("org.jetbrains.kotlin.plugin.compose")
     id("org.jetbrains.kotlin.plugin.serialization")
-}
-
-kotlin {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
-
-    // Desktop target — named "desktop" to distinguish from library jvm() targets
-    jvm("desktop")
-
-    sourceSets {
-        commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-        }
-        commonTest.dependencies {
-            implementation(kotlin("test"))
-        }
-    }
 }
 
 android {
