@@ -15,7 +15,7 @@ subtasks:
 - T006
 phase: Phase 1 - Platform Abstractions
 assignee: ''
-agent: ''
+agent: "claude-sonnet-4-6"
 shell_pid: "9181"
 review_status: ''
 reviewed_by: ''
@@ -641,3 +641,4 @@ Detekt check:
 ## Activity Log
 
 - 2026-03-24T22:28:04Z – system – lane=planned – Prompt created.
+- 2026-03-24T22:35:52Z – claude-sonnet-4-6 – shell_pid=9181 – lane=doing – Assigned agent via workflow command
