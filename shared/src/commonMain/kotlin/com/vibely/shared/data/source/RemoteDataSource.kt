@@ -7,7 +7,6 @@ package com.vibely.shared.data.source
  * Implementations are platform-specific (e.g., Ktor HTTP client).
  */
 interface RemoteDataSource<T : Any, ID : Any> {
-
     /**
      * Fetches an entity by its [id] from the remote source.
      *

@@ -7,7 +7,6 @@ package com.vibely.common
  * practices for PostgreSQL with PgBouncer in session pooling mode.
  */
 object DatabaseConstants {
-
     /**
      * Maximum connection pool size: 2x CPU count, minimum 10.
      *

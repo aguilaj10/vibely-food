@@ -1,9 +1,6 @@
 package com.vibely.database
 
 import com.vibely.common.DatabaseConstants
-import com.vibely.domain.tenant.OrganizationId
-import com.vibely.domain.tenant.StoreId
-import com.vibely.domain.tenant.UserId
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
@@ -23,8 +20,9 @@ import java.util.UUID
  *
  * @param config Immutable pool configuration.
  */
-class DatabaseFactory(private val config: DatabaseConfig) {
-
+class DatabaseFactory(
+    private val config: DatabaseConfig
+) {
     private val dataSource: HikariDataSource = buildDataSource()
     internal val database: Database = Database.connect(dataSource)
 
@@ -33,38 +31,40 @@ class DatabaseFactory(private val config: DatabaseConfig) {
     }
 
     private fun buildDataSource(): HikariDataSource {
-        val hikariConfig = HikariConfig().apply {
-            jdbcUrl = config.url
-            username = config.username
-            password = config.password
-            maximumPoolSize = DatabaseConstants.MAX_POOL_SIZE
-            minimumIdle = DatabaseConstants.MIN_IDLE
-            connectionTimeout = DatabaseConstants.CONNECTION_TIMEOUT_MS
-            idleTimeout = DatabaseConstants.IDLE_TIMEOUT_MS
-            maxLifetime = DatabaseConstants.MAX_LIFETIME_MS
-            connectionTestQuery = "SELECT 1"
+        val hikariConfig =
+            HikariConfig().apply {
+                jdbcUrl = config.url
+                username = config.username
+                password = config.password
+                maximumPoolSize = DatabaseConstants.MAX_POOL_SIZE
+                minimumIdle = DatabaseConstants.MIN_IDLE
+                connectionTimeout = DatabaseConstants.CONNECTION_TIMEOUT_MS
+                idleTimeout = DatabaseConstants.IDLE_TIMEOUT_MS
+                maxLifetime = DatabaseConstants.MAX_LIFETIME_MS
+                connectionTestQuery = "SELECT 1"
 
-            if (config.environment == Environment.DEVELOPMENT) {
-                leakDetectionThreshold = DatabaseConstants.LEAK_DETECTION_THRESHOLD_MS
+                if (config.environment == Environment.DEVELOPMENT) {
+                    leakDetectionThreshold = DatabaseConstants.LEAK_DETECTION_THRESHOLD_MS
+                }
+
+                addDataSourceProperty(
+                    "preparedStatementCacheQueries",
+                    DatabaseConstants.PREPARED_STATEMENT_CACHE_QUERIES.toString(),
+                )
+                addDataSourceProperty(
+                    "preparedStatementCacheSizeMiB",
+                    DatabaseConstants.PREPARED_STATEMENT_CACHE_SIZE_MIB.toString(),
+                )
+                addDataSourceProperty("binaryTransfer", "true")
+                addDataSourceProperty("socketTimeout", "30")
+                addDataSourceProperty("ApplicationName", "vibely-pos")
             }
-
-            addDataSourceProperty(
-                "preparedStatementCacheQueries",
-                DatabaseConstants.PREPARED_STATEMENT_CACHE_QUERIES.toString(),
-            )
-            addDataSourceProperty(
-                "preparedStatementCacheSizeMiB",
-                DatabaseConstants.PREPARED_STATEMENT_CACHE_SIZE_MIB.toString(),
-            )
-            addDataSourceProperty("binaryTransfer", "true")
-            addDataSourceProperty("socketTimeout", "30")
-            addDataSourceProperty("ApplicationName", "vibely-pos")
-        }
         return HikariDataSource(hikariConfig)
     }
 
     private fun runFlyway() {
-        Flyway.configure()
+        Flyway
+            .configure()
             .dataSource(dataSource)
             .baselineOnMigrate(true)
             .baselineVersion("1")
@@ -95,7 +95,10 @@ class DatabaseFactory(private val config: DatabaseConfig) {
      * @return The result of [block].
      * @throws IllegalArgumentException if any non-null ID value is not a valid UUID.
      */
-    suspend fun <T> withTenantContext(ctx: TenantContext, block: suspend () -> T): T {
+    suspend fun <T> withTenantContext(
+        ctx: TenantContext,
+        block: suspend () -> T
+    ): T {
         val orgId = ctx.organizationId.value.also { validateUuid(it, "organizationId") }
         val userId = ctx.userId.value.also { validateUuid(it, "userId") }
         val storeId = ctx.storeId?.value?.also { validateUuid(it, "storeId") }
@@ -110,7 +113,10 @@ class DatabaseFactory(private val config: DatabaseConfig) {
         }
     }
 
-    private fun validateUuid(value: String, fieldName: String) {
+    private fun validateUuid(
+        value: String,
+        fieldName: String
+    ) {
         try {
             UUID.fromString(value)
         } catch (e: IllegalArgumentException) {

@@ -9,7 +9,6 @@ package com.vibely.shared.mapper
  * @param Domain A rich domain model with business logic and validation.
  */
 interface DomainMapper<Entity, Domain> {
-
     /**
      * Converts a persistence [entity] to its [Domain] representation.
      */

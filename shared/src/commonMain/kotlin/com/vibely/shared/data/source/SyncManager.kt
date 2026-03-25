@@ -11,7 +11,6 @@ package com.vibely.shared.data.source
  * across platforms; only the implementation differs.
  */
 interface SyncManager {
-
     /**
      * Returns `true` if the device currently has network connectivity.
      */

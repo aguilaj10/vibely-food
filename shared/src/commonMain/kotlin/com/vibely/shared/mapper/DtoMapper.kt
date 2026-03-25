@@ -10,7 +10,6 @@ package com.vibely.shared.mapper
  * @param Domain A rich domain model with business logic and validation.
  */
 interface DtoMapper<Dto, Domain> {
-
     /**
      * Converts a network [dto] to its [Domain] representation.
      */

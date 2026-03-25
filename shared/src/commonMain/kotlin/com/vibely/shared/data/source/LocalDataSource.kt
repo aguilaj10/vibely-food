@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
  * Implementations are platform-specific (e.g., Room on Android, Exposed on JVM).
  */
 interface LocalDataSource<T : Any, ID : Any> {
-
     /**
      * Retrieves an entity by its [id].
      *

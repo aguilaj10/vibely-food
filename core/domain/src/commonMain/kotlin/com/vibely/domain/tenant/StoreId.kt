@@ -9,4 +9,6 @@ import kotlin.jvm.JvmInline
  * layer and is not validated inside this class.
  */
 @JvmInline
-value class StoreId(val value: String)
+value class StoreId(
+    val value: String
+)

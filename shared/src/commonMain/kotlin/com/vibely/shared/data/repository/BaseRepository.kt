@@ -31,7 +31,6 @@ import kotlinx.coroutines.flow.onStart
  * @param ID The identifier type for [T].
  */
 abstract class BaseRepository<T : Any, ID : Any> {
-
     /** Local persistence data source. */
     protected abstract val localDataSource: LocalDataSource<T, ID>
 
@@ -63,8 +62,8 @@ abstract class BaseRepository<T : Any, ID : Any> {
      * Failure to queue for sync (offline path) is swallowed — it is logged
      * by the caller but must not surface as an error.
      */
-    suspend fun save(entity: T): Result<T> {
-        return if (syncManager.isOnline()) {
+    suspend fun save(entity: T): Result<T> =
+        if (syncManager.isOnline()) {
             remoteDataSource.save(entity).onSuccess { saved ->
                 localDataSource.insert(saved)
             }
@@ -75,7 +74,6 @@ abstract class BaseRepository<T : Any, ID : Any> {
                 }
             }
         }
-    }
 
     /**
      * Returns a [Flow] emitting the entity identified by [id] from the local store.
@@ -83,8 +81,7 @@ abstract class BaseRepository<T : Any, ID : Any> {
      * Triggers [onSyncRequired] on first subscription to initiate a background
      * sync if needed.
      */
-    fun observeById(id: ID): Flow<T> =
-        localDataSource.observeById(id).onStart { onSyncRequired(id) }
+    fun observeById(id: ID): Flow<T> = localDataSource.observeById(id).onStart { onSyncRequired(id) }
 
     /**
      * Called when [observeById] begins collection. Subclasses may override to

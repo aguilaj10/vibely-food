@@ -10,4 +10,6 @@ import kotlin.jvm.JvmInline
  * layer and is not validated inside this class.
  */
 @JvmInline
-value class UserId(val value: String)
+value class UserId(
+    val value: String
+)

@@ -40,13 +40,16 @@ data class DatabaseConfig(
          * | `DB_PASSWORD` | `password`                                |
          * | `APP_ENV`     | `DEVELOPMENT`                             |
          */
-        fun fromEnvironment(): DatabaseConfig = DatabaseConfig(
-            url = System.getenv("DB_URL") ?: "jdbc:postgresql://localhost:5432/vibely",
-            username = System.getenv("DB_USER") ?: "vibely",
-            password = System.getenv("DB_PASSWORD") ?: "password",
-            environment = System.getenv("APP_ENV")
-                ?.let { runCatching { Environment.valueOf(it) }.getOrNull() }
-                ?: Environment.DEVELOPMENT,
-        )
+        fun fromEnvironment(): DatabaseConfig =
+            DatabaseConfig(
+                url = System.getenv("DB_URL") ?: "jdbc:postgresql://localhost:5432/vibely",
+                username = System.getenv("DB_USER") ?: "vibely",
+                password = System.getenv("DB_PASSWORD") ?: "password",
+                environment =
+                    System
+                        .getenv("APP_ENV")
+                        ?.let { runCatching { Environment.valueOf(it) }.getOrNull() }
+                        ?: Environment.DEVELOPMENT,
+            )
     }
 }
