@@ -1,8 +1,11 @@
 ---
 work_package_id: WP01
 title: Foundation Types and Build Configuration
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: e586b04333e8cf20303115ac3db8b266447865b6
+created_at: '2026-03-25T01:54:01.242342+00:00'
 subtasks:
 - T001
 - T002
@@ -10,7 +13,7 @@ subtasks:
 phase: Phase A - Foundation (parallel)
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "66520"
 review_status: ''
 reviewed_by: ''
 history:
