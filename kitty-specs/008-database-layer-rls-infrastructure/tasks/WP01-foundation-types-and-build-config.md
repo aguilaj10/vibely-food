@@ -12,7 +12,7 @@ subtasks:
 - T003
 phase: Phase A - Foundation (parallel)
 assignee: ''
-agent: ''
+agent: "claude-sonnet-4-6"
 shell_pid: "66520"
 review_status: ''
 reviewed_by: ''
@@ -254,3 +254,4 @@ No dedicated tests required for this WP. Verification is compile-time:
 > **CRITICAL**: Activity log entries MUST be in chronological order (oldest first, newest last).
 
 - 2026-03-25T01:40:02Z – system – lane=planned – Prompt created.
+- 2026-03-25T01:54:02Z – claude-sonnet-4-6 – shell_pid=66520 – lane=doing – Assigned agent via workflow command
