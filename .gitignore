@@ -52,3 +52,4 @@ jenkins-cli.jar
 /docs/GRADLE_TASKS_EXPLAINED.md
 /docs/database-schema.sql.backup
 /SCHEMA_ALIGNMENT_REPORT.md
+*.hprof
