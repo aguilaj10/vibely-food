@@ -17,5 +17,8 @@ kotlin {
             implementation(libs.datastore.preferences)
             implementation(libs.room.runtime)
         }
+        jvmMain.dependencies {
+            implementation(projects.core.database)
+        }
     }
 }
