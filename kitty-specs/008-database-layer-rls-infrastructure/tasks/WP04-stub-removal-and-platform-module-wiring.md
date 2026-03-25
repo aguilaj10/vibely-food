@@ -14,7 +14,7 @@ subtasks:
 - T016
 phase: Phase C - Integration
 assignee: ''
-agent: ''
+agent: "claude-sonnet-4-6"
 shell_pid: "78581"
 review_status: ''
 reviewed_by: ''
@@ -203,3 +203,4 @@ Full project build is the verification gate:
 > **CRITICAL**: Activity log entries MUST be in chronological order (oldest first, newest last).
 
 - 2026-03-25T01:40:02Z – system – lane=planned – Prompt created.
+- 2026-03-25T02:18:00Z – claude-sonnet-4-6 – shell_pid=78581 – lane=doing – Assigned agent via workflow command
