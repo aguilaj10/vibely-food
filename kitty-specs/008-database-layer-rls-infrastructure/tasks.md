@@ -21,9 +21,9 @@ description: "Work package task list for Database Layer Infrastructure with RLS"
 **Estimated size**: ~230 lines
 
 ### Included Subtasks
-- [ ] T001 Create tenant value classes (OrganizationId, StoreId, UserId) in `core/domain/src/commonMain/kotlin/com/vibely/domain/tenant/`
-- [ ] T002 [P] Fill in real values in `core/common/src/commonMain/kotlin/com/vibely/common/DatabaseConstants.kt`
-- [ ] T003 [P] Update `core/database/build.gradle.kts` — add jvmMain + jvmTest dependency blocks
+- [x] T001 Create tenant value classes (OrganizationId, StoreId, UserId) in `core/domain/src/commonMain/kotlin/com/vibely/domain/tenant/`
+- [x] T002 [P] Fill in real values in `core/common/src/commonMain/kotlin/com/vibely/common/DatabaseConstants.kt`
+- [x] T003 [P] Update `core/database/build.gradle.kts` — add jvmMain + jvmTest dependency blocks
 
 **Requirement Refs**: FR-001, FR-002, FR-003, FR-004, FR-005, FR-006, FR-007, FR-008
 
