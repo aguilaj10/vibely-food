@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Foundation Types and Build Configuration
-lane: "doing"
+lane: "for_review"
 dependencies: []
 base_branch: main
 base_commit: e586b04333e8cf20303115ac3db8b266447865b6
@@ -255,3 +255,4 @@ No dedicated tests required for this WP. Verification is compile-time:
 
 - 2026-03-25T01:40:02Z – system – lane=planned – Prompt created.
 - 2026-03-25T01:54:02Z – claude-sonnet-4-6 – shell_pid=66520 – lane=doing – Assigned agent via workflow command
+- 2026-03-25T02:10:02Z – claude-sonnet-4-6 – shell_pid=66520 – lane=for_review – Ready for review: T001 OrganizationId/StoreId/UserId value classes created; T002 DatabaseConstants filled with real values (MAX_POOL_SIZE as val using Runtime, rest const); T003 core:database build.gradle.kts deps added (used individual flyway libs - bundles.flyway does not exist in catalog). Note: java_pid42235.hprof is a JVM OOM diagnostic artifact from pre-commit hook crash, not a deliverable.
