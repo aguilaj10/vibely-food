@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Repository and Mapper Interfaces
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: 7937812966dbb33aa5dcc1a2b0656ad7d3c058ce
@@ -16,7 +16,7 @@ subtasks:
 phase: Phase A - Foundation (parallel)
 assignee: ''
 agent: "claude-sonnet-4-6"
-shell_pid: "66797"
+shell_pid: "85483"
 review_status: ''
 reviewed_by: ''
 history:
@@ -451,3 +451,4 @@ No dedicated tests required for this WP. Verification is compile-time:
 - 2026-03-25T01:40:02Z – system – lane=planned – Prompt created.
 - 2026-03-25T01:54:11Z – claude-sonnet-4-6 – shell_pid=66797 – lane=doing – Assigned agent via workflow command
 - 2026-03-25T02:14:44Z – claude-sonnet-4-6 – shell_pid=66797 – lane=for_review – Ready for review: T004 LocalDataSource, T005 RemoteDataSource, T006 SyncManager, T007 BaseRepository (cache-first read + write-through), T008 DomainMapper, T009 DtoMapper — all in correct packages, zero framework imports, KDoc on every method
+- 2026-03-25T02:30:06Z – claude-sonnet-4-6 – shell_pid=85483 – lane=doing – Started review via workflow command
