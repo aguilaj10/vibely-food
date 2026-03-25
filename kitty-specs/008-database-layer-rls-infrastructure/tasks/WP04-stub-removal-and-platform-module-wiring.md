@@ -1,10 +1,13 @@
 ---
 work_package_id: WP04
 title: Stub Removal and PlatformModule Wiring
-lane: planned
+lane: "doing"
 dependencies:
 - WP02
 - WP03
+base_branch: 008-database-layer-rls-infrastructure-WP04-merge-base
+base_commit: 5d717c5eec1894ab23fb137409acca16443262e2
+created_at: '2026-03-25T02:17:59.205147+00:00'
 subtasks:
 - T014
 - T015
@@ -12,7 +15,7 @@ subtasks:
 phase: Phase C - Integration
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "78581"
 review_status: ''
 reviewed_by: ''
 history:
