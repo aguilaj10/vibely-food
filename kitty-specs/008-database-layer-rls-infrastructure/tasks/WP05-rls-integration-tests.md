@@ -1,8 +1,11 @@
 ---
 work_package_id: WP05
 title: RLS Integration Tests
-lane: planned
+lane: "doing"
 dependencies: [WP03]
+base_branch: 008-database-layer-rls-infrastructure-WP03
+base_commit: 57dc7ac8a3d5dcaf81c2c3daf3fca039839fbe5c
+created_at: '2026-03-25T02:18:07.168046+00:00'
 subtasks:
 - T017
 - T018
@@ -11,7 +14,7 @@ subtasks:
 phase: Phase C - Integration
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "78832"
 review_status: ''
 reviewed_by: ''
 history:
