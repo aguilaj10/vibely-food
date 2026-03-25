@@ -160,10 +160,10 @@ description: "Work package task list for Database Layer Infrastructure with RLS"
 **Estimated size**: ~350 lines
 
 ### Included Subtasks
-- [ ] T017 Configure `PostgreSQLContainer` and create `DatabaseFactoryTest` test class skeleton
-- [ ] T018 Write test: `withTenantContext` sets `app.current_organization_id`, `app.current_store_id`, `app.current_user_id` correctly
-- [ ] T019 Write test: RLS session variables are absent after transaction ends (isolation across connections)
-- [ ] T020 Write test: Flyway inserts V1 baseline record in `flyway_schema_history` on empty-history DB
+- [x] T017 Configure `PostgreSQLContainer` and create `DatabaseFactoryTest` test class skeleton
+- [x] T018 Write test: `withTenantContext` sets `app.current_organization_id`, `app.current_store_id`, `app.current_user_id` correctly
+- [x] T019 Write test: RLS session variables are absent after transaction ends (isolation across connections)
+- [x] T020 Write test: Flyway inserts V1 baseline record in `flyway_schema_history` on empty-history DB
 
 **Requirement Refs**: FR-002, FR-003, FR-007
 
