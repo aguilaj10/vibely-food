@@ -13,7 +13,7 @@ subtasks:
 - T013
 phase: Phase B - Core Database Layer
 assignee: ''
-agent: ''
+agent: "claude-sonnet-4-6"
 shell_pid: "76843"
 review_status: ''
 reviewed_by: ''
@@ -419,3 +419,4 @@ Full RLS integration tests are covered by WP05 using Testcontainers.
 > **CRITICAL**: Activity log entries MUST be in chronological order (oldest first, newest last).
 
 - 2026-03-25T01:40:02Z – system – lane=planned – Prompt created.
+- 2026-03-25T02:15:41Z – claude-sonnet-4-6 – shell_pid=76843 – lane=doing – Assigned agent via workflow command
