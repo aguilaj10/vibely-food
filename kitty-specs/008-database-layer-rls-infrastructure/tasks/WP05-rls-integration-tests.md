@@ -1,7 +1,7 @@
 ---
 work_package_id: WP05
 title: RLS Integration Tests
-lane: "for_review"
+lane: "doing"
 dependencies: [WP03]
 base_branch: 008-database-layer-rls-infrastructure-WP03
 base_commit: 57dc7ac8a3d5dcaf81c2c3daf3fca039839fbe5c
@@ -14,7 +14,7 @@ subtasks:
 phase: Phase C - Integration
 assignee: ''
 agent: "claude-sonnet-4-6"
-shell_pid: "89058"
+shell_pid: "90660"
 review_status: "has_feedback"
 reviewed_by: "Jonathan Sánchez Muñoz"
 review_feedback_file: "/private/var/folders/lk/549xp1m52gg9ycr7sgpl0jcw0000gp/T/spec-kitty-review-feedback-WP05.md"
@@ -391,3 +391,4 @@ If Docker is not available in CI:
 - 2026-03-25T02:34:59Z – claude-sonnet-4-6 – shell_pid=89058 – lane=doing – Started review via workflow command
 - 2026-03-25T02:35:59Z – claude-sonnet-4-6 – shell_pid=89058 – lane=planned – Moved to planned
 - 2026-03-25T02:36:50Z – claude-sonnet-4-6 – shell_pid=89058 – lane=for_review – Fixed: added testcontainers-junit-jupiter catalog entry to libs.versions.toml and libs.testcontainers.junit.jupiter to jvmTest.dependencies in core/database/build.gradle.kts. Tests now have all required dependencies for @Testcontainers/@Container annotations.
+- 2026-03-25T02:36:55Z – claude-sonnet-4-6 – shell_pid=90660 – lane=doing – Started review via workflow command
