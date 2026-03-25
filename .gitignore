@@ -53,3 +53,4 @@ jenkins-cli.jar
 /docs/database-schema.sql.backup
 /SCHEMA_ALIGNMENT_REPORT.md
 /.kotlin/metadata/kotlinTransformedMetadataLibraries
+*.hprof

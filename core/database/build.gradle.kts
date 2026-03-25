@@ -21,6 +21,7 @@ kotlin {
         jvmTest.dependencies {
             implementation(libs.kotest.assertions.core)
             implementation(libs.testcontainers.postgresql)
+            implementation(libs.testcontainers.junit.jupiter)
             implementation(libs.kotlinx.coroutines.test)
         }
     }
