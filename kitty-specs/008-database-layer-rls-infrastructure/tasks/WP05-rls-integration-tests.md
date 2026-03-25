@@ -1,7 +1,7 @@
 ---
 work_package_id: WP05
 title: RLS Integration Tests
-lane: "doing"
+lane: "planned"
 dependencies: [WP03]
 base_branch: 008-database-layer-rls-infrastructure-WP03
 base_commit: 57dc7ac8a3d5dcaf81c2c3daf3fca039839fbe5c
@@ -15,8 +15,9 @@ phase: Phase C - Integration
 assignee: ''
 agent: "claude-sonnet-4-6"
 shell_pid: "89058"
-review_status: ''
-reviewed_by: ''
+review_status: "has_feedback"
+reviewed_by: "Jonathan Sánchez Muñoz"
+review_feedback_file: "/private/var/folders/lk/549xp1m52gg9ycr7sgpl0jcw0000gp/T/spec-kitty-review-feedback-WP05.md"
 history:
 - timestamp: '2026-03-25T01:40:02Z'
   lane: planned
@@ -44,9 +45,46 @@ requirement_refs:
 
 ## Review Feedback
 
-*[This section is empty initially. Reviewers will populate it if the work is returned from review. If you see feedback here, treat each item as a must-do before completion.]*
+**Reviewed by**: Jonathan Sánchez Muñoz
+**Status**: ❌ Changes Requested
+**Date**: 2026-03-25
+**Feedback file**: `/private/var/folders/lk/549xp1m52gg9ycr7sgpl0jcw0000gp/T/spec-kitty-review-feedback-WP05.md`
 
----
+# Review Feedback – WP05
+
+## Issue: Missing `testcontainers-junit-jupiter` dependency
+
+`DatabaseFactoryTest.kt` imports `org.testcontainers.junit.jupiter.Container` and `org.testcontainers.junit.jupiter.Testcontainers`, both of which come from `org.testcontainers:junit-jupiter`. This artifact is **not declared** in the WP05 branch — it was removed (relative to the WP01 fixup that added it) because WP05 was based on WP03 which was itself branched from WP01 before the fixup commit.
+
+Without this dependency the test file will **fail to compile**.
+
+## Required Fixes
+
+### 1. `gradle/libs.versions.toml` — add catalog entry if absent
+
+Confirm this line is present in `[libraries]`:
+
+```toml
+testcontainers-junit-jupiter = { module = "org.testcontainers:junit-jupiter", version.ref = "testcontainers" }
+```
+
+### 2. `core/database/build.gradle.kts` — add `jvmTest` dependency
+
+Inside the `jvmTest.dependencies { }` block, ensure:
+
+```kotlin
+jvmTest.dependencies {
+    implementation(libs.kotest.assertions.core)
+    implementation(libs.testcontainers.postgresql)
+    implementation(libs.testcontainers.junit.jupiter)   // ← ADD THIS BACK
+    implementation(libs.kotlinx.coroutines.test)
+}
+```
+
+## No Other Changes Required
+
+The `DatabaseFactoryTest.kt` logic is correct — all four test scenarios (set all 3 vars, null storeId omits store var, vars absent after tx, Flyway V1 baseline) match the spec. Only the missing build dependency needs to be fixed.
+
 
 ## Markdown Formatting
 Wrap HTML/XML tags in backticks: `` `<div>` ``, `` `<script>` ``
@@ -351,3 +389,4 @@ If Docker is not available in CI:
 - 2026-03-25T02:18:08Z – claude-sonnet-4-6 – shell_pid=78832 – lane=doing – Assigned agent via workflow command
 - 2026-03-25T02:23:04Z – claude-sonnet-4-6 – shell_pid=78832 – lane=for_review – Ready for review: T017 PostgreSQLContainer + by-lazy DatabaseFactory; T018 withTenantContext sets all 3 RLS vars (incl. null storeId case); T019 RLS vars absent after tx ends via raw JDBC conn; T020 Flyway V1 baseline record verified
 - 2026-03-25T02:34:59Z – claude-sonnet-4-6 – shell_pid=89058 – lane=doing – Started review via workflow command
+- 2026-03-25T02:35:59Z – claude-sonnet-4-6 – shell_pid=89058 – lane=planned – Moved to planned
