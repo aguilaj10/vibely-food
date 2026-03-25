@@ -1,7 +1,7 @@
 ---
 work_package_id: WP05
 title: RLS Integration Tests
-lane: "planned"
+lane: "for_review"
 dependencies: [WP03]
 base_branch: 008-database-layer-rls-infrastructure-WP03
 base_commit: 57dc7ac8a3d5dcaf81c2c3daf3fca039839fbe5c
@@ -390,3 +390,4 @@ If Docker is not available in CI:
 - 2026-03-25T02:23:04Z – claude-sonnet-4-6 – shell_pid=78832 – lane=for_review – Ready for review: T017 PostgreSQLContainer + by-lazy DatabaseFactory; T018 withTenantContext sets all 3 RLS vars (incl. null storeId case); T019 RLS vars absent after tx ends via raw JDBC conn; T020 Flyway V1 baseline record verified
 - 2026-03-25T02:34:59Z – claude-sonnet-4-6 – shell_pid=89058 – lane=doing – Started review via workflow command
 - 2026-03-25T02:35:59Z – claude-sonnet-4-6 – shell_pid=89058 – lane=planned – Moved to planned
+- 2026-03-25T02:36:50Z – claude-sonnet-4-6 – shell_pid=89058 – lane=for_review – Fixed: added testcontainers-junit-jupiter catalog entry to libs.versions.toml and libs.testcontainers.junit.jupiter to jvmTest.dependencies in core/database/build.gradle.kts. Tests now have all required dependencies for @Testcontainers/@Container annotations.
