@@ -4,6 +4,7 @@ title: Stub Removal and PlatformModule Wiring
 lane: planned
 dependencies:
 - WP02
+- WP03
 subtasks:
 - T014
 - T015
