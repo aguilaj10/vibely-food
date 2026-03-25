@@ -87,10 +87,10 @@ description: "Work package task list for Database Layer Infrastructure with RLS"
 **Estimated size**: ~450 lines
 
 ### Included Subtasks
-- [ ] T010 Create `DatabaseConfig.kt` with `Environment` enum and `fromEnvironment()` companion factory
-- [ ] T011 [P] Create `TenantContext.kt` data class (depends on OrganizationId/StoreId/UserId from WP01)
-- [ ] T012 Create `DatabaseFactory.kt` — HikariCP pool construction from `DatabaseConfig` + `DatabaseConstants`
-- [ ] T013 Implement `withTenantContext` inside `DatabaseFactory` — `SET LOCAL` execution + UUID format guard
+- [x] T010 Create `DatabaseConfig.kt` with `Environment` enum and `fromEnvironment()` companion factory
+- [x] T011 [P] Create `TenantContext.kt` data class (depends on OrganizationId/StoreId/UserId from WP01)
+- [x] T012 Create `DatabaseFactory.kt` — HikariCP pool construction from `DatabaseConfig` + `DatabaseConstants`
+- [x] T013 Implement `withTenantContext` inside `DatabaseFactory` — `SET LOCAL` execution + UUID format guard
 
 **Requirement Refs**: FR-001, FR-002, FR-003, FR-004, FR-005, FR-006, FR-007, FR-008
 
