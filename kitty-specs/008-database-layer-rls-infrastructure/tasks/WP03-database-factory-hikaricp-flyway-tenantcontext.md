@@ -1,8 +1,11 @@
 ---
 work_package_id: WP03
 title: DatabaseFactory with HikariCP, Flyway, and TenantContext
-lane: planned
+lane: "doing"
 dependencies: [WP01]
+base_branch: 008-database-layer-rls-infrastructure-WP01
+base_commit: d9673e7a874113bb255a661c3848c4a1627d4c80
+created_at: '2026-03-25T02:15:40.135845+00:00'
 subtasks:
 - T010
 - T011
@@ -11,7 +14,7 @@ subtasks:
 phase: Phase B - Core Database Layer
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "76843"
 review_status: ''
 reviewed_by: ''
 history:
