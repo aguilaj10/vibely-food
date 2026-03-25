@@ -1,8 +1,11 @@
 ---
 work_package_id: WP02
 title: Repository and Mapper Interfaces
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 7937812966dbb33aa5dcc1a2b0656ad7d3c058ce
+created_at: '2026-03-25T01:54:09.948564+00:00'
 subtasks:
 - T004
 - T005
@@ -13,7 +16,7 @@ subtasks:
 phase: Phase A - Foundation (parallel)
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "66797"
 review_status: ''
 reviewed_by: ''
 history:
