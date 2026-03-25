@@ -1,7 +1,7 @@
 ---
 work_package_id: WP05
 title: RLS Integration Tests
-lane: "doing"
+lane: "for_review"
 dependencies: [WP03]
 base_branch: 008-database-layer-rls-infrastructure-WP03
 base_commit: 57dc7ac8a3d5dcaf81c2c3daf3fca039839fbe5c
@@ -349,3 +349,4 @@ If Docker is not available in CI:
 
 - 2026-03-25T01:40:02Z – system – lane=planned – Prompt created.
 - 2026-03-25T02:18:08Z – claude-sonnet-4-6 – shell_pid=78832 – lane=doing – Assigned agent via workflow command
+- 2026-03-25T02:23:04Z – claude-sonnet-4-6 – shell_pid=78832 – lane=for_review – Ready for review: T017 PostgreSQLContainer + by-lazy DatabaseFactory; T018 withTenantContext sets all 3 RLS vars (incl. null storeId case); T019 RLS vars absent after tx ends via raw JDBC conn; T020 Flyway V1 baseline record verified
