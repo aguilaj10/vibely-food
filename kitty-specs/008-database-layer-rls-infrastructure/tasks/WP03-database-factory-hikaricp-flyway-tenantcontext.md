@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: DatabaseFactory with HikariCP, Flyway, and TenantContext
-lane: "for_review"
+lane: "doing"
 dependencies: [WP01]
 base_branch: 008-database-layer-rls-infrastructure-WP01
 base_commit: d9673e7a874113bb255a661c3848c4a1627d4c80
@@ -14,7 +14,7 @@ subtasks:
 phase: Phase B - Core Database Layer
 assignee: ''
 agent: "claude-sonnet-4-6"
-shell_pid: "76843"
+shell_pid: "87410"
 review_status: ''
 reviewed_by: ''
 history:
@@ -421,3 +421,4 @@ Full RLS integration tests are covered by WP05 using Testcontainers.
 - 2026-03-25T01:40:02Z – system – lane=planned – Prompt created.
 - 2026-03-25T02:15:41Z – claude-sonnet-4-6 – shell_pid=76843 – lane=doing – Assigned agent via workflow command
 - 2026-03-25T02:17:46Z – claude-sonnet-4-6 – shell_pid=76843 – lane=for_review – Ready for review: T010 DatabaseConfig+Environment enum with fromEnvironment(); T011 TenantContext data class with nullable storeId; T012 DatabaseFactory with HikariCP pool + Flyway init; T013 withTenantContext with UUID guard + SET LOCAL RLS variables
+- 2026-03-25T02:32:38Z – claude-sonnet-4-6 – shell_pid=87410 – lane=doing – Started review via workflow command
