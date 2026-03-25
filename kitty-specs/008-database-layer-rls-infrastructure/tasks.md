@@ -123,9 +123,9 @@ description: "Work package task list for Database Layer Infrastructure with RLS"
 **Estimated size**: ~210 lines
 
 ### Included Subtasks
-- [ ] T014 Delete `shared/src/jvmMain/kotlin/com/vibely/shared/di/DatabaseStubs.kt`
-- [ ] T015 [P] Add `projects.core.database` to `shared/build.gradle.kts` jvmMain dependencies
-- [ ] T016 Update `shared/src/jvmMain/kotlin/com/vibely/shared/di/PlatformModule.kt` — replace inline stub bindings with real `DatabaseConfig.fromEnvironment()` + `DatabaseFactory(get())` Koin bindings
+- [x] T014 Delete `shared/src/jvmMain/kotlin/com/vibely/shared/di/DatabaseStubs.kt`
+- [x] T015 [P] Add `projects.core.database` to `shared/build.gradle.kts` jvmMain dependencies
+- [x] T016 Update `shared/src/jvmMain/kotlin/com/vibely/shared/di/PlatformModule.kt` — replace inline stub bindings with real `DatabaseConfig.fromEnvironment()` + `DatabaseFactory(get())` Koin bindings
 
 **Requirement Refs**: FR-019, FR-020
 
