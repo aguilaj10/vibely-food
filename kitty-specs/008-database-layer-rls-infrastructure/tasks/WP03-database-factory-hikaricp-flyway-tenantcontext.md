@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: DatabaseFactory with HikariCP, Flyway, and TenantContext
-lane: "doing"
+lane: "done"
 dependencies: [WP01]
 base_branch: 008-database-layer-rls-infrastructure-WP01
 base_commit: d9673e7a874113bb255a661c3848c4a1627d4c80
@@ -15,8 +15,8 @@ phase: Phase B - Core Database Layer
 assignee: ''
 agent: "claude-sonnet-4-6"
 shell_pid: "87410"
-review_status: ''
-reviewed_by: ''
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-25T01:40:02Z'
   lane: planned
@@ -422,3 +422,4 @@ Full RLS integration tests are covered by WP05 using Testcontainers.
 - 2026-03-25T02:15:41Z – claude-sonnet-4-6 – shell_pid=76843 – lane=doing – Assigned agent via workflow command
 - 2026-03-25T02:17:46Z – claude-sonnet-4-6 – shell_pid=76843 – lane=for_review – Ready for review: T010 DatabaseConfig+Environment enum with fromEnvironment(); T011 TenantContext data class with nullable storeId; T012 DatabaseFactory with HikariCP pool + Flyway init; T013 withTenantContext with UUID guard + SET LOCAL RLS variables
 - 2026-03-25T02:32:38Z – claude-sonnet-4-6 – shell_pid=87410 – lane=doing – Started review via workflow command
+- 2026-03-25T02:33:59Z – claude-sonnet-4-6 – shell_pid=87410 – lane=done – Review passed: DatabaseConfig data class with Environment enum (DEVELOPMENT/STAGING/PRODUCTION) and fromEnvironment() factory; TenantContext data class with nullable storeId; DatabaseFactory with HikariCP using all DatabaseConstants + connectionTestQuery='SELECT 1' + leakDetectionThreshold only in DEVELOPMENT + 5 JDBC properties; Flyway baselineOnMigrate/baselineVersion/validateOnMigrate/.migrate(); withTenantContext uses newSuspendedTransaction(Dispatchers.IO) with UUID validation before transaction + SET LOCAL store_id only when non-null. All checklist items pass. Note: testcontainers-junit-jupiter divergence vs WP01 fixup is a merge artifact - WP05 should re-add if needed.
