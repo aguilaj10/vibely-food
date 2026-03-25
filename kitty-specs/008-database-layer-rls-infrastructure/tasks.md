@@ -52,12 +52,12 @@ description: "Work package task list for Database Layer Infrastructure with RLS"
 **Estimated size**: ~380 lines
 
 ### Included Subtasks
-- [ ] T004 [P] Create `LocalDataSource<T, ID>` interface in `shared/src/commonMain/kotlin/com/vibely/shared/data/source/`
-- [ ] T005 [P] Create `RemoteDataSource<T, ID>` interface in same package
-- [ ] T006 [P] Create `SyncManager` interface in same package
-- [ ] T007 Create `BaseRepository<T, ID>` abstract class in `shared/src/commonMain/kotlin/com/vibely/shared/data/repository/`
-- [ ] T008 [P] Create `DomainMapper<Entity, Domain>` interface in `shared/src/commonMain/kotlin/com/vibely/shared/mapper/`
-- [ ] T009 [P] Create `DtoMapper<Dto, Domain>` interface in same package
+- [x] T004 [P] Create `LocalDataSource<T, ID>` interface in `shared/src/commonMain/kotlin/com/vibely/shared/data/source/`
+- [x] T005 [P] Create `RemoteDataSource<T, ID>` interface in same package
+- [x] T006 [P] Create `SyncManager` interface in same package
+- [x] T007 Create `BaseRepository<T, ID>` abstract class in `shared/src/commonMain/kotlin/com/vibely/shared/data/repository/`
+- [x] T008 [P] Create `DomainMapper<Entity, Domain>` interface in `shared/src/commonMain/kotlin/com/vibely/shared/mapper/`
+- [x] T009 [P] Create `DtoMapper<Dto, Domain>` interface in same package
 
 **Requirement Refs**: FR-009, FR-010, FR-011, FR-012, FR-013, FR-014, FR-015, FR-016, FR-017, FR-018
 
