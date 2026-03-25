@@ -1,7 +1,7 @@
 ---
 work_package_id: WP04
 title: Stub Removal and PlatformModule Wiring
-lane: "doing"
+lane: "for_review"
 dependencies:
 - WP02
 - WP03
@@ -204,3 +204,4 @@ Full project build is the verification gate:
 
 - 2026-03-25T01:40:02Z – system – lane=planned – Prompt created.
 - 2026-03-25T02:18:00Z – claude-sonnet-4-6 – shell_pid=78581 – lane=doing – Assigned agent via workflow command
+- 2026-03-25T02:21:07Z – claude-sonnet-4-6 – shell_pid=78581 – lane=for_review – Ready for review: T014 DatabaseStubs.kt deleted; T015 projects.core.database added to shared jvmMain deps (type-safe accessor); T016 PlatformModule updated with DatabaseConfig.fromEnvironment() and DatabaseFactory(config=get()) Koin bindings
