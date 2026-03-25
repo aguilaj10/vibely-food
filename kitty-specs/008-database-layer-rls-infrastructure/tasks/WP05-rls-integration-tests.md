@@ -13,7 +13,7 @@ subtasks:
 - T020
 phase: Phase C - Integration
 assignee: ''
-agent: ''
+agent: "claude-sonnet-4-6"
 shell_pid: "78832"
 review_status: ''
 reviewed_by: ''
@@ -348,3 +348,4 @@ If Docker is not available in CI:
 > **CRITICAL**: Activity log entries MUST be in chronological order (oldest first, newest last).
 
 - 2026-03-25T01:40:02Z – system – lane=planned – Prompt created.
+- 2026-03-25T02:18:08Z – claude-sonnet-4-6 – shell_pid=78832 – lane=doing – Assigned agent via workflow command
