@@ -91,7 +91,7 @@ A staff member logs out from within the app (logout trigger is out of scope for 
 **FR-006** Tokens must be stored using platform-appropriate encrypted storage:
 - **Android** — `EncryptedSharedPreferences` with AES-256-GCM keys managed by `MasterKey`.
 - **JVM (Desktop)** — PKCS12 keystore file in `~/.vibely/`, encrypted with AES-GCM.
-- **Web** — IndexedDB with encryption via the browser's SubtleCrypto API.
+- **Web** — `sessionStorage` via `kotlinx.browser.sessionStorage`; tokens clear automatically when the browser tab closes.
 
 **FR-007** `TokenStorage` must expose exactly three operations: `saveToken`, `getToken`, and `clearToken`. No other storage concerns belong in this interface.
 

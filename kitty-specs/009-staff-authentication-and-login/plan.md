@@ -1,108 +1,238 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: Staff Authentication & Login
 
+**Branch**: `main` | **Date**: 2026-03-26 | **Spec**: [spec.md](spec.md)
+**Feature**: `009-staff-authentication-and-login`
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+---
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Implement the complete authentication subsystem for Vibely POS: an HTTP client foundation in `core:network`, the `AuthMode` strategy layer + `TokenStorage` platform implementations in `feature/auth`, and the login UI + startup routing in `composeApp`. The system supports three authentication modes (production JWT, debug auto-login, fake for tests) selected at build time via the `buildkonfig` plugin.
+
+---
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+**Language/Version**: Kotlin 2.3.20 — KMP (Android + JVM + JS targets)
+**Primary Dependencies**:
+- Ktor Client 3.4.1 — HTTP (OkHttp engine on Android/JVM, JS engine on web)
+- Koin 4.2.0 — DI
+- Compose Multiplatform 1.10.3 — UI
+- Navigation3 1.0.1 — `navigation3-runtime` + `navigation3-ui`
+- BuildKonfig 0.17.1 — compile-time `AUTH_MODE` constant in `commonMain`
+- `security-crypto 1.1.0-alpha06` — Android `EncryptedSharedPreferences`
+- `kotlinx-datetime 0.7.1` — `Instant` for token expiry
+- `kotlinx-serialization-json 1.10.0` — HTTP DTOs
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Storage**:
+- Android: `EncryptedSharedPreferences` (AES-256-GCM via `MasterKey`)
+- JVM Desktop: PKCS12 `KeyStore` at `~/.vibely/token.ks`
+- Web: `kotlinx.browser.sessionStorage` (token cleared on tab close)
+
+**Testing**: Turbine + Kotest assertions. Unit tests in `jvmTest` using `FakeAuthMode` — no network, no emulator, no Docker required.
+
+**Target Platform**: Android (composeApp), JVM Desktop (future), Web JS (app-web)
+
+**Performance Goals**: Login round-trip < 3s on standard network (SC-001). Silent refresh succeeds ≥ 95% when refresh token is valid (SC-002).
+
+**Constraints**: All `TokenStorage` operations on `Dispatchers.IO` (NFR-001). `AuthMode` interface and use cases in `commonMain` with no platform imports (NFR-002). `FakeAuthMode` constructible without any test framework (NFR-003).
+
+---
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+| Rule | Status | Notes |
+|---|---|---|
+| `core/domain` zero framework dependencies | ✅ Pass | Auth entities live in `feature/auth`, not `core/domain`. Only `UserId`, `StoreId`, `Role` imported from `core/domain` |
+| `Result<T>` for all fallible operations | ✅ Pass | All `AuthMode` operations and use cases return `Result<T>` |
+| Fake implementations for testing | ✅ Pass | `FakeAuthMode` with publicly settable results (FR-004, NFR-003) |
+| `expect/actual` for platform-specific code | ✅ Pass | `TokenStorage` platform impls registered via Koin `actual platformModule` |
+| No `if (isDebug)` in business logic | ✅ Pass | Selection is entirely in Koin DI module via `BuildKonfig.AUTH_MODE`; use cases never branch |
+| Clean Architecture layer boundaries | ✅ Pass | UI → ViewModel → UseCase → AuthMode → ApiClient; no framework in domain layer |
+| KDoc on all public API | ✅ Required | All public classes, interfaces, and functions must have KDoc |
 
-[Gates determined based on constitution file]
+No violations. No exceptions required.
+
+---
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+kitty-specs/009-staff-authentication-and-login/
+├── plan.md              ← this file
+├── research.md          ← BuildKonfig, Navigation3, platform storage findings
+├── data-model.md        ← entities, interfaces, use cases, UI state
+├── contracts/
+│   └── auth-api.yaml   ← OpenAPI 3.1 spec for /auth/* endpoints
+└── tasks.md             ← generated by /spec-kitty.tasks (not yet)
 ```
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+### Source Code (affected modules)
 
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+gradle/libs.versions.toml          ← add: buildkonfig 0.17.1 + navigation3-runtime/ui entries
 
-tests/
-├── contract/
-├── integration/
-└── unit/
+core/network/
+├── build.gradle.kts               ← add: ktor-client deps, kotlinx-serialization, kotlinx-datetime
+└── src/commonMain/kotlin/com/vibely/core/network/
+    ├── auth/
+    │   ├── AuthApiClient.kt        ← interface: login, refresh, validate, logout
+    │   ├── KtorAuthApiClient.kt    ← Ktor HttpClient implementation
+    │   └── dto/
+    │       ├── LoginRequest.kt
+    │       ├── RefreshRequest.kt
+    │       ├── TokenResponse.kt
+    │       └── ValidateResponse.kt
+    ├── HttpClientFactory.kt        ← creates shared Ktor HttpClient instance
+    └── di/
+        └── NetworkModule.kt       ← Koin: networkModule (HttpClient + AuthApiClient)
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+feature/auth/
+├── build.gradle.kts               ← add: buildkonfig plugin + config, core:network dep, core:domain dep
+└── src/
+    ├── commonMain/kotlin/com/vibely/feature/auth/
+    │   ├── domain/
+    │   │   ├── model/
+    │   │   │   ├── AuthToken.kt
+    │   │   │   ├── Credentials.kt
+    │   │   │   └── User.kt          ← uses UserId, StoreId, Role from core:domain
+    │   │   └── auth/
+    │   │       ├── AuthMode.kt      ← sealed interface
+    │   │       ├── ProductionAuthMode.kt
+    │   │       ├── DebugAuthMode.kt
+    │   │       └── FakeAuthMode.kt
+    │   ├── storage/
+    │   │   └── TokenStorage.kt      ← interface: saveToken, getToken, clearToken
+    │   ├── usecase/
+    │   │   ├── LoginUseCase.kt
+    │   │   ├── LogoutUseCase.kt
+    │   │   ├── RefreshTokenUseCase.kt
+    │   │   └── ValidateTokenUseCase.kt
+    │   └── di/
+    │       └── AuthModule.kt        ← authModule + authFeatureModule; reads BuildKonfig.AUTH_MODE
+    ├── androidMain/kotlin/com/vibely/feature/auth/storage/
+    │   └── EncryptedSharedPreferencesTokenStorage.kt
+    ├── jvmMain/kotlin/com/vibely/feature/auth/storage/
+    │   └── Pkcs12KeystoreTokenStorage.kt
+    └── jsMain/kotlin/com/vibely/feature/auth/storage/
+        └── SessionStorageTokenStorage.kt
 
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+composeApp/src/main/kotlin/com/vibely/
+├── navigation/
+│   ├── AppNavKey.kt                ← @Serializable sealed interface + Login + FloorPlan objects
+│   └── AppNavigation.kt           ← root composable: startup routing (validate→refresh→route)
+├── feature/auth/
+│   ├── LoginViewModel.kt          ← StateFlow<LoginUiState>, handles login action
+│   └── LoginScreen.kt             ← email + password fields, Sign In button, error display
+└── VibelyApp.kt                   ← updated: add authModule + authFeatureModule to startKoin
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+---
 
-## Complexity Tracking
+## Work Packages
 
-*Fill ONLY if Constitution Check has violations that must be justified*
+### WP01 — `core:network` HTTP Client Foundation
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+**Goal**: Build the reusable Ktor HTTP client and auth API contract so `ProductionAuthMode` has a real backend to call.
+
+**Scope**:
+1. Add to `gradle/libs.versions.toml`:
+   - `buildkonfig = "0.17.1"` version
+   - `buildkonfig` plugin entry
+   - `navigation3-runtime` and `navigation3-ui` entries (already present, verify)
+   - Ktor client engine entries: `ktor-client-js` for JS target
+2. Update `core/network/build.gradle.kts`:
+   - Add `ktor-client-core`, `ktor-client-content-negotiation`, `ktor-client-logging` to `commonMain`
+   - Add `ktor-client-okhttp` to `androidMain` and `jvmMain`
+   - Add `ktor-client-js` to `jsMain`
+   - Add `kotlinx-serialization-json` and `kotlinx-datetime` to `commonMain`
+3. Implement `HttpClientFactory` — platform-specific engine selection via `expect/actual` or inline in `HttpClientFactory`
+4. Implement `AuthApiClient` interface + `KtorAuthApiClient` for all four endpoints
+5. Define Koin `networkModule`
+
+**Tests**: None in this WP (HTTP contract is verified in integration tests with the real server, which is out of scope here). DTOs are `@Serializable` data classes — compile-time verification sufficient.
+
+**Dependencies**: None (standalone module).
+
+---
+
+### WP02 — `feature/auth` Domain & Strategy Layer
+
+**Goal**: Implement the full authentication domain: three `AuthMode` implementations, three `TokenStorage` platform implementations, four use cases, and Koin wiring.
+
+**Scope**:
+1. Update `feature/auth/build.gradle.kts`:
+   - Apply `alias(libs.plugins.buildkonfig)`
+   - Add `buildkonfig { }` block reading `AUTH_MODE` env var (default: `"production"`)
+   - Add `commonMain` deps: `projects.core.domain`, `projects.core.network`, `koin-core`, `kotlinx-coroutines-core`, `kotlinx-datetime`
+   - Add `androidMain` deps: `security-crypto`
+   - Add `jvmTest` deps: `kotest-assertions-core`, `kotlinx-coroutines-test`, `turbine`
+2. Domain models: `AuthToken`, `Credentials`, `User`
+3. `AuthMode` sealed interface + three implementations:
+   - `ProductionAuthMode(apiClient: AuthApiClient, storage: TokenStorage)` — delegates to API, persists on success
+   - `DebugAuthMode` — returns `Result.success(AuthToken(...))` immediately; `validateToken` returns pre-built `User(role = Role.OWNER)`
+   - `FakeAuthMode` — `var authenticateResult`, `var refreshResult`, `var validateResult`, `var logoutResult` publicly settable; all default to `Result.failure`
+4. `TokenStorage` interface + three platform `actual`-style implementations (registered via Koin `actual platformModule`)
+5. Four use cases (each a plain class injected with `AuthMode`)
+6. `authModule` Koin module:
+   - Reads `BuildKonfig.AUTH_MODE`: `"production"` → binds `ProductionAuthMode`, `"debug"` → `DebugAuthMode`, `"fake"` → `FakeAuthMode`
+   - Binds `LoginUseCase`, `LogoutUseCase`, `RefreshTokenUseCase`, `ValidateTokenUseCase`
+7. Platform `authPlatformModule` (Koin) binding `TokenStorage` to the correct platform singleton
+
+**Tests** (in `jvmTest`):
+- `LoginUseCaseTest` — success path, failure path, error propagation
+- `LogoutUseCaseTest` — success, failure
+- `RefreshTokenUseCaseTest` — success, failure
+- `ValidateTokenUseCaseTest` — success, failure
+- All using `FakeAuthMode`; zero network/storage I/O
+
+**Dependencies**: WP01 must be complete (needs `AuthApiClient`).
+
+---
+
+### WP03 — `composeApp` Login UI & Startup Routing
+
+**Goal**: Implement the login screen, startup token lifecycle, and navigation wiring. The app launches to the floor plan (or login screen) without showing any blank frames.
+
+**Scope**:
+1. Update `composeApp/build.gradle.kts`:
+   - Add `navigation3-runtime` and `navigation3-ui` to `dependencies {}`
+   - Add `projects.feature.auth` and `projects.core.network`
+   - Add `koin-compose`
+2. `AppNavKey` sealed interface: `Login` and `FloorPlan` data objects
+3. `AppNavigation` composable:
+   - On first composition: launches coroutine to call `ValidateTokenUseCase`
+   - On success → navigate to `FloorPlan` (clearing back stack)
+   - On failure → call `RefreshTokenUseCase`
+   - On refresh success → navigate to `FloorPlan`
+   - On refresh failure → navigate to `Login`
+   - Shows `CircularProgressIndicator` during the check (no blank frame)
+4. `LoginViewModel`:
+   - `StateFlow<LoginUiState>` (`email`, `password`, `isLoading`, `errorMessage`)
+   - `fun onEmailChange(email: String)`, `fun onPasswordChange(pw: String)`, `fun onSignIn()`
+   - `onSignIn()` calls `LoginUseCase`, on success posts navigation event to `FloorPlan`
+5. `LoginScreen` composable (in `composeApp/src/main/kotlin/`):
+   - `OutlinedTextField` for email (keyboard type = email)
+   - `OutlinedTextField` for password (password visual transformation)
+   - `Button("Sign In")` — disabled when `!isSubmitEnabled`; shows `CircularProgressIndicator` while `isLoading`
+   - Error text below button when `errorMessage != null`
+6. Update `VibelyApp.kt` to include `authModule()`, `authPlatformModule()`, `networkModule()`
+7. Wire `NavDisplay` in the app entry point Activity
+
+**Tests**: No additional tests in this WP — use cases are fully covered by WP02. Manual verification against the acceptance scenarios S1–S6.
+
+**Dependencies**: WP02 must be complete (needs `LoginUseCase`, `ValidateTokenUseCase`, `RefreshTokenUseCase`).
+
+---
+
+## Quickstart Reference
+
+See [quickstart.md](quickstart.md) for build and run instructions.
+
+---
+
+## Open Questions
+
+None. All planning decisions are resolved. See [research.md](research.md) for rationale.
