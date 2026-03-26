@@ -16,7 +16,7 @@ subtasks:
 - T021
 phase: Phase 2 - Strategy Layer
 assignee: ''
-agent: ''
+agent: "claude-sonnet-4-6"
 shell_pid: "81584"
 review_status: ''
 reviewed_by: ''
@@ -542,3 +542,4 @@ spec-kitty implement WP03 --base WP02
 ## Activity Log
 
 - 2026-03-26T01:25:51Z – system – lane=planned – Prompt created.
+- 2026-03-26T02:20:55Z – claude-sonnet-4-6 – shell_pid=81584 – lane=doing – Assigned agent via workflow command
