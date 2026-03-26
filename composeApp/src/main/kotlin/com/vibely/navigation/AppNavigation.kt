@@ -42,7 +42,14 @@ fun AppNavigation(
     LaunchedEffect(Unit) {
         val stored = tokenStorage.getToken()
         startDestination = when {
-            stored == null -> AppNavKey.Login
+            stored == null -> {
+                // DebugAuthMode.validateToken succeeds regardless of token → FloorPlan.
+                // ProductionAuthMode.validateToken("") fails (401) → Login (S1).
+                validateToken("").fold(
+                    onSuccess = { AppNavKey.FloorPlan },
+                    onFailure = { AppNavKey.Login },
+                )
+            }
             else -> {
                 validateToken(stored.accessToken)
                     .fold(
