@@ -1473,40 +1473,61 @@ fun LoginScreen(
 }
 ```
 
-**Navigation Integration:**
+**Navigation Integration (Navigation3):**
 
-The app root checks for a stored, valid token on startup and routes accordingly. If no valid token exists, `LoginScreen` is shown; on success the user lands on the main POS screen.
+Uses **Jetpack Navigation3** (`1.0.1`). Keys are `@Serializable` data objects; the back stack is a plain `SnapshotStateList` — no string routes, no `NavController` black box.
+
+- `navigation3-runtime` → `commonMain` (back stack state, `NavKey`)
+- `navigation3-ui` (contains `NavDisplay`) → Android and JVM source sets only; not available for JS/Web targets
 
 ```kotlin
-// composeApp/src/commonMain/kotlin/com/vibely/AppNavigation.kt
-sealed class Screen(val route: String) {
-    data object Login : Screen("login")
-    data object Main  : Screen("main")
+// composeApp/src/commonMain/kotlin/com/vibely/nav/AppNavKey.kt
+@Serializable
+sealed interface AppNavKey {
+    @Serializable data object Login : AppNavKey
+    @Serializable data object Main  : AppNavKey
 }
+```
 
+```kotlin
+// composeApp/src/androidMain/kotlin/com/vibely/AppNavigation.kt  (same for jvmMain)
 @Composable
 fun AppNavigation(
     validateTokenUseCase: ValidateTokenUseCase = koinInject(),
 ) {
-    val navController = rememberNavController()
-    val startDestination by produceState(Screen.Login.route) {
+    // Determine start key by checking stored token validity
+    val startKey: AppNavKey by produceState<AppNavKey>(AppNavKey.Login) {
         value = validateTokenUseCase()
-            .fold(onSuccess = { Screen.Main.route }, onFailure = { Screen.Login.route })
+            .fold(onSuccess = { AppNavKey.Main }, onFailure = { AppNavKey.Login })
     }
 
-    NavHost(navController, startDestination = startDestination) {
-        composable(Screen.Login.route) {
-            LoginScreen(onLoginSuccess = {
-                navController.navigate(Screen.Main.route) {
-                    popUpTo(Screen.Login.route) { inclusive = true }
-                }
-            })
-        }
-        composable(Screen.Main.route) {
-            MainScreen()   // implemented in Phase 2
+    val backStack = rememberNavBackStack(startKey)
+
+    NavDisplay(
+        backStack = backStack,
+        onBack = { if (backStack.size > 1) backStack.removeLastOrNull() },
+    ) { entry ->
+        when (val key = entry.key) {
+            AppNavKey.Login -> LoginScreen(
+                onLoginSuccess = {
+                    backStack.clear()          // remove Login from history
+                    backStack.add(AppNavKey.Main)
+                },
+            )
+            AppNavKey.Main -> MainScreen()     // implemented in Phase 2
         }
     }
 }
+```
+
+**Dependency declarations** (in `feature/auth` and `composeApp` build files):
+
+```kotlin
+// commonMain — back stack, NavKey, rememberNavBackStack
+implementation(libs.navigation3.runtime)
+
+// androidMain / jvmMain — NavDisplay composable
+implementation(libs.navigation3.ui)
 ```
 
 **Debug Mode Bypass:**
