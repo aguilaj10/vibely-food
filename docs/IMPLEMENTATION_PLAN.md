@@ -1370,6 +1370,160 @@ actual val platformModule = module {
 }
 ```
 
+### 1.2.3 Login Screen
+
+**Gap Addressed:** UI entry point for the `AuthMode` strategy; `feature/auth` module was listed in the project structure but left empty.
+
+**Note:** `DebugAuthMode.debugUser` was originally written with `Role.ADMIN`. The canonical `Role` enum (already implemented in `core:domain`) has no `ADMIN` value — use `Role.OWNER` instead.
+
+```kotlin
+// feature/auth/src/commonMain/kotlin/com/vibely/feature/auth/LoginViewModel.kt
+class LoginViewModel(
+    private val loginUseCase: LoginUseCase,
+    private val validateTokenUseCase: ValidateTokenUseCase,
+) : ViewModel() {
+
+    sealed interface UiState {
+        data object Idle : UiState
+        data object Loading : UiState
+        data class Error(val message: String) : UiState
+        data object Success : UiState
+    }
+
+    private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
+
+    fun login(email: String, password: String) {
+        viewModelScope.launch {
+            _uiState.value = UiState.Loading
+            val credentials = Credentials(email = email.trim(), password = password)
+            loginUseCase(credentials)
+                .onSuccess { _uiState.value = UiState.Success }
+                .onFailure { _uiState.value = UiState.Error(it.message ?: "Login failed") }
+        }
+    }
+}
+```
+
+```kotlin
+// feature/auth/src/commonMain/kotlin/com/vibely/feature/auth/LoginScreen.kt
+@Composable
+fun LoginScreen(
+    viewModel: LoginViewModel = koinViewModel(),
+    onLoginSuccess: () -> Unit,
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    // Debug mode: LoginUseCase succeeds immediately on first collect → navigate away
+    LaunchedEffect(uiState) {
+        if (uiState is LoginViewModel.UiState.Success) onLoginSuccess()
+    }
+
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    val isLoading = uiState is LoginViewModel.UiState.Loading
+
+    Column(
+        modifier = Modifier.fillMaxSize().padding(horizontal = 32.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text("Vibely POS", style = MaterialTheme.typography.headlineLarge)
+        Spacer(Modifier.height(32.dp))
+
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Spacer(Modifier.height(16.dp))
+
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Password") },
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Spacer(Modifier.height(24.dp))
+
+        if (uiState is LoginViewModel.UiState.Error) {
+            Text(
+                text = (uiState as LoginViewModel.UiState.Error).message,
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            Spacer(Modifier.height(8.dp))
+        }
+
+        Button(
+            onClick = { viewModel.login(email, password) },
+            enabled = !isLoading && email.isNotBlank() && password.isNotBlank(),
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            if (isLoading) CircularProgressIndicator(Modifier.size(20.dp), strokeWidth = 2.dp)
+            else Text("Sign In")
+        }
+    }
+}
+```
+
+**Navigation Integration:**
+
+The app root checks for a stored, valid token on startup and routes accordingly. If no valid token exists, `LoginScreen` is shown; on success the user lands on the main POS screen.
+
+```kotlin
+// composeApp/src/commonMain/kotlin/com/vibely/AppNavigation.kt
+sealed class Screen(val route: String) {
+    data object Login : Screen("login")
+    data object Main  : Screen("main")
+}
+
+@Composable
+fun AppNavigation(
+    validateTokenUseCase: ValidateTokenUseCase = koinInject(),
+) {
+    val navController = rememberNavController()
+    val startDestination by produceState(Screen.Login.route) {
+        value = validateTokenUseCase()
+            .fold(onSuccess = { Screen.Main.route }, onFailure = { Screen.Login.route })
+    }
+
+    NavHost(navController, startDestination = startDestination) {
+        composable(Screen.Login.route) {
+            LoginScreen(onLoginSuccess = {
+                navController.navigate(Screen.Main.route) {
+                    popUpTo(Screen.Login.route) { inclusive = true }
+                }
+            })
+        }
+        composable(Screen.Main.route) {
+            MainScreen()   // implemented in Phase 2
+        }
+    }
+}
+```
+
+**Debug Mode Bypass:**
+
+When `AUTH_MODE=debug`, `DebugAuthMode.authenticate()` always returns `Result.success`. `LoginViewModel.login()` is called automatically on `LaunchedEffect` startup with empty credentials, succeeds immediately, and emits `UiState.Success` — the `LaunchedEffect` in `LoginScreen` fires `onLoginSuccess()` before the user sees the form.
+
+**DI:**
+
+```kotlin
+// feature/auth/src/commonMain/kotlin/com/vibely/feature/auth/di/AuthFeatureModule.kt
+val authFeatureModule = module {
+    viewModel { LoginViewModel(loginUseCase = get(), validateTokenUseCase = get()) }
+}
+```
+
+Add `authFeatureModule` alongside `authModule` in the Koin startup modules list.
+
 ---
 
 ## 1.3 Design System (Already Well-Defined)
