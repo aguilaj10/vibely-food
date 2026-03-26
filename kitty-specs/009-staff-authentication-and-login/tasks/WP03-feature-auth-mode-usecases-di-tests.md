@@ -1,8 +1,11 @@
 ---
 work_package_id: WP03
 title: feature/auth AuthMode + Use Cases + DI + Tests
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 13c6bd178129da3197f931792e31d2ac6880eded
+created_at: '2026-03-26T02:20:54.664459+00:00'
 subtasks:
 - T015
 - T016
@@ -14,7 +17,7 @@ subtasks:
 phase: Phase 2 - Strategy Layer
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "81584"
 review_status: ''
 reviewed_by: ''
 history:
