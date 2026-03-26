@@ -29,6 +29,7 @@ import org.koin.compose.viewmodel.koinViewModel
  *
  * @param onNavigate Called with the next [AppNavKey] when login succeeds.
  */
+@Suppress("FunctionNaming")
 @Composable
 fun LoginScreen(
     onNavigate: (AppNavKey) -> Unit,
@@ -55,7 +56,6 @@ fun LoginScreen(
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(bottom = 32.dp),
         )
-
         OutlinedTextField(
             value = state.email,
             onValueChange = viewModel::onEmailChange,
@@ -63,9 +63,7 @@ fun LoginScreen(
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
         )
-
         Spacer(modifier = Modifier.height(12.dp))
-
         OutlinedTextField(
             value = state.password,
             onValueChange = viewModel::onPasswordChange,
@@ -74,25 +72,8 @@ fun LoginScreen(
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
         )
-
         Spacer(modifier = Modifier.height(24.dp))
-
-        Button(
-            onClick = viewModel::onSignIn,
-            enabled = state.isSubmitEnabled,
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            if (state.isLoading) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(18.dp),
-                    strokeWidth = 2.dp,
-                    color = MaterialTheme.colorScheme.onPrimary,
-                )
-            } else {
-                Text("Sign In")
-            }
-        }
-
+        SignInButton(isLoading = state.isLoading, enabled = state.isSubmitEnabled, onClick = viewModel::onSignIn)
         state.errorMessage?.let { message ->
             Spacer(modifier = Modifier.height(12.dp))
             Text(
@@ -100,6 +81,22 @@ fun LoginScreen(
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodyMedium,
             )
+        }
+    }
+}
+
+@Suppress("FunctionNaming")
+@Composable
+private fun SignInButton(isLoading: Boolean, enabled: Boolean, onClick: () -> Unit) {
+    Button(onClick = onClick, enabled = enabled, modifier = Modifier.fillMaxWidth()) {
+        if (isLoading) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(18.dp),
+                strokeWidth = 2.dp,
+                color = MaterialTheme.colorScheme.onPrimary,
+            )
+        } else {
+            Text("Sign In")
         }
     }
 }

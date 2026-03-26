@@ -31,6 +31,7 @@ import org.koin.compose.koinInject
  *
  * A loading indicator is shown while the check is in progress (FR-013).
  */
+@Suppress("FunctionNaming")
 @Composable
 fun AppNavigation(
     tokenStorage: TokenStorage = koinInject(),
@@ -99,6 +100,7 @@ fun AppNavigation(
 }
 
 /** Temporary placeholder for the floor plan screen (Phase 2). */
+@Suppress("FunctionNaming")
 @Composable
 private fun FloorPlanPlaceholder() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

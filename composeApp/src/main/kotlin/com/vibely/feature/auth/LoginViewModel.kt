@@ -13,6 +13,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * UI state for the login screen.
+ *
+ * @property email Current value of the email field.
+ * @property password Current value of the password field.
+ * @property isLoading True while a sign-in request is in flight.
+ * @property errorMessage Human-readable error shown below the Sign In button, or null.
+ * @property isSubmitEnabled True when both fields are non-blank and no request is in flight.
+ */
 data class LoginUiState(
     val email: String = "",
     val password: String = "",
@@ -37,14 +46,17 @@ class LoginViewModel(
     private val _navigationEvents = MutableSharedFlow<AppNavKey>()
     val navigationEvents = _navigationEvents.asSharedFlow()
 
+    /** Updates the email field and clears any displayed error. */
     fun onEmailChange(email: String) {
         _uiState.update { it.copy(email = email, errorMessage = null) }
     }
 
+    /** Updates the password field and clears any displayed error. */
     fun onPasswordChange(password: String) {
         _uiState.update { it.copy(password = password, errorMessage = null) }
     }
 
+    /** Initiates a sign-in request if [LoginUiState.isSubmitEnabled] is true. */
     fun onSignIn() {
         val state = _uiState.value
         if (!state.isSubmitEnabled) return
