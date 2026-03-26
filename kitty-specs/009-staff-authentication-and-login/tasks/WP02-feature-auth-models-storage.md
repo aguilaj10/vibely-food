@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: feature/auth Models + Platform Storage
-lane: "planned"
+lane: "for_review"
 dependencies: []
 base_branch: main
 base_commit: 3e353041e274e41309f7869b8a79975361408ce9
@@ -529,3 +529,4 @@ spec-kitty implement WP02
 - 2026-03-26T02:06:48Z – claude-sonnet-4-6 – shell_pid=65169 – lane=for_review – Ready for review: buildkonfig config, AuthToken/Credentials/User models, TokenStorage interface + Android/JVM/JS impls. All 7 subtasks complete.
 - 2026-03-26T02:13:05Z – claude-sonnet-4-6 – shell_pid=77606 – lane=doing – Started review via workflow command
 - 2026-03-26T02:19:04Z – claude-sonnet-4-6 – shell_pid=77606 – lane=planned – Moved to planned
+- 2026-03-26T02:19:44Z – claude-sonnet-4-6 – shell_pid=77606 – lane=for_review – Fix applied: added Unit to Pkcs12KeystoreTokenStorage.clearToken() lambda. All 3 targets now compile.
