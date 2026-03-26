@@ -17,7 +17,7 @@ subtasks:
 phase: Phase 2 - Strategy Layer
 assignee: ''
 agent: "claude-sonnet-4-6"
-shell_pid: "81584"
+shell_pid: "98284"
 review_status: ''
 reviewed_by: ''
 history:
@@ -543,3 +543,5 @@ spec-kitty implement WP03 --base WP02
 
 - 2026-03-26T01:25:51Z – system – lane=planned – Prompt created.
 - 2026-03-26T02:20:55Z – claude-sonnet-4-6 – shell_pid=81584 – lane=doing – Assigned agent via workflow command
+- 2026-03-26T02:54:55Z – claude-sonnet-4-6 – shell_pid=81584 – lane=for_review – Ready for review: AuthMode sealed interface + 3 impls, 4 use cases, authModule/authPlatformModule expect/actual (Android/JVM/JS), 9 jvmTest unit tests pass. All kotlin.time.Instant (no kotlinx.datetime.Instant). ktlint filter + baseline for buildkonfig generated sources.
+- 2026-03-26T03:00:08Z – claude-sonnet-4-6 – shell_pid=98284 – lane=doing – Started review via workflow command
