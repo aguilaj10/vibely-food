@@ -2,7 +2,7 @@ package com.vibely.feature.auth.storage
 
 import com.vibely.feature.auth.domain.model.AuthToken
 import kotlinx.browser.sessionStorage
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 private const val KEY_ACCESS = "vibely_access_token"
 private const val KEY_REFRESH = "vibely_refresh_token"

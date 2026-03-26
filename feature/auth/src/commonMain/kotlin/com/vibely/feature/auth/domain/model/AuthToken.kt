@@ -1,6 +1,6 @@
 package com.vibely.feature.auth.domain.model
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 /**
  * A valid authentication session with both access and refresh tokens.

@@ -6,7 +6,7 @@ import androidx.security.crypto.MasterKey
 import com.vibely.feature.auth.domain.model.AuthToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 private const val PREFS_FILE = "vibely_auth_token"
 private const val KEY_ACCESS = "access_token"

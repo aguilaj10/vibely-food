@@ -3,10 +3,10 @@ package com.vibely.feature.auth.storage
 import com.vibely.feature.auth.domain.model.AuthToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.Instant
 import java.io.File
 import java.security.KeyStore
 import javax.crypto.spec.SecretKeySpec
+import kotlin.time.Instant
 
 private const val KEYSTORE_FILE = ".vibely/token.ks"
 private const val ENTRY_ACCESS = "access_token"
