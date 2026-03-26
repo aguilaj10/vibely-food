@@ -1,8 +1,11 @@
 ---
 work_package_id: WP04
 title: composeApp Login UI & Navigation Routing
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 4146a99381d57875ac59f4fb1ed3756844aaa1ec
+created_at: '2026-03-26T03:07:54.933425+00:00'
 subtasks:
 - T022
 - T023
@@ -14,7 +17,7 @@ subtasks:
 phase: Phase 3 - UI Layer
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "3036"
 review_status: ''
 reviewed_by: ''
 history:
