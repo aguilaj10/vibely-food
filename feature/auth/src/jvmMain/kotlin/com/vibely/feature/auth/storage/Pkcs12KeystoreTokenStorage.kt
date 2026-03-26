@@ -78,5 +78,6 @@ class Pkcs12KeystoreTokenStorage : TokenStorage {
     override suspend fun clearToken() =
         withContext(Dispatchers.IO) {
             keystoreFile.delete()
+            Unit
         }
 }
