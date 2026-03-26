@@ -16,7 +16,7 @@ subtasks:
 - T028
 phase: Phase 3 - UI Layer
 assignee: ''
-agent: ''
+agent: "claude-sonnet-4-6"
 shell_pid: "3036"
 review_status: ''
 reviewed_by: ''
@@ -598,3 +598,4 @@ spec-kitty implement WP04 --base WP03
 ## Activity Log
 
 - 2026-03-26T01:25:51Z – system – lane=planned – Prompt created.
+- 2026-03-26T03:08:01Z – claude-sonnet-4-6 – shell_pid=3036 – lane=doing – Assigned agent via workflow command
