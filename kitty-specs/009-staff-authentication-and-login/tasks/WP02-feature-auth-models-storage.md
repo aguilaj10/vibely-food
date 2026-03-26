@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: feature/auth Models + Platform Storage
-lane: "doing"
+lane: "planned"
 dependencies: []
 base_branch: main
 base_commit: 3e353041e274e41309f7869b8a79975361408ce9
@@ -18,8 +18,9 @@ phase: Phase 1 - Foundation (no dependencies)
 assignee: ''
 agent: "claude-sonnet-4-6"
 shell_pid: "77606"
-review_status: ''
-reviewed_by: ''
+review_status: "has_feedback"
+reviewed_by: "Jonathan Sánchez Muñoz"
+review_feedback_file: "/private/var/folders/lk/549xp1m52gg9ycr7sgpl0jcw0000gp/T/spec-kitty-review-feedback-WP02.md"
 history:
 - timestamp: '2026-03-26T01:25:51Z'
   lane: planned
@@ -44,9 +45,38 @@ Check `review_status` in frontmatter. If `has_feedback`, read the **Review Feedb
 
 ## Review Feedback
 
-*[Empty — no feedback yet.]*
+**Reviewed by**: Jonathan Sánchez Muñoz
+**Status**: ❌ Changes Requested
+**Date**: 2026-03-26
+**Feedback file**: `/private/var/folders/lk/549xp1m52gg9ycr7sgpl0jcw0000gp/T/spec-kitty-review-feedback-WP02.md`
 
----
+## Review Feedback: WP02
+
+### ❌ Compilation Error — T013 Pkcs12KeystoreTokenStorage
+
+`clearToken()` has a return-type mismatch that fails `compileKotlinJvm`:
+
+```
+Return type of 'suspend fun clearToken(): Boolean' is not a subtype of the return type
+of the overridden member 'suspend fun clearToken(): Unit'
+```
+
+**Root cause**: `keystoreFile.delete()` returns `Boolean`. Because it is the last expression in the `withContext(Dispatchers.IO)` lambda, the lambda's inferred type is `Boolean`, which the Kotlin compiler promotes to `override suspend fun clearToken(): Boolean` — conflicting with the `Unit` return in `TokenStorage`.
+
+**Fix**: Append `Unit` as the last expression in the `clearToken` override:
+
+```kotlin
+override suspend fun clearToken() =
+    withContext(Dispatchers.IO) {
+        keystoreFile.delete()
+        Unit           // ← add this
+    }
+```
+
+**Other items**: All other subtasks (T008–T012, T014) are correct. The `buildscript { resolutionStrategy.force }` workaround for the buildkonfig Kotlin version conflict is acceptable. Domain models, TokenStorage interface, EncryptedSharedPreferencesTokenStorage, and SessionStorageTokenStorage all look correct. commonMain and JS compilations pass.
+
+Please fix the single-line issue in `Pkcs12KeystoreTokenStorage.kt` and re-commit.
+
 
 ## Objectives & Success Criteria
 
@@ -498,3 +528,4 @@ spec-kitty implement WP02
 - 2026-03-26T01:43:19Z – claude-sonnet-4-6 – shell_pid=65169 – lane=doing – Assigned agent via workflow command
 - 2026-03-26T02:06:48Z – claude-sonnet-4-6 – shell_pid=65169 – lane=for_review – Ready for review: buildkonfig config, AuthToken/Credentials/User models, TokenStorage interface + Android/JVM/JS impls. All 7 subtasks complete.
 - 2026-03-26T02:13:05Z – claude-sonnet-4-6 – shell_pid=77606 – lane=doing – Started review via workflow command
+- 2026-03-26T02:19:04Z – claude-sonnet-4-6 – shell_pid=77606 – lane=planned – Moved to planned
