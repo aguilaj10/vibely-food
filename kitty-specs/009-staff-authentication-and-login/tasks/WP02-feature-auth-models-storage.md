@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: feature/auth Models + Platform Storage
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: 3e353041e274e41309f7869b8a79975361408ce9
@@ -17,7 +17,7 @@ subtasks:
 phase: Phase 1 - Foundation (no dependencies)
 assignee: ''
 agent: "claude-sonnet-4-6"
-shell_pid: "65169"
+shell_pid: "77606"
 review_status: ''
 reviewed_by: ''
 history:
@@ -497,3 +497,4 @@ spec-kitty implement WP02
 - 2026-03-26T01:25:51Z – system – lane=planned – Prompt created.
 - 2026-03-26T01:43:19Z – claude-sonnet-4-6 – shell_pid=65169 – lane=doing – Assigned agent via workflow command
 - 2026-03-26T02:06:48Z – claude-sonnet-4-6 – shell_pid=65169 – lane=for_review – Ready for review: buildkonfig config, AuthToken/Credentials/User models, TokenStorage interface + Android/JVM/JS impls. All 7 subtasks complete.
+- 2026-03-26T02:13:05Z – claude-sonnet-4-6 – shell_pid=77606 – lane=doing – Started review via workflow command
