@@ -1,7 +1,7 @@
 ---
 work_package_id: WP04
 title: composeApp Login UI & Navigation Routing
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: 4146a99381d57875ac59f4fb1ed3756844aaa1ec
@@ -17,7 +17,7 @@ subtasks:
 phase: Phase 3 - UI Layer
 assignee: ''
 agent: "claude-sonnet-4-6"
-shell_pid: "3036"
+shell_pid: "10511"
 review_status: ''
 reviewed_by: ''
 history:
@@ -600,3 +600,4 @@ spec-kitty implement WP04 --base WP03
 - 2026-03-26T01:25:51Z – system – lane=planned – Prompt created.
 - 2026-03-26T03:08:01Z – claude-sonnet-4-6 – shell_pid=3036 – lane=doing – Assigned agent via workflow command
 - 2026-03-26T03:18:47Z – claude-sonnet-4-6 – shell_pid=3036 – lane=for_review – Ready for review: Login UI + Navigation3 routing complete. AppNavKey, LoginViewModel, LoginScreen, AppNavigation, MainActivity all implemented. VibelyApp updated with networkModule/authModule/authPlatformModule. ktlintCheck passes.
+- 2026-03-26T03:19:33Z – claude-sonnet-4-6 – shell_pid=10511 – lane=doing – Started review via workflow command
