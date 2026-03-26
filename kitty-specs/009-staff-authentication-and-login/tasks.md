@@ -20,13 +20,13 @@ WP01 and WP02 have no dependencies and can be implemented in parallel.
 **Estimated size**: ~360 lines
 
 ### Included Subtasks
-- [ ] T001 Add `ktor-client-js` library entry to `gradle/libs.versions.toml`
-- [ ] T002 Update `core/network/build.gradle.kts` with Ktor client deps for all source sets
-- [ ] T003 Implement `HttpClientFactory` with platform-specific engine selection (`expect/actual`)
-- [ ] T004 [P] Define `@Serializable` HTTP DTOs: `LoginRequest`, `RefreshRequest`, `TokenResponse`, `ValidateResponse`
-- [ ] T005 Define `AuthApiClient` interface (login, refresh, validate, logout)
-- [ ] T006 Implement `KtorAuthApiClient` — four HTTP calls against `/auth/*` endpoints
-- [ ] T007 Define Koin `networkModule` (singleton `HttpClient` + `AuthApiClient` binding)
+- [x] T001 Add `ktor-client-js` library entry to `gradle/libs.versions.toml`
+- [x] T002 Update `core/network/build.gradle.kts` with Ktor client deps for all source sets
+- [x] T003 Implement `HttpClientFactory` with platform-specific engine selection (`expect/actual`)
+- [x] T004 [P] Define `@Serializable` HTTP DTOs: `LoginRequest`, `RefreshRequest`, `TokenResponse`, `ValidateResponse`
+- [x] T005 Define `AuthApiClient` interface (login, refresh, validate, logout)
+- [x] T006 Implement `KtorAuthApiClient` — four HTTP calls against `/auth/*` endpoints
+- [x] T007 Define Koin `networkModule` (singleton `HttpClient` + `AuthApiClient` binding)
 
 **Requirement Refs**: FR-002, FR-022, FR-023, FR-024, FR-025
 
