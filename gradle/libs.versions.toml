@@ -21,6 +21,7 @@ testcontainers = "2.0.4"
 detekt = "1.23.8"
 ktlint = "14.2.0"
 agp = "9.1.0"
+buildkonfig = "0.17.1"
 
 [libraries]
 # Kotlin
@@ -96,6 +97,7 @@ room = { id = "androidx.room", version.ref = "room" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 # Convention plugins from buildSrc (no version — resolved from the buildSrc classpath).
 # Note: AGP and Kotlin plugin IDs are applied inside the convention plugins with raw id()
 # since alias() is not available in precompiled script plugin blocks.
