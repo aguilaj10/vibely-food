@@ -16,7 +16,7 @@ subtasks:
 - T007
 phase: Phase 1 - Foundation (no dependencies)
 assignee: ''
-agent: ''
+agent: "claude-sonnet-4-6"
 shell_pid: "64904"
 review_status: ''
 reviewed_by: ''
@@ -414,3 +414,4 @@ spec-kitty implement WP01
 ## Activity Log
 
 - 2026-03-26T01:25:51Z – system – lane=planned – Prompt created.
+- 2026-03-26T01:43:11Z – claude-sonnet-4-6 – shell_pid=64904 – lane=doing – Assigned agent via workflow command
