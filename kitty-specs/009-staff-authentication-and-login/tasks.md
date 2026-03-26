@@ -56,13 +56,13 @@ WP01 and WP02 have no dependencies and can be implemented in parallel.
 **Estimated size**: ~380 lines
 
 ### Included Subtasks
-- [ ] T008 Add `buildkonfig 0.17.1` version + plugin entry to `gradle/libs.versions.toml`
-- [ ] T009 Update `feature/auth/build.gradle.kts` — apply buildkonfig, add all source-set dependencies
-- [ ] T010 [P] Define domain models: `AuthToken`, `Credentials`, `User` in `feature/auth/commonMain`
-- [ ] T011 Define `TokenStorage` interface in `feature/auth/commonMain`
-- [ ] T012 Implement `EncryptedSharedPreferencesTokenStorage` (`androidMain`)
-- [ ] T013 [P] Implement `Pkcs12KeystoreTokenStorage` (`jvmMain`)
-- [ ] T014 [P] Implement `SessionStorageTokenStorage` (`jsMain`)
+- [x] T008 Add `buildkonfig 0.17.1` version + plugin entry to `gradle/libs.versions.toml`
+- [x] T009 Update `feature/auth/build.gradle.kts` — apply buildkonfig, add all source-set dependencies
+- [x] T010 [P] Define domain models: `AuthToken`, `Credentials`, `User` in `feature/auth/commonMain`
+- [x] T011 Define `TokenStorage` interface in `feature/auth/commonMain`
+- [x] T012 Implement `EncryptedSharedPreferencesTokenStorage` (`androidMain`)
+- [x] T013 [P] Implement `Pkcs12KeystoreTokenStorage` (`jvmMain`)
+- [x] T014 [P] Implement `SessionStorageTokenStorage` (`jsMain`)
 
 **Requirement Refs**: FR-006, FR-007, FR-008, NFR-001, NFR-002
 
