@@ -2,7 +2,9 @@
   "feature_number": "009",
   "slug": "009-staff-authentication-and-login",
   "feature_slug": "009-staff-authentication-and-login",
-  "friendly_name": "staff authentication and login",
+  "friendly_name": "Staff Authentication & Login",
+  "source_description": "Section 1.2 (AuthMode strategy + TokenStorage) and 1.2.3 (Login screen) from IMPLEMENTATION_PLAN.md",
+  "vcs": "git",
   "mission": "software-dev",
   "target_branch": "main",
   "created_at": "2026-03-26T00:55:03.656233+00:00"
