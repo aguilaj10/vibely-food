@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: feature/auth AuthMode + Use Cases + DI + Tests
-lane: "done"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: 13c6bd178129da3197f931792e31d2ac6880eded
@@ -17,9 +17,9 @@ subtasks:
 phase: Phase 2 - Strategy Layer
 assignee: ''
 agent: "claude-sonnet-4-6"
-shell_pid: "81584"
-review_status: "approved"
-reviewed_by: "Jonathan Sánchez Muñoz"
+shell_pid: "98284"
+review_status: ''
+reviewed_by: ''
 history:
 - timestamp: '2026-03-26T01:25:51Z'
   lane: planned
@@ -543,4 +543,5 @@ spec-kitty implement WP03 --base WP02
 
 - 2026-03-26T01:25:51Z – system – lane=planned – Prompt created.
 - 2026-03-26T02:20:55Z – claude-sonnet-4-6 – shell_pid=81584 – lane=doing – Assigned agent via workflow command
-- 2026-03-26T03:03:18Z – claude-sonnet-4-6 – shell_pid=81584 – lane=done – Review passed: AuthMode sealed interface, 3 implementations, 4 use cases, authModule/authPlatformModule expect/actual (Android/JVM/JS), 9 jvmTest pass, all kotlin.time.Instant.
+- 2026-03-26T02:54:55Z – claude-sonnet-4-6 – shell_pid=81584 – lane=for_review – Ready for review: AuthMode sealed interface + 3 impls, 4 use cases, authModule/authPlatformModule expect/actual (Android/JVM/JS), 9 jvmTest unit tests pass. All kotlin.time.Instant (no kotlinx.datetime.Instant). ktlint filter + baseline for buildkonfig generated sources.
+- 2026-03-26T03:00:08Z – claude-sonnet-4-6 – shell_pid=98284 – lane=doing – Started review via workflow command
