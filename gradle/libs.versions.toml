@@ -21,6 +21,8 @@ testcontainers = "2.0.4"
 detekt = "1.23.8"
 ktlint = "14.2.0"
 agp = "9.1.0"
+activity = "1.10.1"
+lifecycle = "2.9.0"
 buildkonfig = "0.17.1"
 
 [libraries]
@@ -76,6 +78,8 @@ datastore-preferences = { module = "androidx.datastore:datastore-preferences", v
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 security-crypto = { module = "androidx.security:security-crypto", version.ref = "security-crypto" }
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
+lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "navigation3" }
 navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "navigation3" }
 
