@@ -53,3 +53,14 @@ configure<com.codingfeline.buildkonfig.gradle.BuildKonfigExtension> {
 tasks.withType<Test>().configureEach {
     useJUnit()
 }
+
+// Exclude buildkonfig-generated sources from ktlint — generated code does not
+// comply with project indentation rules and cannot be fixed manually.
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    filter {
+        exclude { element ->
+            val path = element.file.path
+            path.contains("/buildkonfig/") || path.contains("/generated/")
+        }
+    }
+}
