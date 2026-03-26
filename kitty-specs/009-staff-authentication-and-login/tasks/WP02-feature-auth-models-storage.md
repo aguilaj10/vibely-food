@@ -1,8 +1,11 @@
 ---
 work_package_id: WP02
 title: feature/auth Models + Platform Storage
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 3e353041e274e41309f7869b8a79975361408ce9
+created_at: '2026-03-26T01:43:18.097159+00:00'
 subtasks:
 - T008
 - T009
@@ -14,7 +17,7 @@ subtasks:
 phase: Phase 1 - Foundation (no dependencies)
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "65169"
 review_status: ''
 reviewed_by: ''
 history:
