@@ -93,13 +93,13 @@ WP01 and WP02 have no dependencies and can be implemented in parallel.
 **Estimated size**: ~430 lines
 
 ### Included Subtasks
-- [ ] T015 Define `AuthMode` sealed interface (`commonMain`)
-- [ ] T016 Implement `ProductionAuthMode` — delegates to `AuthApiClient` + `TokenStorage`
-- [ ] T017 [P] Implement `DebugAuthMode` — returns hardcoded `Role.OWNER` user; no I/O
-- [ ] T018 [P] Implement `FakeAuthMode` — publicly settable `Result` fields; no I/O
-- [ ] T019 Implement `LoginUseCase`, `LogoutUseCase`, `RefreshTokenUseCase`, `ValidateTokenUseCase`
-- [ ] T020 Define `authModule` Koin (reads `BuildKonfig.AUTH_MODE`) + `authPlatformModule` (TokenStorage platform bindings)
-- [ ] T021 Unit tests: success + failure path for all four use cases using `FakeAuthMode`
+- [x] T015 Define `AuthMode` sealed interface (`commonMain`)
+- [x] T016 Implement `ProductionAuthMode` — delegates to `AuthApiClient` + `TokenStorage`
+- [x] T017 [P] Implement `DebugAuthMode` — returns hardcoded `Role.OWNER` user; no I/O
+- [x] T018 [P] Implement `FakeAuthMode` — publicly settable `Result` fields; no I/O
+- [x] T019 Implement `LoginUseCase`, `LogoutUseCase`, `RefreshTokenUseCase`, `ValidateTokenUseCase`
+- [x] T020 Define `authModule` Koin (reads `BuildKonfig.AUTH_MODE`) + `authPlatformModule` (TokenStorage platform bindings)
+- [x] T021 Unit tests: success + failure path for all four use cases using `FakeAuthMode`
 
 **Requirement Refs**: FR-001, FR-002, FR-003, FR-004, FR-005, FR-022, FR-023, FR-024, FR-025, NFR-002, NFR-003
 
