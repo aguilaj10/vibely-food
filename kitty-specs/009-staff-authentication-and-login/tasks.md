@@ -131,13 +131,13 @@ WP01 and WP02 have no dependencies and can be implemented in parallel.
 **Estimated size**: ~390 lines
 
 ### Included Subtasks
-- [ ] T022 Update `composeApp/build.gradle.kts` — add navigation3, feature:auth, koin-compose deps
-- [ ] T023 Create `AppNavKey` sealed interface with `Login` and `FloorPlan` `@Serializable data object`s
-- [ ] T024 Implement `LoginViewModel` — `StateFlow<LoginUiState>`, `onEmailChange`, `onPasswordChange`, `onSignIn`
-- [ ] T025 Implement `LoginScreen` composable — email/password fields, Sign In button, loading, error display
-- [ ] T026 Implement `AppNavigation` composable — startup token lifecycle (validate → refresh → route to Login or FloorPlan)
-- [ ] T027 Create `MainActivity` — sets content, wires `NavDisplay` with `AppNavigation`
-- [ ] T028 Update `VibelyApp.kt` — add `authModule()`, `authPlatformModule()`, `networkModule()` to `startKoin`
+- [x] T022 Update `composeApp/build.gradle.kts` — add navigation3, feature:auth, koin-compose deps
+- [x] T023 Create `AppNavKey` sealed interface with `Login` and `FloorPlan` `@Serializable data object`s
+- [x] T024 Implement `LoginViewModel` — `StateFlow<LoginUiState>`, `onEmailChange`, `onPasswordChange`, `onSignIn`
+- [x] T025 Implement `LoginScreen` composable — email/password fields, Sign In button, loading, error display
+- [x] T026 Implement `AppNavigation` composable — startup token lifecycle (validate → refresh → route to Login or FloorPlan)
+- [x] T027 Create `MainActivity` — sets content, wires `NavDisplay` with `AppNavigation`
+- [x] T028 Update `VibelyApp.kt` — add `authModule()`, `authPlatformModule()`, `networkModule()` to `startKoin`
 
 **Requirement Refs**: FR-009, FR-010, FR-011, FR-012, FR-013, FR-014, FR-015, FR-016, FR-017, FR-018, FR-019, FR-020, FR-021, FR-026, FR-027, FR-028
 
