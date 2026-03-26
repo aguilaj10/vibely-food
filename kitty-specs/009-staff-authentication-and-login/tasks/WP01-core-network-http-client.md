@@ -1,8 +1,11 @@
 ---
 work_package_id: WP01
 title: core:network HTTP Client Foundation
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 5fbea05251ea8107af8036a6fe1a816d676ad1ed
+created_at: '2026-03-26T01:43:10.837954+00:00'
 subtasks:
 - T001
 - T002
@@ -14,7 +17,7 @@ subtasks:
 phase: Phase 1 - Foundation (no dependencies)
 assignee: ''
 agent: ''
-shell_pid: ''
+shell_pid: "64904"
 review_status: ''
 reviewed_by: ''
 history:
