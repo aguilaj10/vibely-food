@@ -1,7 +1,7 @@
 ---
 work_package_id: WP04
 title: composeApp Login UI & Navigation Routing
-lane: "doing"
+lane: "planned"
 dependencies: []
 base_branch: main
 base_commit: 4146a99381d57875ac59f4fb1ed3756844aaa1ec
@@ -18,8 +18,9 @@ phase: Phase 3 - UI Layer
 assignee: ''
 agent: "claude-sonnet-4-6"
 shell_pid: "10511"
-review_status: ''
-reviewed_by: ''
+review_status: "has_feedback"
+reviewed_by: "Jonathan Sánchez Muñoz"
+review_feedback_file: "/private/var/folders/lk/549xp1m52gg9ycr7sgpl0jcw0000gp/T/spec-kitty-review-feedback-WP04.md"
 history:
 - timestamp: '2026-03-26T01:25:51Z'
   lane: planned
@@ -55,9 +56,37 @@ Check `review_status` in frontmatter. If `has_feedback`, read the **Review Feedb
 
 ## Review Feedback
 
-*[Empty — no feedback yet.]*
+**Reviewed by**: Jonathan Sánchez Muñoz
+**Status**: ❌ Changes Requested
+**Date**: 2026-03-26
+**Feedback file**: `/private/var/folders/lk/549xp1m52gg9ycr7sgpl0jcw0000gp/T/spec-kitty-review-feedback-WP04.md`
 
----
+**Issue 1 — S5 not satisfied: debug build shows Login screen on fresh install**
+
+**Location**: `composeApp/src/main/kotlin/com/vibely/navigation/AppNavigation.kt`, line 44–45
+
+**Problem**:
+```kotlin
+stored == null -> AppNavKey.Login
+```
+When there is no stored token (e.g. fresh debug install), the code unconditionally routes to `AppNavKey.Login` without calling `validateToken`. This means `DebugAuthMode.validateToken()` — which returns `Result.success(debugUser)` — is never invoked on startup, so the Login screen is always shown. S5 ("Debug build → FloorPlan shown; login never shown") is not satisfied.
+
+**Fix**: Replace the null-token branch to attempt `validateToken("")`:
+```kotlin
+stored == null -> {
+    // DebugAuthMode.validateToken succeeds regardless of token → FloorPlan.
+    // ProductionAuthMode.validateToken("") fails (401) → Login.
+    validateToken("").fold(
+        onSuccess = { AppNavKey.FloorPlan },
+        onFailure = { AppNavKey.Login },
+    )
+}
+```
+This requires no `BuildKonfig` coupling in the UI layer and correctly implements S1–S5:
+- S1 (no token, production) → validateToken("") fails → Login ✅
+- S5 (no token, debug) → validateToken("") succeeds → FloorPlan ✅
+- S2/S3/S4 paths (stored != null) are unchanged ✅
+
 
 ## Objectives & Success Criteria
 
@@ -601,3 +630,4 @@ spec-kitty implement WP04 --base WP03
 - 2026-03-26T03:08:01Z – claude-sonnet-4-6 – shell_pid=3036 – lane=doing – Assigned agent via workflow command
 - 2026-03-26T03:18:47Z – claude-sonnet-4-6 – shell_pid=3036 – lane=for_review – Ready for review: Login UI + Navigation3 routing complete. AppNavKey, LoginViewModel, LoginScreen, AppNavigation, MainActivity all implemented. VibelyApp updated with networkModule/authModule/authPlatformModule. ktlintCheck passes.
 - 2026-03-26T03:19:33Z – claude-sonnet-4-6 – shell_pid=10511 – lane=doing – Started review via workflow command
+- 2026-03-26T03:22:28Z – claude-sonnet-4-6 – shell_pid=10511 – lane=planned – Moved to planned
