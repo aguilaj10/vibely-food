@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: core:network HTTP Client Foundation
-lane: "doing"
+lane: "done"
 dependencies: []
 base_branch: main
 base_commit: 5fbea05251ea8107af8036a6fe1a816d676ad1ed
@@ -18,8 +18,8 @@ phase: Phase 1 - Foundation (no dependencies)
 assignee: ''
 agent: "claude-sonnet-4-6"
 shell_pid: "75549"
-review_status: ''
-reviewed_by: ''
+review_status: "approved"
+reviewed_by: "Jonathan Sánchez Muñoz"
 history:
 - timestamp: '2026-03-26T01:25:51Z'
   lane: planned
@@ -417,3 +417,4 @@ spec-kitty implement WP01
 - 2026-03-26T01:43:11Z – claude-sonnet-4-6 – shell_pid=64904 – lane=doing – Assigned agent via workflow command
 - 2026-03-26T01:50:19Z – claude-sonnet-4-6 – shell_pid=64904 – lane=for_review – Ready for review: core:network HTTP client, AuthApiClient interface+impl, DTOs, Koin networkModule. All 7 subtasks complete.
 - 2026-03-26T02:09:10Z – claude-sonnet-4-6 – shell_pid=75549 – lane=doing – Started review via workflow command
+- 2026-03-26T02:12:39Z – claude-sonnet-4-6 – shell_pid=75549 – lane=done – Review passed: all 7 subtasks complete. core:network compiles for all 3 targets (JVM, JS, commonMain metadata). DTOs are @Serializable, AuthApiClient is pure interface, KtorAuthApiClient uses runCatching throughout, networkModule() is a function returning a fresh module. expect/actual engines correct (OkHttp for Android+JVM, Js for JS). No business logic in transport layer. libs.xxx accessors used exclusively.
