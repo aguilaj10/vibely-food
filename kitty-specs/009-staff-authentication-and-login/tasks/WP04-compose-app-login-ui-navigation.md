@@ -1,7 +1,7 @@
 ---
 work_package_id: WP04
 title: composeApp Login UI & Navigation Routing
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: 4146a99381d57875ac59f4fb1ed3756844aaa1ec
@@ -17,7 +17,7 @@ subtasks:
 phase: Phase 3 - UI Layer
 assignee: ''
 agent: "claude-sonnet-4-6"
-shell_pid: "14063"
+shell_pid: "15292"
 review_status: "has_feedback"
 reviewed_by: "Jonathan Sánchez Muñoz"
 review_feedback_file: "/private/var/folders/lk/549xp1m52gg9ycr7sgpl0jcw0000gp/T/spec-kitty-review-feedback-WP04.md"
@@ -633,3 +633,4 @@ spec-kitty implement WP04 --base WP03
 - 2026-03-26T03:22:28Z – claude-sonnet-4-6 – shell_pid=10511 – lane=planned – Moved to planned
 - 2026-03-26T03:24:51Z – claude-sonnet-4-6 – shell_pid=14063 – lane=doing – Started implementation via workflow command
 - 2026-03-26T03:25:24Z – claude-sonnet-4-6 – shell_pid=14063 – lane=for_review – Fixed S5: null-token path now calls validateToken("") — DebugAuthMode succeeds → FloorPlan, ProductionAuthMode fails → Login. ktlintCheck passes.
+- 2026-03-26T03:26:37Z – claude-sonnet-4-6 – shell_pid=15292 – lane=doing – Started review via workflow command
