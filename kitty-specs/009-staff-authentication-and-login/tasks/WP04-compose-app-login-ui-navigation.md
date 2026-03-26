@@ -1,7 +1,7 @@
 ---
 work_package_id: WP04
 title: composeApp Login UI & Navigation Routing
-lane: "doing"
+lane: "done"
 dependencies: []
 base_branch: main
 base_commit: 4146a99381d57875ac59f4fb1ed3756844aaa1ec
@@ -634,3 +634,4 @@ spec-kitty implement WP04 --base WP03
 - 2026-03-26T03:24:51Z – claude-sonnet-4-6 – shell_pid=14063 – lane=doing – Started implementation via workflow command
 - 2026-03-26T03:25:24Z – claude-sonnet-4-6 – shell_pid=14063 – lane=for_review – Fixed S5: null-token path now calls validateToken("") — DebugAuthMode succeeds → FloorPlan, ProductionAuthMode fails → Login. ktlintCheck passes.
 - 2026-03-26T03:26:37Z – claude-sonnet-4-6 – shell_pid=15292 – lane=doing – Started review via workflow command
+- 2026-03-26T03:27:15Z – claude-sonnet-4-6 – shell_pid=15292 – lane=done – Review passed: S5 fix verified — null-token path calls validateToken("") so DebugAuthMode routes to FloorPlan without Login. All S1–S5 scenarios and FR-013/015/017/018 satisfied. ktlintCheck passes.
