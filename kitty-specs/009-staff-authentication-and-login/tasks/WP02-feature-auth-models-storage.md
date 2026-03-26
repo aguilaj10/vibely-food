@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: feature/auth Models + Platform Storage
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: 3e353041e274e41309f7869b8a79975361408ce9
@@ -17,7 +17,7 @@ subtasks:
 phase: Phase 1 - Foundation (no dependencies)
 assignee: ''
 agent: "claude-sonnet-4-6"
-shell_pid: "77606"
+shell_pid: "80734"
 review_status: "has_feedback"
 reviewed_by: "Jonathan Sánchez Muñoz"
 review_feedback_file: "/private/var/folders/lk/549xp1m52gg9ycr7sgpl0jcw0000gp/T/spec-kitty-review-feedback-WP02.md"
@@ -530,3 +530,4 @@ spec-kitty implement WP02
 - 2026-03-26T02:13:05Z – claude-sonnet-4-6 – shell_pid=77606 – lane=doing – Started review via workflow command
 - 2026-03-26T02:19:04Z – claude-sonnet-4-6 – shell_pid=77606 – lane=planned – Moved to planned
 - 2026-03-26T02:19:44Z – claude-sonnet-4-6 – shell_pid=77606 – lane=for_review – Fix applied: added Unit to Pkcs12KeystoreTokenStorage.clearToken() lambda. All 3 targets now compile.
+- 2026-03-26T02:19:49Z – claude-sonnet-4-6 – shell_pid=80734 – lane=doing – Started review via workflow command
